@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists;
+package main.com.teamalfa.blindvirologists.consoleController;
 
 import main.com.teamalfa.blindvirologists.agents.Agent;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
@@ -21,8 +21,8 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
-import static main.com.teamalfa.blindvirologists.ControllerHelper.*;
-import static main.com.teamalfa.blindvirologists.ErrorPrinter.*;
+import static main.com.teamalfa.blindvirologists.consoleController.ConsoleControllerHelper.*;
+import static main.com.teamalfa.blindvirologists.consoleController.ErrorPrinter.*;
 
 
 import java.io.*;
@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class ControllerRefactor {
+public class ConsoleController {
     private static HashMap<String,Field> fieldHashMap = new HashMap<>();
     private static HashMap<String, Virologist> virologistHashMap = new HashMap<>();
     private static HashMap<String, Backpack> backpackHashMap = new HashMap<>();
@@ -46,7 +46,7 @@ public class ControllerRefactor {
     private Scanner scanner = new Scanner(System.in);
     String fileSeparator;
 
-    public ControllerRefactor() {
+    public ConsoleController() {
         initIdCounter();
         fileSeparator = System.getProperty("file.separator");
     }
@@ -539,7 +539,7 @@ public class ControllerRefactor {
 
         String virusID = getNextArgument(input);
         if (virusID != null) {
-            Agent agentToApply = ControllerHelper.handleDoesNotExistError(virusID, agentHashMap);
+            Agent agentToApply = ConsoleControllerHelper.handleDoesNotExistError(virusID, agentHashMap);
             if (activeEquipment instanceof Gloves && agentToApply instanceof Virus) {
                 ((Gloves) activeEquipment).setUsedVirus((Virus) agentToApply);
             }

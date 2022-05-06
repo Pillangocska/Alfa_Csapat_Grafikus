@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists;
+package main.com.teamalfa.blindvirologists.consoleController;
 
 import java.io.*;
 

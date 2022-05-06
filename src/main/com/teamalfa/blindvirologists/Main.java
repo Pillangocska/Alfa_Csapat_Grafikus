@@ -1,19 +1,16 @@
 package main.com.teamalfa.blindvirologists;
 
-import main.com.teamalfa.blindvirologists.city.fields.Field;
-import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
-import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
-import main.com.teamalfa.blindvirologists.turn_handler.Game;
-import main.com.teamalfa.blindvirologists.virologist.Virologist;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.swing.*;
 import java.util.Scanner;
+import main.com.teamalfa.blindvirologists.consoleController.*;
+import main.com.teamalfa.blindvirologists.frames.MenuFrame;
 
 public class Main {
-    public static void main(String[] args) {
-        MenuFrame menuFrame = new MenuFrame();
-        ControllerRefactor controllerRefactor = new ControllerRefactor();
+    // SET THIS TO CHANGE THE STARTUP MODE TO GRAPHIC / CONSOLE
+    private static final boolean GRAPHIC = true;
+
+    private static void console() {
+        ConsoleController controller = new ConsoleController();
 
         System.out.println("Would you like to play the game or run tests?");
         System.out.println("1. Play Game");
@@ -24,11 +21,11 @@ public class Main {
             try {
                 int choice = Integer.parseInt(inputScanner.nextLine());
                 if (choice == 1) {
-                    controllerRefactor.startProgram();
+                    controller.startProgram();
                     return;
                 }
                 if (choice == 2) {
-                    controllerRefactor.runTest();
+                    controller.runTest();
                     return;
                 } else {
                     throw new NumberFormatException("Invalid input!");
@@ -38,5 +35,17 @@ public class Main {
             }
         }
 
+    }
+
+    private static void graphic() {
+        JFrame menuFrame = new MenuFrame();
+    }
+
+    public static void main(String[] args) {
+        // start the program in graphic or console mode
+        if (GRAPHIC)
+            graphic();
+        else
+            console();
     }
 }

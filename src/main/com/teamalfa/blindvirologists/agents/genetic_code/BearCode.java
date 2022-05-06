@@ -1,8 +1,5 @@
 package main.com.teamalfa.blindvirologists.agents.genetic_code;
 
-import main.com.teamalfa.blindvirologists.Controller;
-import main.com.teamalfa.blindvirologists.ControllerHelper;
-import main.com.teamalfa.blindvirologists.ControllerRefactor;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;

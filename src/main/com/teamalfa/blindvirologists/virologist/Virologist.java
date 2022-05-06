@@ -1,8 +1,6 @@
 package main.com.teamalfa.blindvirologists.virologist;
 
-import main.com.teamalfa.blindvirologists.ControllerHelper;
 import main.com.teamalfa.blindvirologists.agents.Agent;
-import main.com.teamalfa.blindvirologists.agents.GeneticCodeBank;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.genetic_code.GeneticCode;
 import main.com.teamalfa.blindvirologists.agents.virus.Virus;
@@ -14,12 +12,9 @@ import main.com.teamalfa.blindvirologists.equipments.active_equipments.ActiveEqu
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
-import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class Virologist {
     private ArrayList<GeneticCode> protectionBank;
