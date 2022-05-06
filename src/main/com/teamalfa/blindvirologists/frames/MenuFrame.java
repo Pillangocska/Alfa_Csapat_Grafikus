@@ -10,7 +10,6 @@ public class MenuFrame extends JFrame implements ActionListener {
     JButton exitButton;
     JButton kittyButton;
 
-
     public MenuFrame() {
         this.setTitle("BV");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -77,7 +76,7 @@ public class MenuFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
         else if(e.getSource() == playButton){
-            new IntroFrame();
+            new GameFrame(69);
             this.dispose();
         }
         else if(e.getSource() == kittyButton){

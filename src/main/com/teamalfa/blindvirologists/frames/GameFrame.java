@@ -16,7 +16,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private JPanel mapPanel;
     private JPanel whatHappenedPanel;
 
-    public GameFrame(String difficulty, int numberOfPlayers){
+    public GameFrame(int numberOfPlayers){
         masterPanel = new JPanel(new GridBagLayout());
 
         this.setTitle("Blind Virologist");
