@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Controller controller = new Controller();
+        MenuFrame menuFrame = new MenuFrame();
         ControllerRefactor controllerRefactor = new ControllerRefactor();
 
         System.out.println("Would you like to play the game or run tests?");
