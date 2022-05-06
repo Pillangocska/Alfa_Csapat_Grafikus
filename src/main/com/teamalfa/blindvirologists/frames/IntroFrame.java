@@ -10,6 +10,7 @@ public class IntroFrame extends JFrame implements ActionListener {
     JButton startButton;
     JComboBox difficultyBox;
     JComboBox playerNumberBox;
+
     IntroFrame(){
         this.setTitle("Game Parameters");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -77,9 +78,9 @@ public class IntroFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startButton){
             String dif = Objects.requireNonNull(difficultyBox.getSelectedItem()).toString();
-            System.out.println(dif);
+            //System.out.println(dif);
             int players = (int) playerNumberBox.getSelectedItem();
-            System.out.println(players);
+            //System.out.println(players);
             GameFrame gameFrame = new GameFrame(dif,players);
             this.dispose();
         }

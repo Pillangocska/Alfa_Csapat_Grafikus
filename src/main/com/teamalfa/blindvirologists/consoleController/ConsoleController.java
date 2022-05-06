@@ -231,7 +231,7 @@ public class ConsoleController {
         field = handleDoesNotExistError(fieldId, fieldHashMap);
 
         // create virologist and position on given field
-        Virologist virologist = new Virologist();
+        Virologist virologist = new Virologist("nameless virologist");
         Backpack backpack = virologist.getBackpack();
         ElementBank elementBank = virologist.getBackpack().getElementBank();
         field.accept(virologist);

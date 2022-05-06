@@ -16,7 +16,7 @@ public class MenuFrame extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setSize(430,550);
-        ImageIcon imageIcon = new ImageIcon("logo.png");
+        ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
         this.getContentPane().setBackground(new Color(0,0,0));
 
@@ -31,7 +31,7 @@ public class MenuFrame extends JFrame implements ActionListener {
         titleLabel.setBounds(2,0,410,35);
 
         //The kitty button for the user manual
-        ImageIcon cicaIcon = new ImageIcon("cicmic.gif");
+        ImageIcon cicaIcon = new ImageIcon("resources/cicmic.gif");
         kittyButton = new JButton();
         kittyButton.addActionListener(this);
         kittyButton.setIcon(cicaIcon);

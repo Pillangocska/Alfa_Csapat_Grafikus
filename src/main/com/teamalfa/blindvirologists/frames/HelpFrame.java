@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class HelpFrame extends JFrame implements ActionListener {
     JButton backButton;
+
     HelpFrame(){
         this.setTitle("Help");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -3,6 +3,7 @@ package main.com.teamalfa.blindvirologists;
 import javax.swing.*;
 import java.util.Scanner;
 import main.com.teamalfa.blindvirologists.consoleController.*;
+import main.com.teamalfa.blindvirologists.frames.GameFrame;
 import main.com.teamalfa.blindvirologists.frames.MenuFrame;
 
 public class Main {
@@ -39,6 +40,7 @@ public class Main {
 
     private static void graphic() {
         JFrame menuFrame = new MenuFrame();
+        //JFrame myframe = new GameFrame( "lófasz", 4);
     }
 
     public static void main(String[] args) {

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Virologist {
+    private String name;
     private ArrayList<GeneticCode> protectionBank;
     private ArrayList<Virus> activeViruses;
     private ArrayList<Equipment> wornEquipment = new ArrayList<>();
@@ -24,7 +25,12 @@ public class Virologist {
     private Backpack backpack;
     private Field field;
 
-    public Virologist() {
+    /**
+     * Constructs a virologist with an empty inventory.
+     * @param name The name od the virologist.
+     */
+    public Virologist(String name) {
+        this.name = name;
         protectionBank = new ArrayList<>();
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
