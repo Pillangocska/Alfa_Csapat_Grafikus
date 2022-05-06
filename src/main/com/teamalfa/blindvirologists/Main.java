@@ -40,7 +40,7 @@ public class Main {
 
     private static void graphic() {
         JFrame menuFrame = new MenuFrame();
-        //JFrame myframe = new GameFrame( "lófasz", 4);
+        //JFrame myframe = new GameFrame( 4);
     }
 
     public static void main(String[] args) {
