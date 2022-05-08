@@ -1,8 +1,11 @@
 package GUI.view.frames;
 
+import GUI.view.panels.InventoryPanel;
+import GUI.view.panels.StatusPanel;
+import GUI.view.panels.WhatHappenedPanel;
+import GUI.view.panels.WornEquipmentPanel;
+import GUI.view.view.View;
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.panels.InventoryPanel;
-import main.com.teamalfa.blindvirologists.panels.StatusPanel;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -12,13 +15,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameFrame extends JFrame implements ActionListener, Notifiable {
-    private JLayeredPane jlp;
+    private JLayeredPane jlp; //TODO ha mukszik minden megcsinalni addig fix koordinata
     private JPanel statusPanel;
     private JPanel inventoryPanel;
-    private JPanel mapPanel;
+    private JPanel wornEquipmentPanel;
+    private JPanel mapPanel; //TODO naon
     private JPanel whatHappenedPanel;
     private ArrayList<View> views;
     public static GameFrame instance;
@@ -26,7 +29,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     public GameFrame(int numberOfPlayers){
         //Starting the game
         this.startGame(numberOfPlayers);
-
+        //And setting up the basics...
         this.setTitle("Blind Virologist");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -34,33 +37,27 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
 
-        // Creating a layered pane so the controls can be on top of the game field
-        //jlp = new JLayeredPane();
-        //jlp.setLayout(new GridBagLayout());
-        //jlp.setSize(new Dimension(900, 720));
-
         // Creating the status panel
         statusPanel = new StatusPanel();
-        // Adding the status panel to the layered pane
-        //GridBagConstraints gbc1 = new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-                //GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
-        //jlp.add(statusPanel, gbc1, JLayeredPane.DEFAULT_LAYER);
-        statusPanel.setBounds(0,0,400,100);
-        statusPanel.setBackground(Color.CYAN);
+        statusPanel.setBounds(0,0,300,100);
+        statusPanel.setBackground(Color.black);
+
+        //Creating worn equipment panel
+        wornEquipmentPanel = new WornEquipmentPanel();
+        wornEquipmentPanel.setBounds(960,10, 300,120);
 
         //Creating the inventory panel
         inventoryPanel = new InventoryPanel();
-        //add(inventoryPanel);
+        inventoryPanel.setBounds(960,280,300,200);
 
-        // Adding the layered pane to the frame
-        //GridBagConstraints gbc2 = new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
-                //GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
-        //this.add(jlp, gbc2);
-        //this.add(jlp);
-        inventoryPanel.setBounds(950,200,300,200);
+        //Creating what happened panel
+        whatHappenedPanel = new WhatHappenedPanel();
+        whatHappenedPanel.setBounds(960,480,300,200);
 
-
+        this.setLayout(null);
         this.setVisible(true);
+        this.add(whatHappenedPanel);
+        this.add(wornEquipmentPanel);
         this.add(statusPanel);
         this.add(inventoryPanel);
         this.repaint();
@@ -79,7 +76,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
             TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
         }
-        //TODO
     }
 
     public void updateView() {
@@ -87,7 +83,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
             view.update();
         }
     }
-    */
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -96,6 +91,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
 
     @Override
     public void creativeNotify(String massage) {
-
+        // TODO
     }
 }
