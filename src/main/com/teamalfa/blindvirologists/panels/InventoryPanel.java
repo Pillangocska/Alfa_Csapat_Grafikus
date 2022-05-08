@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class InventoryPanel extends JPanel {
     BaseBagPanel[] bagPanels;
+    JLabel aminoText;
+    JLabel nucleoText;
 
     public InventoryPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -28,6 +30,7 @@ public class InventoryPanel extends JPanel {
         gridLayout.setVgap(2);
         bagPanelsPanel.setLayout(gridLayout);
         bagPanelsPanel.setMaximumSize(new Dimension(250, 150));
+        bagPanelsPanel.setMinimumSize(new Dimension(250, 150));
 
         // Adding bag panels
         for (var b : bagPanels)
@@ -35,8 +38,25 @@ public class InventoryPanel extends JPanel {
 
         add(bagPanelsPanel);
 
+        // create the panel displaying the elements
         JPanel elementPanel = new JPanel();
         elementPanel.setOpaque(false);
+        aminoText = new ElementQuantityLabel();
+        ImageIcon aminoImageIcon = new ImageIcon("resources/amino.png");
+        aminoImageIcon.setImage(aminoImageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        JLabel aminoIcon = new JLabel(aminoImageIcon);
+
+        nucleoText = new ElementQuantityLabel();
+        ImageIcon nucleoImageIcon = new ImageIcon("resources/nucleotide.png");
+        nucleoImageIcon.setImage(nucleoImageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        JLabel nucleoIcon = new JLabel(nucleoImageIcon);
+
+        elementPanel.add(aminoIcon);
+        elementPanel.add(aminoText);
+        elementPanel.add(nucleoIcon);
+        elementPanel.add(nucleoText);
+
+        add(elementPanel);
     }
 
     public void update() {
