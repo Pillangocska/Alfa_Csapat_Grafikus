@@ -28,6 +28,7 @@ public class WhatHappenedPanel extends JPanel implements View {
     public static void logOnPanel(String message){
         textArea.append("\n"+message);
     }
+
     @Override
     public void update() {/*doesn't do anything yet*/}
 

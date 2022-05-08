@@ -36,6 +36,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         this.setSize(1280,720);
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
+        this.getContentPane().setBackground(new Color(141,120,120));
 
         // Creating the status panel
         statusPanel = new StatusPanel();
@@ -44,15 +45,15 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
 
         //Creating worn equipment panel
         wornEquipmentPanel = new WornEquipmentPanel();
-        wornEquipmentPanel.setBounds(960,10, 300,120);
+        wornEquipmentPanel.setBounds(960,5, 300,110);
 
         //Creating the inventory panel
         inventoryPanel = new InventoryPanel();
-        inventoryPanel.setBounds(960,280,300,200);
+        inventoryPanel.setBounds(960,115,300,300);
 
         //Creating what happened panel
         whatHappenedPanel = new WhatHappenedPanel();
-        whatHappenedPanel.setBounds(960,480,300,200);
+        whatHappenedPanel.setBounds(960,415,300,260);
 
         this.setLayout(null);
         this.setVisible(true);
