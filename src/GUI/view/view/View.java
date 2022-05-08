@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists.frames;
+package GUI.view.view;
 /**
  * Interface that every viewable object implements.
  */

@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists.panels;
+package GUI.view.panels;
 
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 

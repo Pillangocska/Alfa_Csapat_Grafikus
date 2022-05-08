@@ -1,11 +1,10 @@
 package main.com.teamalfa.blindvirologists;
 
 import java.util.Scanner;
-import main.com.teamalfa.blindvirologists.consoleController.*;
-import main.com.teamalfa.blindvirologists.frames.GameFrame;
-import main.com.teamalfa.blindvirologists.frames.MenuFrame;
 
-import javax.swing.*;
+import GUI.view.frames.GameFrame;
+import main.com.teamalfa.blindvirologists.consoleController.*;
+import GUI.view.frames.menuFrames.MenuFrame;
 
 public class Main {
     // SET THIS TO CHANGE THE STARTUP MODE TO GRAPHIC / CONSOLE
@@ -41,7 +40,6 @@ public class Main {
 
     private static void graphic() {
         new MenuFrame();
-        //new GameFrame( 4);
     }
 
     public static void main(String[] args) {

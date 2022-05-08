@@ -1,9 +1,11 @@
-package main.com.teamalfa.blindvirologists.panels;
+package GUI.view.panels;
+
+import GUI.view.view.View;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BaseBagPanel extends JPanel {
+public class BaseBagPanel extends JPanel implements View {
     // Ezt nem absztraktra csináltam, hogy reprezentálhassa az üres paneleket az inventoryban.
 
     public BaseBagPanel() {
@@ -13,13 +15,11 @@ public class BaseBagPanel extends JPanel {
         this.setMinimumSize(new Dimension(100, 50));
     }
 
-    public void onlick() {
-        //TODO
-    }
+    @Override
+    public void update() {    }
 
-    public void update() {
-        //todo
-    }
+    @Override
+    public void onClick() {    }
 
     @Override
     /**

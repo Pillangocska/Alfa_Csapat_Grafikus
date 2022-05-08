@@ -1,8 +1,7 @@
-package main.com.teamalfa.blindvirologists.panels;
+package GUI.view.panels;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class RoundedOutlinedButton extends JButton {
     public RoundedOutlinedButton(String text) {
