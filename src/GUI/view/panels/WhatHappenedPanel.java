@@ -13,4 +13,8 @@ public class WhatHappenedPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
+
+    public void logOnPanel(String log){
+        //Todo
+    }
 }

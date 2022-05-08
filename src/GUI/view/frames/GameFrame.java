@@ -1,5 +1,6 @@
 package GUI.view.frames;
 
+import GUI.view.panels.WhatHappenedPanel;
 import GUI.view.view.View;
 import main.com.teamalfa.blindvirologists.city.City;
 import GUI.view.panels.InventoryPanel;
@@ -20,7 +21,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable{
     private JPanel statusPanel;
     private JPanel inventoryPanel;
     private JPanel mapPanel;
-    private JPanel whatHappenedPanel;
+    private WhatHappenedPanel whatHappenedPanel;
     private ArrayList<View> views;
     public static GameFrame instance;
 
@@ -95,6 +96,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable{
 
     @Override
     public void creativeNotify(String massage) {
-
+        whatHappenedPanel.logOnPanel(massage);
+        this.updateView();
     }
 }
