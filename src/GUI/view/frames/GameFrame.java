@@ -1,5 +1,6 @@
 package GUI.view.frames;
 
+import GUI.view.view.View;
 import main.com.teamalfa.blindvirologists.city.City;
 import GUI.view.panels.InventoryPanel;
 import GUI.view.panels.StatusPanel;
@@ -11,13 +12,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-public class GameFrame extends JFrame implements ActionListener, Notifiable {
+public class GameFrame extends JFrame implements ActionListener, Notifiable{
     private JLayeredPane jlp;
     private JPanel statusPanel;
     private JPanel inventoryPanel;
     private JPanel mapPanel;
     private JPanel whatHappenedPanel;
+    private ArrayList<View> views;
+    public static GameFrame instance;
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -77,22 +82,19 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     }
 
     public void updateView() {
-
+        for (View view : views) {
+            view.update();
+        }
     }
 
-    /* NAME CONFLICT
-    public void notify() {
-
-    }
-    */
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO
     }
 
-    public static void creativeNotify(String msg){
-        System.out.println("sikerült");
+    @Override
+    public void creativeNotify(String massage) {
 
     }
 }

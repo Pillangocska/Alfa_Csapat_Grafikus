@@ -1,13 +1,12 @@
 package main.com.teamalfa.blindvirologists.city.fields;
+import GUI.view.frames.GameFrame;
+import GUI.view.view.View;
 import main.com.teamalfa.blindvirologists.equipments.Equipment;
-import main.com.teamalfa.blindvirologists.frames.GameFrame;
-import main.com.teamalfa.blindvirologists.frames.Notifiable;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import java.util.ArrayList;
 
 public class Field {
-
     /**
      * Virologists on the field
      */
