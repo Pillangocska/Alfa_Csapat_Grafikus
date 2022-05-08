@@ -1,4 +1,6 @@
-package GUI.view.view;
+package GUI.view.view.fieldView;
+
+import GUI.view.view.View;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
