@@ -1,4 +1,6 @@
-package main.com.teamalfa.blindvirologists.frames;
+package GUI.view.frames.menuFrames;
+
+import GUI.view.frames.GameFrame;
 
 import javax.swing.*;
 import java.awt.*;

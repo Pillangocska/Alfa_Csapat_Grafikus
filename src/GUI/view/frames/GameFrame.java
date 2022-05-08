@@ -1,8 +1,8 @@
-package main.com.teamalfa.blindvirologists.frames;
+package GUI.view.frames;
 
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.panels.InventoryPanel;
-import main.com.teamalfa.blindvirologists.panels.StatusPanel;
+import GUI.view.panels.InventoryPanel;
+import GUI.view.panels.StatusPanel;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;

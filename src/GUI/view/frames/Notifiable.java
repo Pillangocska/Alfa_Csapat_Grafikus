@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists.frames;
+package GUI.view.frames;
 /**
  * When something changes in the model the player and
  * the frames get notified by this interface.
