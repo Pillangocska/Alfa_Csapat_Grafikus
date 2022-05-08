@@ -29,35 +29,37 @@ public class GameFrame extends JFrame implements ActionListener {
         this.setSize(1280,720);
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
-        //this.setLayout(new BoxLayout());
 
         // Creating a layered pane so the controls can be on top of the game field
-        jlp = new JLayeredPane();
-        jlp.setLayout(new GridBagLayout());
-        jlp.setSize(new Dimension(900, 720));
+        //jlp = new JLayeredPane();
+        //jlp.setLayout(new GridBagLayout());
+        //jlp.setSize(new Dimension(900, 720));
 
         // Creating the status panel
         statusPanel = new StatusPanel();
         // Adding the status panel to the layered pane
-        GridBagConstraints gbc1 = new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-                GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
-        jlp.add(statusPanel, gbc1, JLayeredPane.DEFAULT_LAYER);
+        //GridBagConstraints gbc1 = new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
+                //GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+        //jlp.add(statusPanel, gbc1, JLayeredPane.DEFAULT_LAYER);
+        statusPanel.setBounds(0,0,400,100);
+        statusPanel.setBackground(Color.CYAN);
 
         //Creating the inventory panel
         inventoryPanel = new InventoryPanel();
         //add(inventoryPanel);
 
         // Adding the layered pane to the frame
-        GridBagConstraints gbc2 = new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
-                GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+        //GridBagConstraints gbc2 = new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
+                //GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         //this.add(jlp, gbc2);
         //this.add(jlp);
+        inventoryPanel.setBounds(950,200,300,200);
 
-        add(inventoryPanel);
-        add(statusPanel);
-
-
+        this.setLayout(null);
         this.setVisible(true);
+        this.add(statusPanel);
+        this.add(inventoryPanel);
+        this.repaint();
     }
 
     public void logEvent(String message) {
@@ -70,21 +72,19 @@ public class GameFrame extends JFrame implements ActionListener {
         for(int i = 1 ; i <= numberOfPlayers ; i++){
             Virologist virologist = new Virologist("Player"+i);
             virologist.setField(City.getInstance().getAllFields().get(0));
-            TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
         }
-        //TODO
+        TurnHandler.setActiveVirologist(TurnHandler.GetOrder().get(0));
     }
 
     public void updateView() {
         //TODO
     }
 
-    /* NAME CONFLICT
-    public void notify() {
+
+    public void creativeNotify(String msg) {
 
     }
-    */
 
     @Override
     public void actionPerformed(ActionEvent e) {

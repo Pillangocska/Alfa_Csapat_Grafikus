@@ -25,6 +25,10 @@ public class Virologist {
     private Backpack backpack;
     private Field field;
 
+    private int actions;
+
+    public int getActions(){ return actions; }
+
     /**
      * Constructs a virologist with an empty inventory.
      * @param name The name od the virologist.
@@ -34,11 +38,9 @@ public class Virologist {
         protectionBank = new ArrayList<>();
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
-
+        actions = 3;
         TurnHandler.accept(this);
     }
-
-
 
     //getters setters
 

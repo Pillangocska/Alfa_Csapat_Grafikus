@@ -1,16 +1,32 @@
 package main.com.teamalfa.blindvirologists.panels;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import main.com.teamalfa.blindvirologists.frames.View;
 
-public class WhatHappenedPanel extends JPanel implements ActionListener {
+import javax.swing.*;
+import java.awt.*;
+
+public class WhatHappenedPanel extends JPanel implements View {
+    private String log;
+    private TextArea textArea;
 
     public WhatHappenedPanel(){
+        textArea = new TextArea();
+        this.setLayout(null);
+        this.setVisible(true);
+        this.add(textArea);
+        this.repaint();
+    }
 
+    public String getLog(){ return log; }
+
+    public void logOnPanel(String message){
+        this.log += message;
     }
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void update() {
 
     }
+
+    @Override
+    public void onClick() {/*doesn't do anything*/}
 }

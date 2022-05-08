@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
     private JButton endTurnButton;
     private JLabel currentPlayerLabel;
-    private JLabel nextPlayerLabel;
     private JLabel actionCounter;
 
     public StatusPanel() {
@@ -27,25 +26,23 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
         currentPlayerInformationContainer.add(currentPlayerLabel);
 
         actionCounter = new RoundedJLabel();
-        actionCounter.setText("Actions Left: 2");
+        actionCounter.setText("Initializing...");
         actionCounter.setAlignmentX(CENTER_ALIGNMENT);
         currentPlayerInformationContainer.add(actionCounter);
         currentPlayerInformationContainer.setLayout(new BoxLayout(currentPlayerInformationContainer, BoxLayout.Y_AXIS));
         this.add(currentPlayerInformationContainer);
-
-        nextPlayerLabel = new RoundedJLabel();
-        nextPlayerLabel.setText("<html><center>Next Player:<br/>UWU420</center></html>"); // külön osztályba setterrel?
-        this.add(nextPlayerLabel);
     }
 
     public void update() {
-        //TODO
+        this.currentPlayerLabel.setText(TurnHandler.getActiveVirologist().getName());
+        this.actionCounter.setText(Integer.toString(TurnHandler.getActiveVirologist().getActions()));
+        this.repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO
         if(e.getSource() == endTurnButton)
-            System.exit(1);
+            TurnHandler.getInstance().tick();
+        this.update();
     }
 }

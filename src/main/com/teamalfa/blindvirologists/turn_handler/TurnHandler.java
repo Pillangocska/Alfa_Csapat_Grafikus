@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TurnHandler {
-    private static TurnHandler instance = null;
+    private static TurnHandler instance;
     private static final ArrayList<Steppable> steppables = new ArrayList<>();
     private static ArrayList<Virologist> order = new ArrayList<>();
     private static Virologist activeVirologist; // the virologist, who's turn is active
@@ -30,6 +30,16 @@ public class TurnHandler {
         for(Steppable steppable : steppables) {
             steppable.step();
         }
+            for(int i = 0 ; i < order.size() ; i++) {
+                if (order.get(i).equals(activeVirologist)) {
+                    if(i+1 == order.size()){
+                        reOrderVirologists();
+                        activeVirologist = order.get(0);
+                    }else {
+                        activeVirologist = order.get(i+1);
+                    }
+                }
+            }
     }
 
     /**
