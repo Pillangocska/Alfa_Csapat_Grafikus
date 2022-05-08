@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists.frames;
+package GUI.view.frames;
 
 import main.com.teamalfa.blindvirologists.city.City;
 import main.com.teamalfa.blindvirologists.panels.InventoryPanel;
@@ -11,13 +11,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-public class GameFrame extends JFrame implements ActionListener {
+public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private JLayeredPane jlp;
     private JPanel statusPanel;
     private JPanel inventoryPanel;
     private JPanel mapPanel;
     private JPanel whatHappenedPanel;
+    private ArrayList<View> views;
+    public static GameFrame instance;
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -55,7 +59,7 @@ public class GameFrame extends JFrame implements ActionListener {
         //this.add(jlp);
         inventoryPanel.setBounds(950,200,300,200);
 
-        this.setLayout(null);
+
         this.setVisible(true);
         this.add(statusPanel);
         this.add(inventoryPanel);
@@ -72,22 +76,26 @@ public class GameFrame extends JFrame implements ActionListener {
         for(int i = 1 ; i <= numberOfPlayers ; i++){
             Virologist virologist = new Virologist("Player"+i);
             virologist.setField(City.getInstance().getAllFields().get(0));
+            TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
         }
-        TurnHandler.setActiveVirologist(TurnHandler.GetOrder().get(0));
-    }
-
-    public void updateView() {
         //TODO
     }
 
-
-    public void creativeNotify(String msg) {
-
+    public void updateView() {
+        for (View view : views) {
+            view.update();
+        }
     }
+    */
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO
+    }
+
+    @Override
+    public void creativeNotify(String massage) {
+
     }
 }

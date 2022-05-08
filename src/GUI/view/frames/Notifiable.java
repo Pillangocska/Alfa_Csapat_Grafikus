@@ -1,11 +1,6 @@
 package GUI.view.frames;
-/**
- * When something changes in the model the player and
- * the frames get notified by this interface.
- */
+
 public interface Notifiable {
-    /**
-     * A method for transmitting the message.
-     */
-    static void creativeNotify(String msg){}
+
+    void creativeNotify(String massage);
 }
