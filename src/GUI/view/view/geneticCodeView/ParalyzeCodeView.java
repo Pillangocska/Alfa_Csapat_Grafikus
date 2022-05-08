@@ -1,6 +1,8 @@
 package GUI.view.view.geneticCodeView;
 
-import GUI.view.view.GeneticCodeView;
+import main.com.teamalfa.blindvirologists.agents.genetic_code.ParalyzeCode;
 
 public class ParalyzeCodeView extends GeneticCodeView {
+    private ParalyzeCode code;
+
 }
