@@ -30,7 +30,7 @@ public class GameFrame extends JFrame implements ActionListener {
         this.setSize(1280,720);
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
-        this.setLayout(new GridBagLayout());
+        //this.setLayout(new GridBagLayout());
 
         // Creating a layered pane so the controls can be on top of the game field
         jlp = new JLayeredPane();
@@ -44,14 +44,20 @@ public class GameFrame extends JFrame implements ActionListener {
                 GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         jlp.add(statusPanel, gbc1, JLayeredPane.DEFAULT_LAYER);
 
-        // Creating the inventory panel
-        //inventoryPanel = new InventoryPanel();
+        //Creating the inventory panel
+        inventoryPanel = new InventoryPanel();
         //add(inventoryPanel);
 
         // Adding the layered pane to the frame
         GridBagConstraints gbc2 = new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
                 GridBagConstraints.LAST_LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
-        this.add(jlp, gbc2);
+        //this.add(jlp, gbc2);
+        //this.add(jlp);
+
+        add(inventoryPanel);
+
+
+
         this.setVisible(true);
     }
 

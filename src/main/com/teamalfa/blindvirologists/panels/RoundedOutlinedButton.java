@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class RoundedOutlinedButton extends JButton {
-    private Color backgroundColor;
-
     public RoundedOutlinedButton(String text) {
         super(text);
         setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
@@ -18,14 +16,14 @@ public class RoundedOutlinedButton extends JButton {
         setMargin(new Insets(15, 20, 15, 20));
 
         // The default color is black, whenever the cursor is above, change color to gray
-        backgroundColor = Color.BLACK;
+        setBackground(Color.BLACK);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backgroundColor = Color.GRAY.darker().darker();
+                setBackground(Color.GRAY.darker().darker());
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                backgroundColor = Color.BLACK;
+                setBackground(Color.BLACK);
             }
         });
     }
@@ -33,7 +31,7 @@ public class RoundedOutlinedButton extends JButton {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
-        g2.setColor(backgroundColor);
+        g2.setColor(getBackground());
         g2.setRenderingHints(new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON));
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 40, 40);
         g2.setPaint(Color.RED);
