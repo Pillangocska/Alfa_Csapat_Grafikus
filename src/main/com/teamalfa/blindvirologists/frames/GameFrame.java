@@ -31,12 +31,11 @@ public class GameFrame extends JFrame implements ActionListener {
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
         this.setLayout(new GridBagLayout());
-        this.setBackground(Color.CYAN);
 
+        // Creating a layered pane so the controls can be on top of the game field
         jlp = new JLayeredPane();
         jlp.setLayout(new GridBagLayout());
         jlp.setSize(new Dimension(900, 720));
-        jlp.setBackground(Color.BLUE);
 
         // Creating the status panel
         statusPanel = new StatusPanel();
@@ -84,6 +83,6 @@ public class GameFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //TODO
+        // TODO
     }
 }
