@@ -2,6 +2,7 @@ package main.com.teamalfa.blindvirologists.panels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class RoundedOutlinedButton extends JButton {
     public RoundedOutlinedButton(String text) {
@@ -13,12 +14,24 @@ public class RoundedOutlinedButton extends JButton {
         setBorderPainted(false);
         setFocusPainted(false);
         setMargin(new Insets(15, 20, 15, 20));
+
+        // The default color is black, whenever the cursor is above, change color to gray
+        setBackground(Color.BLACK);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                setBackground(Color.GRAY.darker().darker());
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                setBackground(Color.BLACK);
+            }
+        });
     }
 
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
-        g2.setColor(Color.BLACK);
+        g2.setColor(getBackground());
         g2.setRenderingHints(new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON));
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 40, 40);
         g2.setPaint(Color.RED);
