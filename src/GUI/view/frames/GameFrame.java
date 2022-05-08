@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameFrame extends JFrame implements ActionListener {
+public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private JLayeredPane jlp;
     private JPanel statusPanel;
     private JPanel inventoryPanel;
@@ -77,7 +77,7 @@ public class GameFrame extends JFrame implements ActionListener {
     }
 
     public void updateView() {
-        //TODO
+
     }
 
     /* NAME CONFLICT
@@ -89,5 +89,10 @@ public class GameFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO
+    }
+
+    public static void creativeNotify(String msg){
+        System.out.println("sikerült");
+
     }
 }

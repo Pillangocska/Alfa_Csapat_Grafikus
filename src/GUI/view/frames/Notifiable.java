@@ -7,5 +7,5 @@ public interface Notifiable {
     /**
      * A method for transmitting the message.
      */
-    void creativeNotify(String msg);
+    static void creativeNotify(String msg){}
 }
