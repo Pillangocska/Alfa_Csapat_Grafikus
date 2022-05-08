@@ -33,5 +33,4 @@ public class InventoryPanel extends JPanel {
         //TODO
     }
 
-
 }

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class RoundedJLabel extends JLabel {
     public RoundedJLabel() {
-        setFont(new Font("Lucida Calligraphy", Font.PLAIN, 15));
+        setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         setForeground(Color.RED);
         setOpaque(false);
         setBorder(new EmptyBorder(12, 10, 12, 10));

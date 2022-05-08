@@ -1,12 +1,17 @@
 package main.com.teamalfa.blindvirologists.frames;
 
+import main.com.teamalfa.blindvirologists.city.City;
 import main.com.teamalfa.blindvirologists.panels.InventoryPanel;
 import main.com.teamalfa.blindvirologists.panels.StatusPanel;
+import main.com.teamalfa.blindvirologists.turn_handler.Game;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class GameFrame extends JFrame implements ActionListener {
     private JLayeredPane jlp;
@@ -16,6 +21,9 @@ public class GameFrame extends JFrame implements ActionListener {
     private JPanel whatHappenedPanel;
 
     public GameFrame(int numberOfPlayers){
+        //Starting the game
+        this.startGame(numberOfPlayers);
+
         this.setTitle("Blind Virologist");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -23,6 +31,7 @@ public class GameFrame extends JFrame implements ActionListener {
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
         this.setLayout(new GridBagLayout());
+        this.setBackground(Color.CYAN);
 
         jlp = new JLayeredPane();
         jlp.setLayout(new GridBagLayout());
@@ -52,6 +61,14 @@ public class GameFrame extends JFrame implements ActionListener {
     }
 
     public void startGame (int numberOfPlayers) {
+        Game.getInstance().startGame();
+        //Adding players to the turnhandler
+        for(int i = 1 ; i <= numberOfPlayers ; i++){
+            Virologist virologist = new Virologist("Player"+i);
+            virologist.setField(City.getInstance().getAllFields().get(0));
+            TurnHandler.accept(virologist);
+            System.out.println("Player"+i+" created");
+        }
         //TODO
     }
 

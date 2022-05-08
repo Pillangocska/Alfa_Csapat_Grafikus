@@ -53,6 +53,7 @@ public class Virologist {
         this.field = f;
     }
 
+    public String getName(){ return name; }
     public Backpack getBackpack() {
         return backpack;
     }

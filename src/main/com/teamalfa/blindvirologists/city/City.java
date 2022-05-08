@@ -36,6 +36,8 @@ public class City {
         return instance;
     }
 
+    public ArrayList<Field> getAllFields(){ return allFields; }
+
     /**
      * ctr
      */
@@ -54,10 +56,10 @@ public class City {
     //Not the final product
     public void GenerateMap() {
         Random random = new Random();
-        int numberOfFields = random.nextInt(50-5+1)+5;
-        int numberOfLabs = random.nextInt(10-4+1)+4;
-        int numberOfStoreH = random.nextInt(15-5+1)+5;
-        int numberOfSafeH = random.nextInt(20-2+1)+2;
+        int numberOfFields = random.nextInt(25-5+1)+5;
+        int numberOfLabs = random.nextInt(8-4+1)+4;
+        int numberOfStoreH = random.nextInt(10-5+1)+5;
+        int numberOfSafeH = random.nextInt(10-2+1)+2;
         //Generating field numbers
         for(int i = 0; i < numberOfFields; i++){
             System.out.println("Field created");

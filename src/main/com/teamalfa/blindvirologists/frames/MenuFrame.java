@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame implements ActionListener {
+    JSlider playerSlider;
     JButton playButton;
     JButton exitButton;
     JButton kittyButton;
@@ -28,6 +29,18 @@ public class MenuFrame extends JFrame implements ActionListener {
         titleLabel.setBackground(Color.BLACK);
         titleLabel.setOpaque(true);
         titleLabel.setBounds(2,0,410,35);
+
+        //Slider for the player count
+        playerSlider = new JSlider(1,6,3);
+        playerSlider.setOrientation(SwingConstants.VERTICAL);
+        playerSlider.setFont(new Font("Bauhaus 93",Font.PLAIN,32));
+        playerSlider.setForeground(Color.RED);
+        playerSlider.setBackground(Color.BLACK);
+        playerSlider.setMinorTickSpacing(1);
+        playerSlider.setMajorTickSpacing(1);
+        playerSlider.setPaintTicks(true);
+        playerSlider.setPaintLabels(true);
+        playerSlider.setBounds(0,300,100,200);
 
         //The kitty button for the user manual
         ImageIcon cicaIcon = new ImageIcon("resources/cicmic.gif");
@@ -67,6 +80,7 @@ public class MenuFrame extends JFrame implements ActionListener {
         this.add(titleLabel);
         this.add(playButton);
         this.add(exitButton);
+        this.add(playerSlider);
         this.repaint();
     }
 
@@ -76,7 +90,8 @@ public class MenuFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
         else if(e.getSource() == playButton){
-            new GameFrame(69);
+            int players = playerSlider.getValue();
+            new GameFrame(players);
             this.dispose();
         }
         else if(e.getSource() == kittyButton){

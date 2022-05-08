@@ -1,5 +1,7 @@
 package main.com.teamalfa.blindvirologists.panels;
 
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +21,7 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
         currentPlayerInformationContainer.setOpaque(false);
 
         currentPlayerLabel = new RoundedJLabel();
-        currentPlayerLabel.setText("xxXXShowMeUrguts69XXxx");
+        currentPlayerLabel.setText(TurnHandler.getActiveVirologist().getName());
         currentPlayerLabel.setAlignmentX(CENTER_ALIGNMENT);
         currentPlayerInformationContainer.add(currentPlayerLabel);
 
@@ -42,6 +44,7 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //TODO
+        if(e.getSource() == endTurnButton)
+            System.exit(1);
     }
 }

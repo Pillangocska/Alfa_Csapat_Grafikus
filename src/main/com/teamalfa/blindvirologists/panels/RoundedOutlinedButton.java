@@ -6,7 +6,7 @@ import java.awt.*;
 public class RoundedOutlinedButton extends JButton {
     public RoundedOutlinedButton(String text) {
         super(text);
-        setFont(new Font("Lucida Calligraphy", Font.PLAIN, 15));
+        setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         setForeground(Color.RED);
         setOpaque(false);
         setContentAreaFilled(false);

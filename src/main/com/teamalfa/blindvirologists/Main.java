@@ -1,6 +1,5 @@
 package main.com.teamalfa.blindvirologists;
 
-import javax.swing.*;
 import java.util.Scanner;
 import main.com.teamalfa.blindvirologists.consoleController.*;
 import main.com.teamalfa.blindvirologists.frames.GameFrame;
@@ -39,7 +38,7 @@ public class Main {
     }
 
     private static void graphic() {
-        JFrame menuFrame = new MenuFrame();
+        new MenuFrame();
         //JFrame myframe = new GameFrame( 4);
     }
 
