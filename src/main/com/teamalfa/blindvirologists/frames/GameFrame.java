@@ -1,7 +1,6 @@
 package main.com.teamalfa.blindvirologists.frames;
 
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.panels.InventoryPanel;
 import main.com.teamalfa.blindvirologists.panels.StatusPanel;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
@@ -11,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 public class GameFrame extends JFrame implements ActionListener {
     private JLayeredPane jlp;
