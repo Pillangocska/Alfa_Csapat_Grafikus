@@ -9,10 +9,9 @@ public class BaseBagPanel extends JPanel implements View {
     // Ezt nem absztraktra csináltam, hogy reprezentálhassa az üres paneleket az inventoryban.
 
     public BaseBagPanel() {
-        this.setOpaque(false);
-        this.setSize(100, 50);
-        this.setMaximumSize(new Dimension(100, 50));
-        this.setMinimumSize(new Dimension(100, 50));
+        setOpaque(false);
+        setSize(100, 50);
+        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
 
     @Override

@@ -30,8 +30,9 @@ public class InventoryPanel extends JPanel {
 
         // Creating bag panels
         bagPanels = new BaseBagPanel[9];
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 8; i++)
             bagPanels[i] = new BaseBagPanel();
+        bagPanels[8] = new AgentPanel();
 
         // Creating the panel that will hold the bag panels
         JPanel bagPanelsPanel = new JPanel();
