@@ -5,6 +5,8 @@ import main.com.teamalfa.blindvirologists.consoleController.*;
 import main.com.teamalfa.blindvirologists.frames.GameFrame;
 import main.com.teamalfa.blindvirologists.frames.MenuFrame;
 
+import javax.swing.*;
+
 public class Main {
     // SET THIS TO CHANGE THE STARTUP MODE TO GRAPHIC / CONSOLE
     private static final boolean GRAPHIC = true;
@@ -39,7 +41,7 @@ public class Main {
 
     private static void graphic() {
         new MenuFrame();
-        //JFrame myframe = new GameFrame( 4);
+        //new GameFrame( 4);
     }
 
     public static void main(String[] args) {

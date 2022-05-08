@@ -14,6 +14,7 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
 
     public StatusPanel() {
         endTurnButton = new RoundedOutlinedButton("End Turn");
+        endTurnButton.addActionListener(this);
         this.add(endTurnButton);
 
         // this is necessary for information about the current player (currentPlayerLabel and actionCounter) to be displayed in the same column
@@ -32,7 +33,6 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
         currentPlayerInformationContainer.setLayout(new BoxLayout(currentPlayerInformationContainer, BoxLayout.Y_AXIS));
         this.add(currentPlayerInformationContainer);
 
-
         nextPlayerLabel = new RoundedJLabel();
         nextPlayerLabel.setText("<html><center>Next Player:<br/>UWU420</center></html>"); // külön osztályba setterrel?
         this.add(nextPlayerLabel);
@@ -44,6 +44,7 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // TODO
         if(e.getSource() == endTurnButton)
             System.exit(1);
     }
