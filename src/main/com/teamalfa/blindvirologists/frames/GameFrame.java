@@ -1,6 +1,7 @@
 package main.com.teamalfa.blindvirologists.frames;
 
 import main.com.teamalfa.blindvirologists.city.City;
+import main.com.teamalfa.blindvirologists.panels.InventoryPanel;
 import main.com.teamalfa.blindvirologists.panels.StatusPanel;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
@@ -28,7 +29,7 @@ public class GameFrame extends JFrame implements ActionListener {
         this.setSize(1280,720);
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
-        //this.setLayout(new GridBagLayout());
+        //this.setLayout(new BoxLayout());
 
         // Creating a layered pane so the controls can be on top of the game field
         jlp = new JLayeredPane();
@@ -53,7 +54,7 @@ public class GameFrame extends JFrame implements ActionListener {
         //this.add(jlp);
 
         add(inventoryPanel);
-
+        add(statusPanel);
 
 
         this.setVisible(true);
