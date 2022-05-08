@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Alfa_Csapat_Grafikus.iml" filepath="$PROJECT_DIR$/.idea/Alfa_Csapat_Grafikus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Alfa_Csapat_Grafikus.iml" filepath="$PROJECT_DIR$/Alfa_Csapat_Grafikus.iml" />
     </modules>
   </component>
 </project>
