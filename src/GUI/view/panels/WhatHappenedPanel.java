@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists.panels;
+package GUI.view.panels;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
