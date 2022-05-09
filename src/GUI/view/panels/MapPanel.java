@@ -2,7 +2,6 @@ package GUI.view.panels;
 
 import GUI.view.view.View;
 import GUI.view.view.fieldView.FieldView;
-import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import javax.swing.*;
@@ -30,7 +29,6 @@ public class MapPanel extends JPanel implements View {
             neighbourFields[i].setField(mainField.getField().getNeighbours().get(i));
             this.add(neighbourFields[i]);
         }
-
         this.add(mainField);
         this.repaint();
     }
@@ -43,5 +41,35 @@ public class MapPanel extends JPanel implements View {
     @Override
     public void onClick() {
 
+    }
+    @Override
+    public void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        Point origin = new Point(200 / 2, 200 / 2);
+        drawCircle(g2d, origin, 380, true, true, 0x4488FF, 0);
+    }
+
+    public void drawCircle(Graphics2D g, Point origin, int radius,
+                           boolean centered, boolean filled, int colorValue, int lineThickness) {
+        // Store before changing
+        Stroke tmpS = g.getStroke();
+        Color tmpC = g.getColor();
+
+        g.setColor(new Color(colorValue));
+        g.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_ROUND,
+                BasicStroke.JOIN_ROUND));
+
+        int diameter = radius * 2;
+        int x2 = centered ? origin.x - radius : origin.x;
+        int y2 = centered ? origin.y - radius : origin.y;
+
+        if (filled)
+            g.fillOval(x2, y2, diameter, diameter);
+        else
+            g.drawOval(x2, y2, diameter, diameter);
+
+        // Set values to previous when done
+        g.setColor(tmpC);
+        g.setStroke(tmpS);
     }
 }
