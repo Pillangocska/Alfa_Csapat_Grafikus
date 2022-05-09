@@ -1,9 +1,6 @@
 package GUI.view.frames;
 
-import GUI.view.panels.InventoryPanel;
-import GUI.view.panels.StatusPanel;
-import GUI.view.panels.WhatHappenedPanel;
-import GUI.view.panels.WornEquipmentPanel;
+import GUI.view.panels.*;
 import GUI.view.view.View;
 import main.com.teamalfa.blindvirologists.city.City;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
@@ -21,7 +18,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private JPanel statusPanel;
     private JPanel inventoryPanel;
     private JPanel wornEquipmentPanel;
-    private JPanel mapPanel; //TODO naon
+    private JPanel mapPanel;
     private JPanel whatHappenedPanel;
     private ArrayList<View> views;
     public static GameFrame instance;
@@ -55,8 +52,13 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         whatHappenedPanel = new WhatHappenedPanel();
         whatHappenedPanel.setBounds(960,415,300,260);
 
+        //Creating map panel
+        mapPanel = new MapPanel();
+        mapPanel.setBounds(0,110,600,500);
+
         this.setLayout(null);
         this.setVisible(true);
+        this.add(mapPanel);
         this.add(whatHappenedPanel);
         this.add(wornEquipmentPanel);
         this.add(statusPanel);
