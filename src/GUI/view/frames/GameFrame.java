@@ -14,12 +14,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GameFrame extends JFrame implements ActionListener, Notifiable {
-    private JLayeredPane jlp; //TODO ha mukszik minden megcsinalni addig fix koordinata
-    private JPanel statusPanel;
+    private final JPanel statusPanel;
     private JPanel inventoryPanel;
     private JPanel wornEquipmentPanel;
     private JPanel mapPanel;
-    private JPanel whatHappenedPanel;
+    private WhatHappenedPanel whatHappenedPanel;
     private ArrayList<View> views;
     public static GameFrame instance;
 
@@ -34,6 +33,10 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
         this.getContentPane().setBackground(new Color(141,120,120));
+
+        //LayeredPane panel, map will be in the back and the rest front
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0,0,1280,720);
 
         // Creating the status panel
         statusPanel = new StatusPanel();
@@ -54,20 +57,22 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
 
         //Creating map panel
         mapPanel = new MapPanel();
-        mapPanel.setBounds(0,110,600,500);
+        mapPanel.setBounds(0,0,1000,550);
 
         this.setLayout(null);
         this.setVisible(true);
-        this.add(mapPanel);
-        this.add(whatHappenedPanel);
-        this.add(wornEquipmentPanel);
-        this.add(statusPanel);
-        this.add(inventoryPanel);
+        layeredPane.add(mapPanel,Integer.valueOf(0));//Default Layer(bottom)
+        layeredPane.add(whatHappenedPanel,Integer.valueOf(1));//The rest will go to the front
+        layeredPane.add(wornEquipmentPanel,Integer.valueOf(1));
+        layeredPane.add(statusPanel,Integer.valueOf(1));
+        layeredPane.add(inventoryPanel,Integer.valueOf(1));
+        this.add(layeredPane);
         this.repaint();
     }
 
     public void logEvent(String message) {
-        //TODO
+        whatHappenedPanel.logOnPanel(message);
+        this.updateView();
     }
 
     public void startGame (int numberOfPlayers) {

@@ -14,7 +14,7 @@ public class MapPanel extends JPanel implements View {
     public MapPanel(){
         this.setBackground(Color.GREEN);
         this.setBorder(BorderFactory.createLineBorder(Color.RED));
-        this.setOpaque(false);
+        this.setOpaque(true);
         this.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         this.setVisible(true);
 

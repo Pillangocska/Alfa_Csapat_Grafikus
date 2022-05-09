@@ -25,7 +25,7 @@ public class WhatHappenedPanel extends JPanel implements View {
         this.repaint();
     }
 
-    public static void logOnPanel(String message){
+    public void logOnPanel(String message){
         textArea.append("\n"+message);
     }
 
