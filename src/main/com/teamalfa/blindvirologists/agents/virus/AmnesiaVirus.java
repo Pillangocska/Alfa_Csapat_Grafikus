@@ -10,6 +10,7 @@ public class AmnesiaVirus extends Virus {
         priority = 4;
         expiry = duration = 5;
         geneticCode = new AmnesiaCode();
+        name = "amnesia virus";
 
         TurnHandler.getInstance().accept(this);
     }

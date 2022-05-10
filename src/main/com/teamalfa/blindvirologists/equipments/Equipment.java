@@ -4,6 +4,7 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 abstract public class Equipment {
     protected Virologist virologist;
+    protected String name;
     /**
      * This calls the virologists removeWorn function
      * and so the passive equipment will be removed from
@@ -29,6 +30,8 @@ abstract public class Equipment {
     public boolean protect() {
         return false;
     }
+
+    public String getName() { return name; }
 
     abstract public String getType();
 }

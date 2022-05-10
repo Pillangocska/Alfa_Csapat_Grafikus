@@ -10,6 +10,7 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
  */
 abstract public class GeneticCode {
     protected String type;
+    protected String name;
     abstract public Virus createVirus(ElementBank elementBank);
     abstract public Vaccine createVaccine(ElementBank elementBank);
     public void autoInfect(Virologist virologist){  }
@@ -24,5 +25,9 @@ abstract public class GeneticCode {
         // now it's safe to cast
         GeneticCode code = (GeneticCode) obj;
         return code.getType() == type;
+    }
+
+    public String getName() {
+        return name;
     }
 }

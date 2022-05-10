@@ -9,6 +9,7 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
  * Abstract class that represents the agents in the game.
  */
 abstract public class Agent implements Steppable {
+    protected String name;
     /**
      * The cost of the Agent.
      */
@@ -65,4 +66,6 @@ abstract public class Agent implements Steppable {
      * Handles the duration and expiry of the agents.
      */
     public abstract void step();
+
+    public String getName() { return name; }
 }

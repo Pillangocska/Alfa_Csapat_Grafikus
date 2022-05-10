@@ -14,6 +14,7 @@ public class DanceVirus extends Virus {
 
     public DanceVirus(){
         geneticCode = new DanceCode();
+        name = "dance virus";
 
         TurnHandler.getInstance().accept(this);
     }
