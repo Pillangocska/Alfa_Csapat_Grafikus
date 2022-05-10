@@ -45,16 +45,13 @@ public class MapPanel extends JPanel implements View {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        Point origin = new Point(200 / 2, 200 / 2);
-        drawCircle(g2d, origin, 380, true, true, 0x4488FF, 0);
+        Point origin = new Point(1000 / 2, 500 / 2);
+        drawCircle(g2d, origin, 200, true, true, 0x4d664d, 0);
+        drawPolygon(g2d,1000/2, 550/2 ,1,0x00cc00,true);
     }
 
     public void drawCircle(Graphics2D g, Point origin, int radius,
                            boolean centered, boolean filled, int colorValue, int lineThickness) {
-        // Store before changing
-        Stroke tmpS = g.getStroke();
-        Color tmpC = g.getColor();
-
         g.setColor(new Color(colorValue));
         g.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_ROUND,
                 BasicStroke.JOIN_ROUND));
@@ -67,9 +64,26 @@ public class MapPanel extends JPanel implements View {
             g.fillOval(x2, y2, diameter, diameter);
         else
             g.drawOval(x2, y2, diameter, diameter);
+    }
 
-        // Set values to previous when done
-        g.setColor(tmpC);
-        g.setStroke(tmpS);
+    public void drawPolygon(Graphics2D g, int xcenter, int ycenter, int lineThickness, int colorValue, boolean filled) {
+        g.setColor(new Color(colorValue));
+        g.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
+
+        int[] xpoints = new int[6];
+        int[] ypoints = new int[6];
+        for (int p = 0; p < 6; p++) {
+            double fraction = (double) p / 6;
+            double angle = fraction * Math.PI * 2 + Math.toRadians((90 + 180) % 360);
+            int x = (int) (xcenter + Math.cos(angle) * 120); //1000/2 -> center
+            int y = (int) (ycenter + Math.sin(angle) * 120); //120 -> radius
+            Point point = new Point(x,y);
+            xpoints[p] = point.x;
+            ypoints[p] = point.y;
+        }
+        if (filled)
+            g.fillPolygon(xpoints, ypoints, 6);
+        else
+            g.drawPolygon(xpoints, ypoints, 6);
     }
 }
