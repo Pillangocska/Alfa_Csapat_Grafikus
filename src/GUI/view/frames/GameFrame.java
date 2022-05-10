@@ -2,7 +2,9 @@ package GUI.view.frames;
 
 import GUI.view.panels.*;
 import GUI.view.view.View;
+import GUI.view.view.fieldView.FieldView;
 import main.com.teamalfa.blindvirologists.city.City;
+import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -19,6 +21,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private WornEquipmentPanel wornEquipmentPanel;
     private MapPanel mapPanel;
     private WhatHappenedPanel whatHappenedPanel;
+    static private ArrayList<FieldView> fieldViews = new ArrayList<>();
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -108,6 +111,14 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO
+    }
+
+    public static FieldView findFieldViewByField(Field field){
+        // find fieldView by its field object
+        for(FieldView fieldView : fieldViews)
+            if(fieldView.getField() == field)
+                return fieldView;
+        return null;
     }
 
     /**

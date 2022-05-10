@@ -5,10 +5,10 @@ import GUI.view.view.View;
 import GUI.view.view.fieldView.FieldView;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import static GUI.view.frames.GameFrame.findFieldViewByField;
 
 public class MapPanel extends JPanel implements View {
     FieldView mainField;
