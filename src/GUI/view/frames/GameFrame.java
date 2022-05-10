@@ -14,13 +14,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GameFrame extends JFrame implements ActionListener, Notifiable {
-    private final JPanel statusPanel;
-    private JPanel inventoryPanel;
-    private JPanel wornEquipmentPanel;
-    private JPanel mapPanel;
+    private final StatusPanel statusPanel;
+    private InventoryPanel inventoryPanel;
+    private WornEquipmentPanel wornEquipmentPanel;
+    private MapPanel mapPanel;
     private WhatHappenedPanel whatHappenedPanel;
-    private ArrayList<View> views;
-    public static GameFrame instance;
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -46,18 +44,22 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         //Creating worn equipment panel
         wornEquipmentPanel = new WornEquipmentPanel();
         wornEquipmentPanel.setBounds(960,5, 300,110);
+        //views.add((View)wornEquipmentPanel);
 
         //Creating the inventory panel
         inventoryPanel = new InventoryPanel();
         inventoryPanel.setBounds(960,115,300,300);
+        //views.add((View)inventoryPanel);
 
         //Creating what happened panel
         whatHappenedPanel = new WhatHappenedPanel();
         whatHappenedPanel.setBounds(960,415,300,260);
+        //views.add((View)whatHappenedPanel);
 
         //Creating map panel
         mapPanel = new MapPanel();
         mapPanel.setBounds(0,80,1000,550);
+        //views.add((View)mapPanel);
 
         this.setLayout(null);
         this.setVisible(true);
@@ -70,6 +72,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         this.repaint();
     }
 
+    //szerintem ez felesleges
     public void logEvent(String message) {
         whatHappenedPanel.logOnPanel(message);
         this.updateView();
@@ -86,10 +89,20 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         }
     }
 
+    /**
+     * Updates all Views
+     */
     public void updateView() {
+        /*
         for (View view : views) {
             view.update();
         }
+        */
+        statusPanel.update();
+        wornEquipmentPanel.update();
+        inventoryPanel.update();
+        whatHappenedPanel.update();
+        mapPanel.update();
     }
 
     @Override
@@ -97,8 +110,14 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         // TODO
     }
 
+    /**
+     * Passes the event massage to the WhatHappenedPanel
+     * Updates all Views
+     * @param massage
+     */
     @Override
     public void creativeNotify(String massage) {
-        // TODO
+        whatHappenedPanel.logOnPanel(massage);
+        updateView();
     }
 }

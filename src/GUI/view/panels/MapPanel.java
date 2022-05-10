@@ -35,6 +35,10 @@ public class MapPanel extends JPanel implements View {
 
     @Override
     public void update() {
+        mainField.update();
+        for ( int i = 0; i < neighbourFields.length ; i++) {
+            neighbourFields[i].update();
+        }
 
     }
 
