@@ -46,6 +46,7 @@ public class TurnHandler {
         else {
             activeVirologist = order.get(indx + 1);
         }
+        activeVirologist.startTurn();
     }
 
     /**

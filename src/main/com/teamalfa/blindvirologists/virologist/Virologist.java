@@ -27,6 +27,7 @@ public class Virologist {
     private Field field;
     private Notifiable game;
     private ArrayList<Field> discoveredFields = new ArrayList<>();
+    private static final int maxActions = 3;
 
     private int actions;
 
@@ -42,7 +43,7 @@ public class Virologist {
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
         game = game;
-        actions = 3;
+        actions = maxActions;
     }
 
     //getters setters
@@ -63,6 +64,13 @@ public class Virologist {
         return backpack;
     }
     public Notifiable getGame() { return game; }
+
+    /**
+     * Resets the action counter.
+     */
+    public void startTurn() {
+        actions = maxActions;
+    }
 
     /**
      * The method is called when the virologist moves to another field,
