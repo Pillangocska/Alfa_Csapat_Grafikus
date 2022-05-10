@@ -27,24 +27,7 @@ public class MapPanel extends JPanel implements View {
         this.setOpaque(true);
         this.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         bindFields();
-
-        // current virologist's field
-        Field current = TurnHandler.getActiveVirologist().getField();
-
-        //The map panel's center will be where the current virologist is
-        mainField = findFieldViewByField(current);
-
-        //It's neighbouring fields are where the neighbours are in the model
-        neighbourFields = new ArrayList<>();
-        for(Field field : current.getNeighbours()) {
-            neighbourFields.add(findFieldViewByField(field));
-        }
-        this.add(mainField);
-        addNeighbours();
-
-        positionFields();
-        this.setVisible(true);
-        this.repaint();
+        update();
     }
 
     private void addNeighbours(){
@@ -83,7 +66,25 @@ public class MapPanel extends JPanel implements View {
 
     @Override
     public void update() {
+        removeAll();
+        // current virologist's field
+        Field current = TurnHandler.getActiveVirologist().getField();
 
+        //The map panel's center will be where the current virologist is
+        mainField = findFieldViewByField(current);
+
+        //It's neighbouring fields are where the neighbours are in the model
+        neighbourFields = new ArrayList<>();
+        for(Field field : current.getNeighbours()) {
+            neighbourFields.add(findFieldViewByField(field));
+        }
+        this.add(mainField);
+        addNeighbours();
+
+        positionFields();
+        this.setVisible(true);
+        revalidate();
+        this.repaint();
     }
 
     @Override

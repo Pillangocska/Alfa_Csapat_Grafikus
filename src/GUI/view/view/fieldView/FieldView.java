@@ -3,6 +3,8 @@ package GUI.view.view.fieldView;
 import GUI.view.view.View;
 import GUI.view.view.VirologistView;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +25,7 @@ public class FieldView extends JPanel implements View, MouseListener {
         this.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         this.add(textField);
         this.setVisible(true);
+        this.addMouseListener(this);
     }
     public void setField(Field f){
         this.field = f;
@@ -35,7 +38,9 @@ public class FieldView extends JPanel implements View, MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        Virologist current = TurnHandler.getActiveVirologist();
+        if(field != current.getField())
+            current.move(field);
     }
 
     @Override
@@ -65,7 +70,9 @@ public class FieldView extends JPanel implements View, MouseListener {
 
     @Override
     public void onClick() {
-
+        Virologist current = TurnHandler.getActiveVirologist();
+        if(field != current.getField())
+            current.move(field);
     }
 
     @Override

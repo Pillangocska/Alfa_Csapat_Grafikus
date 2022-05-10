@@ -1,5 +1,6 @@
 package main.com.teamalfa.blindvirologists.virologist;
 
+import GUI.view.frames.Notifiable;
 import main.com.teamalfa.blindvirologists.agents.Agent;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.genetic_code.GeneticCode;
@@ -25,6 +26,7 @@ public class Virologist {
     private Backpack backpack;
     private Field field;
     private ArrayList<Field> discoveredFields = new ArrayList<>();
+    private Notifiable notifiable;
 
     private int actions;
 
@@ -43,6 +45,9 @@ public class Virologist {
     }
 
     //getters setters
+    public void setNotifiable(Notifiable notifiable) {
+        this.notifiable = notifiable;
+    }
 
 
     public ArrayList<GeneticCode> getProtectionBank() {
@@ -79,6 +84,8 @@ public class Virologist {
         destination.accept(this);
 
         field = destination;
+        notifiable.creativeNotify("I moved!");
+        System.out.println("I Moved!");
     }
 
     public boolean use(ActiveEquipment a, Virologist v) {

@@ -25,7 +25,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private final JPanel statusPanel;
     private JPanel inventoryPanel;
     private JPanel wornEquipmentPanel;
-    private JPanel mapPanel;
+    private MapPanel mapPanel;
     private WhatHappenedPanel whatHappenedPanel;
     private ArrayList<View> views;
     public static GameFrame instance;
@@ -88,6 +88,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         //Adding players to the turn handler
         for(int i = 1 ; i <= numberOfPlayers ; i++){
             Virologist virologist = new Virologist("Player"+i);
+            virologist.setNotifiable(this);
             virologist.setField(City.getInstance().getAllFields().get(0));
             TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
@@ -107,6 +108,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
 
     @Override
     public void creativeNotify(String massage) {
-        // TODO
+        mapPanel.update();
     }
 }
