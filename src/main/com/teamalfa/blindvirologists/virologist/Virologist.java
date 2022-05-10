@@ -24,6 +24,7 @@ public class Virologist {
     private ArrayList<ActiveEquipment> activeEquipments = new ArrayList<>();
     private Backpack backpack;
     private Field field;
+    private ArrayList<Field> discoveredFields = new ArrayList<>();
 
     private int actions;
 
@@ -225,6 +226,7 @@ public class Virologist {
      */
     public void search() {
         field.searchedBy(this);
+        discoveredFields.add(field);
     }
 
     /**
