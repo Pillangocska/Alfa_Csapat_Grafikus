@@ -26,6 +26,7 @@ public class Virologist {
     private Backpack backpack;
     private Field field;
     private Notifiable game;
+    private ArrayList<Field> discoveredFields = new ArrayList<>();
 
     private int actions;
 
@@ -42,7 +43,6 @@ public class Virologist {
         backpack = new Backpack(this);
         game = game;
         actions = 3;
-
     }
 
     //getters setters
@@ -255,7 +255,9 @@ public class Virologist {
             field.searchedBy(this);
             actions--;
             game.creativeNotify(name + " searched field.");
+            discoveredFields.add(field);
         }
+
     }
 
     /**

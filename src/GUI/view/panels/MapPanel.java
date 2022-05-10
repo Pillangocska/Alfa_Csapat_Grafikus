@@ -6,6 +6,7 @@ import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MapPanel extends JPanel implements View {
     FieldView mainField;
