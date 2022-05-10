@@ -1,36 +1,85 @@
 package GUI.view.panels;
 
+import GUI.view.frames.GameFrame;
 import GUI.view.view.View;
 import GUI.view.view.fieldView.FieldView;
+import GUI.view.view.fieldView.LaboratoryView;
+import GUI.view.view.fieldView.SafeHouseView;
+import GUI.view.view.fieldView.StoreHouseView;
+import main.com.teamalfa.blindvirologists.city.City;
+import main.com.teamalfa.blindvirologists.city.fields.Field;
+import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
+import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
+import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MapPanel extends JPanel implements View {
+    private final ArrayList<FieldView> fieldViews = new ArrayList<>();
     FieldView mainField;
-    FieldView[] neighbourFields;
+    ArrayList<FieldView> neighbourFields;
     public MapPanel(){
         this.setBackground(Color.GREEN);
+        setLayout(null);
         this.setBorder(BorderFactory.createLineBorder(Color.RED));
         this.setOpaque(true);
         this.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
-        this.setVisible(true);
+        bindFields();
+
+        // current virologist's field
+        Field current = TurnHandler.getActiveVirologist().getField();
 
         //The map panel's center will be where the current virologist is
-        mainField = new FieldView();
-        mainField.setField(TurnHandler.getActiveVirologist().getField());
+        mainField = findFieldViewByField(current);
+
         //It's neighbouring fields are where the neighbours are in the model
-        neighbourFields = new FieldView[mainField.getField().getNeighbours().size()];
-        for(int i = 0 ; i < mainField.getField().getNeighbours().size() ; i++) {
-            neighbourFields[i] = new FieldView();
-        }
-        for(int i = 0 ; i < neighbourFields.length ; i++){
-            neighbourFields[i].setField(mainField.getField().getNeighbours().get(i));
-            this.add(neighbourFields[i]);
+        neighbourFields = new ArrayList<>();
+        for(Field field : current.getNeighbours()) {
+            neighbourFields.add(findFieldViewByField(field));
         }
         this.add(mainField);
+        addNeighbours();
+
+        positionFields();
+        this.setVisible(true);
         this.repaint();
+    }
+
+    private void addNeighbours(){
+        int max = 1;
+        for(FieldView neighbour : neighbourFields) {
+            if(max > 6)
+                break;
+            this.add(neighbour);
+            max++;
+        }
+    }
+
+    private void positionFields(){
+        Point center = new Point(1000/2 - 40, 500/2 - 40);
+        int offSet = 10;
+        int dimension = 100;
+        int horizontalOffset = dimension/2;
+        int verticalOffset = dimension - dimension / 4 + offSet;
+
+        mainField.setBounds(center.x, center.y, dimension,dimension);
+
+        // northeast
+        neighbourFields.get(0).setBounds(center.x + horizontalOffset, center.y - verticalOffset, 100, 100);
+        // east
+        neighbourFields.get(1).setBounds(center.x + dimension, center.y, 100, 100);
+        // southeast
+        neighbourFields.get(2).setBounds(center.x + horizontalOffset, center.y + verticalOffset, 100, 100);
+        // southwest
+        neighbourFields.get(3).setBounds(center.x - horizontalOffset, center.y + verticalOffset, 100, 100);
+        // west
+        neighbourFields.get(4).setBounds(center.x - dimension, center.y, 100, 100);
+        //northwest
+        neighbourFields.get(5).setBounds(center.x - horizontalOffset, center.y - verticalOffset, 100, 100);
+
     }
 
     @Override
@@ -47,7 +96,7 @@ public class MapPanel extends JPanel implements View {
         Graphics2D g2d = (Graphics2D) g;
         Point origin = new Point(1000 / 2, 500 / 2);
         drawCircle(g2d, origin, 200, true, true, 0x4d664d, 0);
-        drawPolygon(g2d,1000/2, 550/2 ,1,0x00cc00,true);
+        //drawPolygon(g2d,1000/2, 550/2 ,1,0x00cc00,true);
     }
 
     public void drawCircle(Graphics2D g, Point origin, int radius,
@@ -85,5 +134,43 @@ public class MapPanel extends JPanel implements View {
             g.fillPolygon(xpoints, ypoints, 6);
         else
             g.drawPolygon(xpoints, ypoints, 6);
+    }
+
+    private void bindFields(){
+        // bind fields
+        for(Field field : City.getAllFields()){
+            FieldView fieldView = new FieldView();
+            fieldView.setField(field);
+            fieldViews.add(fieldView);
+        }
+
+        // bind labs
+        for(Laboratory laboratory : City.getAllLaboratories()){
+            LaboratoryView labView = new LaboratoryView();
+            labView.setLab(laboratory);
+            fieldViews.add(labView);
+        }
+
+        //bind safe houses
+        for(SafeHouse safeHouse : City.getAllSafeHouses()){
+            SafeHouseView safeHouseView = new SafeHouseView();
+            safeHouseView.setSafeh(safeHouse);
+            fieldViews.add(safeHouseView);
+        }
+
+        // bind store houses
+        for(StoreHouse storeHouse : City.getAllStoreHouses()){
+            StoreHouseView storeHouseView = new StoreHouseView();
+            storeHouseView.setStoreh(storeHouse);
+            fieldViews.add(storeHouseView);
+        }
+    }
+
+    private FieldView findFieldViewByField(Field field) {
+        // find fieldView by its field object
+        for(FieldView fieldView : fieldViews)
+            if(fieldView.getField() == field)
+                return fieldView;
+        return null;
     }
 }

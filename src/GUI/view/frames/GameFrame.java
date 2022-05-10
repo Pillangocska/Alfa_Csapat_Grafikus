@@ -2,7 +2,15 @@ package GUI.view.frames;
 
 import GUI.view.panels.*;
 import GUI.view.view.View;
+import GUI.view.view.fieldView.FieldView;
+import GUI.view.view.fieldView.LaboratoryView;
+import GUI.view.view.fieldView.SafeHouseView;
+import GUI.view.view.fieldView.StoreHouseView;
 import main.com.teamalfa.blindvirologists.city.City;
+import main.com.teamalfa.blindvirologists.city.fields.Field;
+import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
+import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
+import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -77,7 +85,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
 
     public void startGame (int numberOfPlayers) {
         Game.getInstance().startGame();
-        //Adding players to the turnhandler
+        //Adding players to the turn handler
         for(int i = 1 ; i <= numberOfPlayers ; i++){
             Virologist virologist = new Virologist("Player"+i);
             virologist.setField(City.getInstance().getAllFields().get(0));
