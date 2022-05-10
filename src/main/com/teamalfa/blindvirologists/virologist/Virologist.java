@@ -40,7 +40,6 @@ public class Virologist {
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
         actions = 3;
-        TurnHandler.accept(this);
     }
 
     //getters setters
