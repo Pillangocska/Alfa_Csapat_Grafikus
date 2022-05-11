@@ -12,6 +12,7 @@ public class Gloves extends ActiveEquipment {
         cooldownDuration = 3;
         usetime = 3;
         cooldown = 0;
+        name = "glove";
 
         TurnHandler.getInstance().accept(this);
     }

@@ -21,10 +21,10 @@ import java.util.Random;
 public class City {
     private static City instance;
     private ArrayList<Equipment> allEquipment = new ArrayList<>();
-    private final ArrayList<Field> allFields = new ArrayList<>();
-    private final ArrayList<Laboratory> allLaboratories = new ArrayList<>();
-    private final ArrayList<StoreHouse> allStoreHouses = new ArrayList<>();
-    private final ArrayList<SafeHouse> allSafeHouses = new ArrayList<>();
+    private static final ArrayList<Field> allFields = new ArrayList<>();
+    private static final ArrayList<Laboratory> allLaboratories = new ArrayList<>();
+    private static final ArrayList<StoreHouse> allStoreHouses = new ArrayList<>();
+    private static final ArrayList<SafeHouse> allSafeHouses = new ArrayList<>();
 
     //Creates one object in the beginning of the game.
     static {
@@ -36,7 +36,6 @@ public class City {
         return instance;
     }
 
-    public ArrayList<Field> getAllFields(){ return allFields; }
 
     /**
      * ctr
@@ -299,4 +298,17 @@ public class City {
             }
         }
     }
+
+    public static ArrayList<Laboratory> getAllLaboratories(){
+        return allLaboratories;
+    }
+
+    public static ArrayList<SafeHouse> getAllSafeHouses(){
+        return allSafeHouses;
+    }
+
+    public static ArrayList<StoreHouse> getAllStoreHouses(){
+        return allStoreHouses;
+    }
+    public static ArrayList<Field> getAllFields(){ return allFields; }
 }

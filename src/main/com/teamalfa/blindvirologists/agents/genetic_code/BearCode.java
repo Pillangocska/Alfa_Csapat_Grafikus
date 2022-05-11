@@ -9,6 +9,7 @@ public class BearCode extends GeneticCode {
 
     public BearCode(){
         this.type = "bear";
+        name = "bear code";
     }
 
     /**

@@ -8,6 +8,7 @@ public class AmnesiaCode extends GeneticCode {
 
     public AmnesiaCode(){
         this.type = "amnesia";
+        name = "amnesia code";
     }
 
     /**

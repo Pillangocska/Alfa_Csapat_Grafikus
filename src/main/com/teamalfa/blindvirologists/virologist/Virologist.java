@@ -1,5 +1,6 @@
 package main.com.teamalfa.blindvirologists.virologist;
 
+import GUI.view.frames.Notifiable;
 import main.com.teamalfa.blindvirologists.agents.Agent;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.genetic_code.GeneticCode;
@@ -24,6 +25,9 @@ public class Virologist {
     private ArrayList<ActiveEquipment> activeEquipments = new ArrayList<>();
     private Backpack backpack;
     private Field field;
+    private Notifiable game;
+    private ArrayList<Field> discoveredFields = new ArrayList<>();
+    private static final int maxActions = 3;
 
     private int actions;
 
@@ -38,12 +42,13 @@ public class Virologist {
         protectionBank = new ArrayList<>();
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
-        actions = 3;
-        TurnHandler.accept(this);
+        actions = maxActions;
     }
 
     //getters setters
-
+    public void setNotifiable(Notifiable game) {
+        this.game = game;
+    }
 
     public ArrayList<GeneticCode> getProtectionBank() {
         return protectionBank;
@@ -59,6 +64,14 @@ public class Virologist {
     public Backpack getBackpack() {
         return backpack;
     }
+    public Notifiable getGame() { return game; }
+
+    /**
+     * Resets the action counter.
+     */
+    public void startTurn() {
+        actions = maxActions;
+    }
 
     /**
      * The method is called when the virologist moves to another field,
@@ -70,20 +83,28 @@ public class Virologist {
      * @param destination the field the virologist would like to step onto.
      */
     public void move(Field destination) {
-        Field modified = null;
+        if(actions > 0) {
+            Field modified = null;
 
-        if(!activeViruses.isEmpty()) modified = activeViruses.get(0).affectMovement(field);
-        if(modified != null) destination = modified;
+            if (!activeViruses.isEmpty()) modified = activeViruses.get(0).affectMovement(field);
+            if (modified != null) destination = modified;
 
-        field.remove(this);
-        destination.accept(this);
+            field.remove(this);
+            destination.accept(this);
 
-        field = destination;
+            field = destination;
+
+            actions--;
+            game.creativeNotify("Moved.");
+        }
     }
 
     public boolean use(ActiveEquipment a, Virologist v) {
-        if(!(checkUsageAffect()))
+        if(!(checkUsageAffect()) && actions > 0) {
+            actions--;
+            game.creativeNotify(a.getName() + " used on " + v.getName() + ".");
             return a.use(v);
+        }
         return false;
     }
 
@@ -94,9 +115,10 @@ public class Virologist {
      * @param v The virologist the agent is used on.
      */
     public void use(Agent a, Virologist v){
-        if (a != null && !(checkUsageAffect())){
+        if (a != null && !(checkUsageAffect()) && actions > 0){
             a.apply(v);
             backpack.getAgentPocket().removeAgent(a);
+            game.creativeNotify(a.getName() + " used on " + v.getName() + ".");
         }
     }
 
@@ -106,13 +128,15 @@ public class Virologist {
      * @return True if it was learned, false otherwise.
      */
     public boolean learn(GeneticCode gc) {
-        if(!(this.checkUsageAffect()) && gc != null) {
+        if(!(this.checkUsageAffect()) && gc != null && actions > 0) {
             for(GeneticCode alreadyLearnt : backpack.getGeneticCodePocket().getGeneticCodes()) {
                 if(gc.equals(alreadyLearnt)) {
                     return false;
                 }
             }
             backpack.add(gc);
+            actions--;
+            game.creativeNotify(gc.getName() + "learnt.");
             return true;
         }
         return false;
@@ -124,12 +148,14 @@ public class Virologist {
      * @return true if it was successful, false if it wasn't
      */
     public boolean pickUpEquipment(Equipment equipment) {
-        if(!isParalyzed()) {
+        if(!isParalyzed() && actions > 0) {
             if(field.canChangeEquipment()) {
                 SafeHouse safeHouse = (SafeHouse) field;
-                if(safeHouse.getEquipments().contains(equipment)){
-                    if(backpack.add(equipment)) {
+                if (safeHouse.getEquipments().contains(equipment)) {
+                    if (backpack.add(equipment)) {
                         equipment.setVirologist(this);
+                        game.creativeNotify(equipment.getName() + " picked up.");
+                        actions--;
                         return true;
                     }
                 }
@@ -139,8 +165,10 @@ public class Virologist {
     }
 
     public void pickUpMaterial() {
-        if(!isParalyzed()) {
+        if(!isParalyzed() && actions > 0) {
             field.searchedBy(this);
+            actions--;
+            game.creativeNotify("Material picked up.");
         }
     }
 
@@ -151,6 +179,7 @@ public class Virologist {
     public Backpack robbed() {
         if(!(activeViruses.isEmpty())){
             if(activeViruses.get(0).affectRobbability()){
+                game.creativeNotify(name + " were robbed.");
                 return backpack;
             }
         }
@@ -164,8 +193,11 @@ public class Virologist {
      * @return the virologist's backpack or null.
      */
     public Backpack rob(Virologist v) {
-        if(!(checkUsageAffect()))
+        if(!(checkUsageAffect()) && actions > 0) {
+            actions--;
+            game.creativeNotify(name + " robbed " + v.getName() + ".");
             return v.robbed();
+        }
         return null;
     }
 
@@ -191,6 +223,7 @@ public class Virologist {
         }
 
         activeViruses.add(virus);
+        game.creativeNotify(name + " were infected by " + virus.getName() + ".");
         return true;
     }
 
@@ -201,6 +234,7 @@ public class Virologist {
     public void protectedBy(Vaccine vaccine) {
         GeneticCode geneticcode = vaccine.getGeneticCode();
         protectionBank.add(geneticcode);
+        game.creativeNotify(name + " got vaccinated.");
     }
 
     /**
@@ -209,6 +243,7 @@ public class Virologist {
      */
     public void removeVirus(Virus virus) {
         activeViruses.remove(virus);
+        game.creativeNotify(virus.getName() + " is over.");
     }
 
     /**
@@ -217,6 +252,7 @@ public class Virologist {
      */
     public void removeVaccine(Vaccine vaccine) {
         protectionBank.remove(vaccine.getGeneticCode());
+        game.creativeNotify(vaccine.getName() + " is over.");
     }
 
     /**
@@ -224,7 +260,13 @@ public class Virologist {
      * It calls the current field's searchedBy method.
      */
     public void search() {
-        field.searchedBy(this);
+        if(actions > 0) {
+            field.searchedBy(this);
+            actions--;
+            game.creativeNotify(name + " searched field.");
+            discoveredFields.add(field);
+        }
+
     }
 
     /**
@@ -310,6 +352,7 @@ public class Virologist {
      */
     public void destroy() {
         field.destroy();
+        game.creativeNotify("Field destroyed.");
     }
 
     /**
@@ -322,6 +365,7 @@ public class Virologist {
         else {
             Game.getInstance().remove(this);
         }
+        game.creativeNotify(name + "died:c");
     }
 
     /**
@@ -332,6 +376,7 @@ public class Virologist {
             TurnHandler.getInstance().remove(this);
             Game.getInstance().accept(this);
         }
+        game.creativeNotify(name + "turned to bear :c");
     }
 
     /**
@@ -341,12 +386,14 @@ public class Virologist {
      * @return true if it was successful, false otherwise.
      */
     public boolean toss(Equipment e){
-        if(!(wornEquipment.contains(e))){
+        if(!(wornEquipment.contains(e)) && actions > 0){
             Virologist v = backpack.getVirologist();
             Field f = v.getField();
             if(f.canChangeEquipment()){
                 backpack.getEquipmentPocket().getEquipmentHolder().remove(e);
                 f.add(e);
+                actions--;
+                game.creativeNotify(name + " tossed " + e.getName() + ".");
                 return true;
             }
         }
@@ -360,17 +407,22 @@ public class Virologist {
     public void toggle(Equipment e){
         Virologist v = backpack.getVirologist();
         Field f = v.getField();
-        if(f.canChangeEquipment()){
+        if(f.canChangeEquipment() && actions > 0){
             boolean isParalysed = false;
             for (var vir : activeViruses) {
                 if (isParalysed = vir.affectUsage());
                 break;
             }
             if (!isParalysed) {
-                if (wornEquipment.contains(e))
+                actions--;
+                if (wornEquipment.contains(e)) {
                     e.unEquip();
-                else
+                    game.creativeNotify(name + " unequipped " + e);
+                }
+                else {
                     e.equip();
+                    game.creativeNotify(name + " unequipped " + e);
+                }
             }
         }
     }
@@ -400,7 +452,11 @@ public class Virologist {
      * @return the method.
      */
     public ArrayList<Virologist> searchForVirologist() {
-        return field.searchForVirologist(this);
+        if(actions > 0) {
+            actions--;
+            return field.searchForVirologist(this);
+        }
+        return null;
     }
 
 }

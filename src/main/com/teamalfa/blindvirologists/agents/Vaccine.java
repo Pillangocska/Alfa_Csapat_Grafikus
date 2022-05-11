@@ -9,6 +9,7 @@ public class Vaccine extends Agent {
     public Vaccine(GeneticCode geneticcode) {
         expiry = duration = 5;
         this.geneticCode = geneticcode;
+        name = "vaccine";
 
         TurnHandler.getInstance().accept(this);
     }

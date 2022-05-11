@@ -7,6 +7,7 @@ public class ParalyzeCode extends GeneticCode{
 
     public ParalyzeCode(){
         this.type = "paralyze";
+        name = "genetic code";
     }
 
     /**
