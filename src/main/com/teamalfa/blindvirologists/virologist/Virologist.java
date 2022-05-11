@@ -42,7 +42,7 @@ public class Virologist {
         protectionBank = new ArrayList<>();
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
-        game = game;
+        this.game = game;
         actions = maxActions;
     }
 

@@ -83,6 +83,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         //Adding players to the turnhandler
         for(int i = 1 ; i <= numberOfPlayers ; i++){
             Virologist virologist = new Virologist("Player"+i, this);
+
             virologist.setField(City.getInstance().getAllFields().get(0));
             TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
