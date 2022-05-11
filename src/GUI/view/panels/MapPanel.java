@@ -97,13 +97,6 @@ public class MapPanel extends JPanel implements View {
     public void onClick() {
 
     }
-//    @Override
-//    public void paintComponent(Graphics g) {
-//        Graphics2D g2d = (Graphics2D) g;
-//        Point origin = new Point(1000 / 2, 500 / 2);
-//        drawCircle(g2d, origin, 200, true, true, 0x4d664d, 0);
-//        //drawPolygon(g2d,1000/2, 550/2 ,1,0x00cc00,true);
-//    }
 
     public void drawCircle(Graphics2D g, Point origin, int radius,
                            boolean centered, boolean filled, int colorValue, int lineThickness) {
