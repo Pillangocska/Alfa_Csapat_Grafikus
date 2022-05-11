@@ -11,6 +11,7 @@ public class StoreHouseView extends FieldView {
 
     public StoreHouseView(){
         color = Color.CYAN;
+        this.text = "store";
         setFieldText("store");
     }
 

@@ -37,17 +37,18 @@ public class Virologist {
      * Constructs a virologist with an empty inventory.
      * @param name The name od the virologist.
      */
-    public Virologist(String name, Notifiable game) {
+    public Virologist(String name) {
         this.name = name;
         protectionBank = new ArrayList<>();
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
-        this.game = game;
         actions = maxActions;
     }
 
     //getters setters
-
+    public void setNotifiable(Notifiable game) {
+        this.game = game;
+    }
 
     public ArrayList<GeneticCode> getProtectionBank() {
         return protectionBank;

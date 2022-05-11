@@ -16,6 +16,7 @@ public class FieldView extends JPanel implements View, MouseListener {
     private Field field;
     private ArrayList<VirologistView> virologistOnField = new ArrayList<>();
     private JLabel textField = new JLabel("Field");
+    protected String text = "Field";
     protected Color color;
 
     public FieldView(){
@@ -39,7 +40,7 @@ public class FieldView extends JPanel implements View, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         Virologist current = TurnHandler.getActiveVirologist();
-        if(field != current.getField())
+        if(field != current.getField() && current != null)
             current.move(field);
     }
 
@@ -55,12 +56,17 @@ public class FieldView extends JPanel implements View, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        String name = "null";
+        if(field != null) {
+            String[] parts = field.toString().split("\\.");
+            name = parts[parts.length-1];
+        }
+        textField.setText(name);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        textField.setText(text);
     }
 
     @Override

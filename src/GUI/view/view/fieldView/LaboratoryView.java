@@ -12,6 +12,7 @@ public class LaboratoryView extends FieldView{
 
     public LaboratoryView(){
         color = Color.PINK;
+        this.text = "lab";
         setFieldText("lab");
     }
 

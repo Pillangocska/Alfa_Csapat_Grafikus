@@ -12,6 +12,7 @@ public class SafeHouseView extends FieldView{
 
     public SafeHouseView(){
         color = Color.orange;
+        this.text = "safe";
         setFieldText("safe");
     }
 
