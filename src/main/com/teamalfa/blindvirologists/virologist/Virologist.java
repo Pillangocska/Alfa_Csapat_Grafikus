@@ -43,14 +43,13 @@ public class Virologist {
         protectionBank = new ArrayList<>();
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
-        actions = 3;
+        actions = maxActions;
     }
 
     //getters setters
-    public void setNotifiable(Notifiable notifiable) {
-        this.game = notifiable;
+    public void setNotifiable(Notifiable game) {
+        this.game = game;
     }
-
 
     public ArrayList<GeneticCode> getProtectionBank() {
         return protectionBank;
@@ -461,4 +460,8 @@ public class Virologist {
         return null;
     }
 
+    public void endTurn() {
+        TurnHandler.changeActiveVirologist();
+        game.creativeNotify("End turn");
+    }
 }

@@ -13,10 +13,12 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class FieldView extends JPanel implements View, MouseListener {
-    private Field field;
+    protected Field field;
     private ArrayList<VirologistView> virologistOnField = new ArrayList<>();
     private JLabel textField = new JLabel("Field");
+    protected String text = "Field";
     protected Color color;
+    private static final int hexaDimension = 150;
 
     public FieldView(){
         color = Color.white;
@@ -26,6 +28,9 @@ public class FieldView extends JPanel implements View, MouseListener {
         this.add(textField);
         this.setVisible(true);
         this.addMouseListener(this);
+    }
+    public static int getHexaDimension(){
+        return hexaDimension;
     }
     public void setField(Field f){
         this.field = f;
@@ -38,14 +43,14 @@ public class FieldView extends JPanel implements View, MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-        Virologist current = TurnHandler.getActiveVirologist();
-        if(field != current.getField())
-            current.move(field);
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        Virologist current = TurnHandler.getActiveVirologist();
+        if(field != current.getField() && current != null)
+            current.move(field);
     }
 
     @Override
@@ -55,30 +60,41 @@ public class FieldView extends JPanel implements View, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        String name = "null";
+        if(field != null) {
+            String[] parts = field.toString().split("\\.");
+            name = parts[parts.length-1];
+        }
+        textField.setText(name);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        textField.setText(text);
     }
 
     @Override
     public void update() {
+        // remove all components from field
+        removeAll();
 
+        // and update only if its current field
+        if(field == TurnHandler.getActiveVirologist().getField()) {
+            for(Virologist virologist : field.getVirologists()){
+                add(new JButton("viro"));
+            }
+        }
     }
 
     @Override
     public void onClick() {
-        Virologist current = TurnHandler.getActiveVirologist();
-        if(field != current.getField())
-            current.move(field);
+        // ez a fuggveny nem tud semmit szentem nem kell
     }
 
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        drawPolygon(g2d,100/2, 100/2 ,1,color.getRGB(),true);
+        drawPolygon(g2d,hexaDimension/2, hexaDimension/2 ,1,color.getRGB(),true);
     }
 
     public void drawPolygon(Graphics2D g, int xcenter, int ycenter, int lineThickness, int colorValue, boolean filled) {
@@ -90,8 +106,8 @@ public class FieldView extends JPanel implements View, MouseListener {
         for (int p = 0; p < 6; p++) {
             double fraction = (double) p / 6;
             double angle = fraction * Math.PI * 2 + Math.toRadians((90 + 180) % 360);
-            int x = (int) (xcenter + Math.cos(angle) * 50); //1000/2 -> center
-            int y = (int) (ycenter + Math.sin(angle) * 50); //120 -> radius
+            int x = (int) (xcenter + Math.cos(angle) * hexaDimension/2); //1000/2 -> center
+            int y = (int) (ycenter + Math.sin(angle) * hexaDimension/2); //120 -> radius
             Point point = new Point(x,y);
             xpoints[p] = point.x;
             ypoints[p] = point.y;
