@@ -37,7 +37,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         layeredPane.setBounds(0,0,1280,720);
 
         // Creating the status panel
-        statusPanel = new StatusPanel();
+        statusPanel = new StatusPanel(this);
         statusPanel.setBounds(0,0,300,100);
         statusPanel.setBackground(Color.black);
 

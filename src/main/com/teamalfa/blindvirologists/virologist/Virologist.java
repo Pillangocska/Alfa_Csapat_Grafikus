@@ -459,4 +459,8 @@ public class Virologist {
         return null;
     }
 
+    public void endTurn() {
+        TurnHandler.changeActiveVirologist();
+        game.creativeNotify("End turn");
+    }
 }
