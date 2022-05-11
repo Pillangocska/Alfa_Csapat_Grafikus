@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class StoreHouseView extends FieldView {
     private ElementView elementv;
+    private StoreHouse storeHouse;
 
     public StoreHouseView(){
         color = Color.CYAN;

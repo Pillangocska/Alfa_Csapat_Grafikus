@@ -1,14 +1,22 @@
 package GUI.view.view.fieldView;
 
-import GUI.view.view.equipmentView.EquipmentView;
+import GUI.view.view.VirologistView;
+import GUI.view.view.equipmentView.*;
 import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
+import main.com.teamalfa.blindvirologists.equipments.Bag;
+import main.com.teamalfa.blindvirologists.equipments.Cloak;
+import main.com.teamalfa.blindvirologists.equipments.Equipment;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class SafeHouseView extends FieldView{
     private ArrayList<EquipmentView> equipments = new ArrayList<>();
-
+    private SafeHouse safeHouse;
     public SafeHouseView(){
         color = Color.getHSBColor(0,250,0);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/SafeHouse1.png");
@@ -27,5 +35,29 @@ public class SafeHouseView extends FieldView{
 
     public void setField(SafeHouse safeh) {
         field = safeh;
+    }
+
+    @Override
+    public void update() {
+        // remove all components from field
+        removeAll();
+
+        // and update only if its current field
+        if(field == TurnHandler.getActiveVirologist().getField()) {
+            for (Virologist virologist : field.getVirologists()) {
+                add(new VirologistView(virologist));
+            }
+            safeHouse = (SafeHouse) TurnHandler.getActiveVirologist().getField();
+            for(Equipment equipment : safeHouse.getEquipments()){
+                if(equipment.getName().equals("axe"))
+                    add(new AxeView((Axe) equipment));
+                if(equipment.getName().equals("bag"))
+                    add(new BagView((Bag) equipment));
+                if(equipment.getName().equals("cloak"))
+                    add(new CloakView((Cloak) equipment));
+                if(equipment.getName().equals("glove"))
+                    add(new GlovesView((Gloves) equipment));
+            }
+        }
     }
 }
