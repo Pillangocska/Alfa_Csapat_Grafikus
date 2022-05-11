@@ -114,6 +114,7 @@ public class City {
         }
         //Setting up neighbours for fields first
         for(int i = 0; i < numberOfFields; i++){
+            //TODO neighbours!!!!!!!!!
             //One field gets 1 to 5 normal field neighbours
             int numberOfFieldNeighbours = random.nextInt(5-1+1)+1;
             for(int j = 0; j < numberOfFieldNeighbours; j++) {

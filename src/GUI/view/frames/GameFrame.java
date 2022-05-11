@@ -30,7 +30,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         this.setSize(1280,720);
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
-        this.getContentPane().setBackground(new Color(141,120,120));
+        this.getContentPane().setBackground(new Color(0,0,0));
 
         //LayeredPane panel, map will be in the back and the rest front
         JLayeredPane layeredPane = new JLayeredPane();
