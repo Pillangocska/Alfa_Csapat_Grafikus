@@ -78,10 +78,16 @@ public class MapPanel extends JPanel implements View {
         for(Field field : current.getNeighbours()) {
             neighbourFields.add(findFieldViewByField(field));
         }
+
+        // update the main field and add it panel
+        mainField.update();
         this.add(mainField);
         addNeighbours();
 
+        // position the neighbouring fields and update all of them
         positionFields();
+        for(FieldView fv : fieldViews)
+            fv.update();
         this.setVisible(true);
         revalidate();
         this.repaint();
