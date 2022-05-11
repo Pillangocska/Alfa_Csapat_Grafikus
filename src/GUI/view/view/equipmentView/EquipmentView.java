@@ -1,6 +1,7 @@
 package GUI.view.view.equipmentView;
 
 import GUI.view.view.View;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,4 +22,5 @@ public abstract class EquipmentView extends JButton implements View, ActionListe
     public void onClick() {
 
     }
+    protected abstract void handleIcon();
 }

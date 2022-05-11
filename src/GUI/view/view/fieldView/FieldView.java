@@ -2,6 +2,8 @@ package GUI.view.view.fieldView;
 
 import GUI.view.view.View;
 import GUI.view.view.VirologistView;
+import GUI.view.view.equipmentView.AxeView;
+import GUI.view.view.equipmentView.EquipmentView;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 public class FieldView extends JPanel implements View, MouseListener {
     protected Field field;
     private ArrayList<VirologistView> virologistOnField = new ArrayList<>();
+    private ArrayList<EquipmentView> equipmentViews = new ArrayList<>();
     private JLabel textField = new JLabel("Field");
     protected String text = "Field";
     protected Color color;
@@ -83,9 +86,11 @@ public class FieldView extends JPanel implements View, MouseListener {
         removeAll();
 
         // and update only if its current field
-        if(field == TurnHandler.getActiveVirologist().getField())
-            for(Virologist virologist : field.getVirologists())
+        if(field == TurnHandler.getActiveVirologist().getField()) {
+            for (Virologist virologist : field.getVirologists()) {
                 add(new VirologistView(virologist));
+            }
+        }
 
     }
 

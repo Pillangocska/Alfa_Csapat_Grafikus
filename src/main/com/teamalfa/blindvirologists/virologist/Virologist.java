@@ -71,6 +71,7 @@ public class Virologist {
      */
     public void startTurn() {
         actions = maxActions;
+        game.creativeNotify(name + "'s turn started.");
     }
 
     /**
@@ -154,6 +155,7 @@ public class Virologist {
                 if (safeHouse.getEquipments().contains(equipment)) {
                     if (backpack.add(equipment)) {
                         equipment.setVirologist(this);
+                        safeHouse.remove(equipment);
                         game.creativeNotify(equipment.getName() + " picked up.");
                         actions--;
                         return true;
@@ -461,6 +463,6 @@ public class Virologist {
 
     public void endTurn() {
         TurnHandler.changeActiveVirologist();
-        game.creativeNotify("End turn");
+        game.creativeNotify(name + "'s turn ended");
     }
 }
