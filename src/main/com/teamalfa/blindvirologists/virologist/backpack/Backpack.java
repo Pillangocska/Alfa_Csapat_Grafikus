@@ -34,7 +34,17 @@ public class Backpack {
      * @return true if it was successful, false otherwise.
      */
     public boolean add(Equipment equipment) {
+        virologist.getGame().creativeNotify(equipment.getName() + " added.");
         return equipmentPocket.add(equipment);
+    }
+
+    /**
+     * Removes the equipment from the backpack.
+     * @param equipment the removed equipment.
+     */
+    public void remove(Equipment equipment) {
+        equipmentPocket.getEquipmentHolder().remove(equipment);
+        virologist.getGame().creativeNotify(equipment.getName() + " removed.");
     }
 
     /**
@@ -52,6 +62,16 @@ public class Backpack {
     public void add(ElementBank elements) {
         ElementBank added = elementBank.add(elements);
         elements.remove(added);
+        virologist.getGame().creativeNotify("Elements added.");
+    }
+
+    /**
+     * Removes the elements from the virologist.
+     * @param elements The elements that gets removed.
+     */
+    public void remove(ElementBank elements) {
+        elementBank.remove(elements);
+        virologist.getGame().creativeNotify("Elements removed.");
     }
 
     /**

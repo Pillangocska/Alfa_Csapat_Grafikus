@@ -9,6 +9,7 @@ public class Axe extends ActiveEquipment{
     public Axe() {
         usetime = 1;
         blunt = false;
+        name = "axe";
 
         TurnHandler.getInstance().accept(this);
     }

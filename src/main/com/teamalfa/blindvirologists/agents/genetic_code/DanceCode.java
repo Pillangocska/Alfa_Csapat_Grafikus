@@ -8,6 +8,7 @@ public class DanceCode extends GeneticCode{
 
     public DanceCode(){
         this.type = "dance";
+        name = "dance code";
     }
 
     /**

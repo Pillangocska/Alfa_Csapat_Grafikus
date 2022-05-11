@@ -2,15 +2,7 @@ package GUI.view.frames;
 
 import GUI.view.panels.*;
 import GUI.view.view.View;
-import GUI.view.view.fieldView.FieldView;
-import GUI.view.view.fieldView.LaboratoryView;
-import GUI.view.view.fieldView.SafeHouseView;
-import GUI.view.view.fieldView.StoreHouseView;
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.city.fields.Field;
-import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
-import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
-import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -22,13 +14,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GameFrame extends JFrame implements ActionListener, Notifiable {
-    private final JPanel statusPanel;
-    private JPanel inventoryPanel;
-    private JPanel wornEquipmentPanel;
+    private final StatusPanel statusPanel;
+    private InventoryPanel inventoryPanel;
+    private WornEquipmentPanel wornEquipmentPanel;
     private MapPanel mapPanel;
     private WhatHappenedPanel whatHappenedPanel;
-    private ArrayList<View> views;
-    public static GameFrame instance;
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -54,18 +44,22 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         //Creating worn equipment panel
         wornEquipmentPanel = new WornEquipmentPanel();
         wornEquipmentPanel.setBounds(960,5, 300,110);
+        //views.add((View)wornEquipmentPanel);
 
         //Creating the inventory panel
         inventoryPanel = new InventoryPanel();
         inventoryPanel.setBounds(960,115,300,300);
+        //views.add((View)inventoryPanel);
 
         //Creating what happened panel
         whatHappenedPanel = new WhatHappenedPanel();
         whatHappenedPanel.setBounds(960,415,300,260);
+        //views.add((View)whatHappenedPanel);
 
         //Creating map panel
         mapPanel = new MapPanel();
         mapPanel.setBounds(0,80,1000,550);
+        //views.add((View)mapPanel);
 
         this.setLayout(null);
         this.setVisible(true);
@@ -78,6 +72,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         this.repaint();
     }
 
+    //szerintem ez felesleges
     public void logEvent(String message) {
         whatHappenedPanel.logOnPanel(message);
         this.updateView();
@@ -85,20 +80,29 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
 
     public void startGame (int numberOfPlayers) {
         Game.getInstance().startGame();
-        //Adding players to the turn handler
+        //Adding players to the turnhandler
         for(int i = 1 ; i <= numberOfPlayers ; i++){
-            Virologist virologist = new Virologist("Player"+i);
-            virologist.setNotifiable(this);
+            Virologist virologist = new Virologist("Player"+i, this);
             virologist.setField(City.getInstance().getAllFields().get(0));
             TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
         }
     }
 
+    /**
+     * Updates all Views
+     */
     public void updateView() {
+        /*
         for (View view : views) {
             view.update();
         }
+        */
+        statusPanel.update();
+        wornEquipmentPanel.update();
+        inventoryPanel.update();
+        whatHappenedPanel.update();
+        mapPanel.update();
     }
 
     @Override
@@ -106,8 +110,14 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         // TODO
     }
 
+    /**
+     * Passes the event massage to the WhatHappenedPanel
+     * Updates all Views
+     * @param massage
+     */
     @Override
     public void creativeNotify(String massage) {
-        mapPanel.update();
+        whatHappenedPanel.logOnPanel(massage);
+        updateView();
     }
 }

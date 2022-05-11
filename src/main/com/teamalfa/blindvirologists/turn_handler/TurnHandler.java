@@ -25,21 +25,28 @@ public class TurnHandler {
 
     /**
      * Makes every steppable step.
+     *
      */
     public void tick() {
         for(Steppable steppable : steppables) {
             steppable.step();
         }
-            for(int i = 0 ; i < order.size() ; i++) {
-                if (order.get(i).equals(activeVirologist)) {
-                    if(i+1 == order.size()){
-                        reOrderVirologists();
-                        activeVirologist = order.get(0);
-                    }else {
-                        activeVirologist = order.get(i+1);
-                    }
-                }
-            }
+        changeActiveVirologist();
+    }
+
+    /**
+     * Helper method to change the current virologist to the next one.
+     */
+    private static void changeActiveVirologist() {
+        int indx = order.indexOf(activeVirologist);
+        if(indx == order.size()-1) {
+            reOrderVirologists();
+            activeVirologist = order.get(0);
+        }
+        else {
+            activeVirologist = order.get(indx + 1);
+        }
+        activeVirologist.startTurn();
     }
 
     /**
@@ -79,7 +86,7 @@ public class TurnHandler {
     /**
      * Reorders the virologists list.
      */
-    private void reOrderVirologists() {
+    private static void reOrderVirologists() {
         Collections.shuffle(order);
     }
 

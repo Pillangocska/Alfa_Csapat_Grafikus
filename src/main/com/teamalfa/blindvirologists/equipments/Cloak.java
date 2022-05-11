@@ -11,6 +11,7 @@ public class Cloak extends Equipment{
 
     public Cloak(){
         protectionRate = 823;
+        name = "cloak";
     }
 
     /**

@@ -10,6 +10,7 @@ public class ParalyzeVirus extends Virus {
         priority = 2;
         expiry = duration = 5;
         geneticCode = new ParalyzeCode();
+        name = "paralyze virus";
 
         TurnHandler.getInstance().accept(this);
     }

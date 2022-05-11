@@ -9,6 +9,7 @@ public class BearVirus extends DanceVirus{
     public BearVirus(){
         priority = 1;
         geneticCode = new BearCode();
+        name = "bear virus";
 
         TurnHandler.getInstance().accept(this);
     }

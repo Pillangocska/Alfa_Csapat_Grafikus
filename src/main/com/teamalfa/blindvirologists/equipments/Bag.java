@@ -8,10 +8,12 @@ public class Bag extends Equipment{
 
     public Bag(int size){
         extraSize = size;
+        name = "bag";
     }
 
     public Bag() {
         extraSize = 20;
+        name = "bag";
     }
 
     /**
