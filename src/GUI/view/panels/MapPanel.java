@@ -43,24 +43,24 @@ public class MapPanel extends JPanel implements View {
     private void positionFields(){
         Point center = new Point(1000/2 - 40, 500/2 - 40);
         int offSet = 10;
-        int dimension = 100;
+        int dimension = FieldView.getHexaDimension();
         int horizontalOffset = dimension/2;
         int verticalOffset = dimension - dimension / 4 + offSet;
 
         mainField.setBounds(center.x, center.y, dimension,dimension);
 
         // northeast
-        neighbourFields.get(0).setBounds(center.x + horizontalOffset, center.y - verticalOffset, 100, 100);
+        neighbourFields.get(0).setBounds(center.x + horizontalOffset, center.y - verticalOffset, dimension, dimension);
         // east
-        neighbourFields.get(1).setBounds(center.x + dimension, center.y, 100, 100);
+        neighbourFields.get(1).setBounds(center.x + dimension, center.y, dimension, dimension);
         // southeast
-        neighbourFields.get(2).setBounds(center.x + horizontalOffset, center.y + verticalOffset, 100, 100);
+        neighbourFields.get(2).setBounds(center.x + horizontalOffset, center.y + verticalOffset, dimension, dimension);
         // southwest
-        neighbourFields.get(3).setBounds(center.x - horizontalOffset, center.y + verticalOffset, 100, 100);
+        neighbourFields.get(3).setBounds(center.x - horizontalOffset, center.y + verticalOffset, dimension, dimension);
         // west
-        neighbourFields.get(4).setBounds(center.x - dimension, center.y, 100, 100);
+        neighbourFields.get(4).setBounds(center.x - dimension, center.y, dimension, dimension);
         //northwest
-        neighbourFields.get(5).setBounds(center.x - horizontalOffset, center.y - verticalOffset, 100, 100);
+        neighbourFields.get(5).setBounds(center.x - horizontalOffset, center.y - verticalOffset, dimension, dimension);
 
     }
 
