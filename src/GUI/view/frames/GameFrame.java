@@ -2,6 +2,10 @@ package GUI.view.frames;
 
 import GUI.view.panels.*;
 import main.com.teamalfa.blindvirologists.city.City;
+import main.com.teamalfa.blindvirologists.city.fields.Field;
+import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
+import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
+import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;

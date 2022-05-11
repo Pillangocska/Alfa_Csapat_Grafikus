@@ -1,5 +1,6 @@
 package main.com.teamalfa.blindvirologists.virologist.backpack.pockets;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
+import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
 import main.com.teamalfa.blindvirologists.equipments.Equipment;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
