@@ -11,6 +11,8 @@ public class LaboratoryView extends FieldView{
 
     public LaboratoryView(){
         color = Color.PINK;
+        newImage = Toolkit.getDefaultToolkit().createImage("resources/axe.png");
+        backGround = newImage.getScaledInstance(195,195,Image.SCALE_DEFAULT);
         this.text = "lab";
         setFieldText("lab");
     }

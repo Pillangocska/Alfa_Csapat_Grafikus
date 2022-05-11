@@ -10,6 +10,8 @@ public class StoreHouseView extends FieldView {
 
     public StoreHouseView(){
         color = Color.CYAN;
+        newImage = Toolkit.getDefaultToolkit().createImage("resources/bag.png");
+        backGround = newImage.getScaledInstance(195,195,Image.SCALE_DEFAULT);
         this.text = "store";
         setFieldText("store");
     }

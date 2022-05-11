@@ -11,6 +11,8 @@ public class SafeHouseView extends FieldView{
 
     public SafeHouseView(){
         color = Color.orange;
+        newImage = Toolkit.getDefaultToolkit().createImage("resources/cloak.png");
+        backGround = newImage.getScaledInstance(195,195,Image.SCALE_DEFAULT);
         this.text = "safe";
         setFieldText("safe");
     }

@@ -18,10 +18,14 @@ public class FieldView extends JPanel implements View, MouseListener {
     private JLabel textField = new JLabel("Field");
     protected String text = "Field";
     protected Color color;
+    protected Image newImage;
+    protected Image backGround;
     private static final int hexaDimension = 200;
 
     public FieldView(){
         color = Color.white;
+        newImage = Toolkit.getDefaultToolkit().createImage("resources/field1.png");
+        backGround = newImage.getScaledInstance(198,198,Image.SCALE_DEFAULT);
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(100,100));
         this.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
@@ -94,6 +98,8 @@ public class FieldView extends JPanel implements View, MouseListener {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         drawPolygon(g2d,hexaDimension/2, hexaDimension/2 ,1,color.getRGB(),true);
+        g.drawImage(backGround,1,1,null);
+        this.repaint();
     }
 
     public void drawPolygon(Graphics2D g, int xcenter, int ycenter, int lineThickness, int colorValue, boolean filled) {

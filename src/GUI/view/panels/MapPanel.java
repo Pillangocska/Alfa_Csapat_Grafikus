@@ -1,6 +1,5 @@
 package GUI.view.panels;
 
-import GUI.view.frames.GameFrame;
 import GUI.view.view.View;
 import GUI.view.view.fieldView.FieldView;
 import GUI.view.view.fieldView.LaboratoryView;
@@ -23,7 +22,8 @@ public class MapPanel extends JPanel implements View {
     ArrayList<FieldView> neighbourFields;
     public MapPanel(){
         setLayout(null);
-        this.setBorder(BorderFactory.createLineBorder(Color.RED));
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.setBackground(Color.BLACK);
         this.setOpaque(true);
         this.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         bindFields();
