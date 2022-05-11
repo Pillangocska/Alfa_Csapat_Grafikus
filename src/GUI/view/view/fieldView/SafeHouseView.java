@@ -7,7 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class SafeHouseView extends FieldView{
-    private SafeHouse safeh;
     private ArrayList<EquipmentView> equipments = new ArrayList<>();
 
     public SafeHouseView(){
@@ -16,12 +15,7 @@ public class SafeHouseView extends FieldView{
         setFieldText("safe");
     }
 
-    public void setSafeh(SafeHouse safeh) {
-        this.safeh = safeh;
-    }
-
-    @Override
-    public SafeHouse getField(){
-        return safeh;
+    public void setField(SafeHouse safeh) {
+        field = safeh;
     }
 }

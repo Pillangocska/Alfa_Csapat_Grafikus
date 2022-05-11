@@ -147,21 +147,21 @@ public class MapPanel extends JPanel implements View {
         // bind labs
         for(Laboratory laboratory : City.getAllLaboratories()){
             LaboratoryView labView = new LaboratoryView();
-            labView.setLab(laboratory);
+            labView.setField(laboratory);
             fieldViews.add(labView);
         }
 
         //bind safe houses
         for(SafeHouse safeHouse : City.getAllSafeHouses()){
             SafeHouseView safeHouseView = new SafeHouseView();
-            safeHouseView.setSafeh(safeHouse);
+            safeHouseView.setField(safeHouse);
             fieldViews.add(safeHouseView);
         }
 
         // bind store houses
         for(StoreHouse storeHouse : City.getAllStoreHouses()){
             StoreHouseView storeHouseView = new StoreHouseView();
-            storeHouseView.setStoreh(storeHouse);
+            storeHouseView.setField(storeHouse);
             fieldViews.add(storeHouseView);
         }
     }

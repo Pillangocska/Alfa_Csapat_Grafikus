@@ -6,7 +6,6 @@ import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
 import java.awt.*;
 
 public class StoreHouseView extends FieldView {
-    private StoreHouse storeh;
     private ElementView elementv;
 
     public StoreHouseView(){
@@ -15,12 +14,7 @@ public class StoreHouseView extends FieldView {
         setFieldText("store");
     }
 
-    public void setStoreh(StoreHouse storeh) {
-        this.storeh = storeh;
-    }
-
-    @Override
-    public StoreHouse getField(){
-        return storeh;
+    public void setField(StoreHouse storeh) {
+        field = storeh;
     }
 }

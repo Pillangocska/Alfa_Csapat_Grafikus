@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class FieldView extends JPanel implements View, MouseListener {
-    private Field field;
+    protected Field field;
     private ArrayList<VirologistView> virologistOnField = new ArrayList<>();
     private JLabel textField = new JLabel("Field");
     protected String text = "Field";
