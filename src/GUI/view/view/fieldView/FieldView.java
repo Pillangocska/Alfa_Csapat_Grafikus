@@ -2,6 +2,7 @@ package GUI.view.view.fieldView;
 
 import GUI.view.view.View;
 import GUI.view.view.VirologistView;
+import GUI.view.view.equipmentView.AxeView;
 import GUI.view.view.equipmentView.EquipmentView;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
