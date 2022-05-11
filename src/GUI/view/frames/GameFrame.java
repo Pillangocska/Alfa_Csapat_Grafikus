@@ -1,7 +1,6 @@
 package GUI.view.frames;
 
 import GUI.view.panels.*;
-import GUI.view.view.View;
 import main.com.teamalfa.blindvirologists.city.City;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
@@ -15,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private final StatusPanel statusPanel;
