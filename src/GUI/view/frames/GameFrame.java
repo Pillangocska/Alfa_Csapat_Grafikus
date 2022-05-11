@@ -2,9 +2,7 @@ package GUI.view.frames;
 
 import GUI.view.panels.*;
 import GUI.view.view.View;
-import GUI.view.view.fieldView.FieldView;
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -21,7 +19,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private WornEquipmentPanel wornEquipmentPanel;
     private MapPanel mapPanel;
     private WhatHappenedPanel whatHappenedPanel;
-    static private ArrayList<FieldView> fieldViews = new ArrayList<>();
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -33,14 +30,14 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         this.setSize(1280,720);
         ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         this.setIconImage(imageIcon.getImage());
-        this.getContentPane().setBackground(new Color(141,120,120));
+        this.getContentPane().setBackground(new Color(0,0,0));
 
         //LayeredPane panel, map will be in the back and the rest front
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,1280,720);
 
         // Creating the status panel
-        statusPanel = new StatusPanel();
+        statusPanel = new StatusPanel(this);
         statusPanel.setBounds(0,0,300,100);
         statusPanel.setBackground(Color.black);
 
@@ -60,7 +57,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         //views.add((View)whatHappenedPanel);
 
         //Creating map panel
-        mapPanel = new MapPanel(this);
+        mapPanel = new MapPanel();
         mapPanel.setBounds(0,80,1000,550);
         //views.add((View)mapPanel);
 
@@ -85,8 +82,11 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         Game.getInstance().startGame();
         //Adding players to the turnhandler
         for(int i = 1 ; i <= numberOfPlayers ; i++){
-            Virologist virologist = new Virologist("Player"+i, this);
-            virologist.setField(City.getInstance().getAllFields().get(0));
+            Virologist virologist = new Virologist("Player"+i);
+            virologist.setNotifiable(this);
+
+
+            City.getInstance().getAllFields().get(0).accept(virologist);
             TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
         }
@@ -111,14 +111,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO
-    }
-
-    public static FieldView findFieldViewByField(Field field){
-        // find fieldView by its field object
-        for(FieldView fieldView : fieldViews)
-            if(fieldView.getField() == field)
-                return fieldView;
-        return null;
     }
 
     /**

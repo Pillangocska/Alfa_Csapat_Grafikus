@@ -1,5 +1,7 @@
 package GUI.view.panels;
 
+import GUI.view.frames.GameFrame;
+import GUI.view.frames.Notifiable;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import javax.swing.*;
@@ -10,8 +12,10 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
     private JButton endTurnButton;
     private JLabel currentPlayerLabel;
     private JLabel actionCounter;
+    private Notifiable notifiable;
 
-    public StatusPanel() {
+    public StatusPanel(Notifiable notifiable) {
+        this.notifiable = notifiable;
         endTurnButton = new RoundedOutlinedButton("End Turn");
         endTurnButton.addActionListener(this);
         this.add(endTurnButton);
@@ -42,7 +46,6 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == endTurnButton)
-            TurnHandler.getInstance().tick();
-        this.update();
+            TurnHandler.getActiveVirologist().endTurn();
     }
 }

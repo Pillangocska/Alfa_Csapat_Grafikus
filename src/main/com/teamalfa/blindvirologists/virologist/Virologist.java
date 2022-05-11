@@ -27,6 +27,7 @@ public class Virologist {
     private Field field;
     private Notifiable game;
     private ArrayList<Field> discoveredFields = new ArrayList<>();
+    private static final int maxActions = 3;
 
     private int actions;
 
@@ -36,18 +37,18 @@ public class Virologist {
      * Constructs a virologist with an empty inventory.
      * @param name The name od the virologist.
      */
-    public Virologist(String name, Notifiable game) {
+    public Virologist(String name) {
         this.name = name;
         protectionBank = new ArrayList<>();
         activeViruses = new ArrayList<>();
         backpack = new Backpack(this);
-        game = game;
-        actions = 3;
-
+        actions = maxActions;
     }
 
     //getters setters
-
+    public void setNotifiable(Notifiable game) {
+        this.game = game;
+    }
 
     public ArrayList<GeneticCode> getProtectionBank() {
         return protectionBank;
@@ -64,6 +65,13 @@ public class Virologist {
         return backpack;
     }
     public Notifiable getGame() { return game; }
+
+    /**
+     * Resets the action counter.
+     */
+    public void startTurn() {
+        actions = maxActions;
+    }
 
     /**
      * The method is called when the virologist moves to another field,
@@ -258,6 +266,7 @@ public class Virologist {
             game.creativeNotify(name + " searched field.");
             discoveredFields.add(field);
         }
+
     }
 
     /**
@@ -450,4 +459,8 @@ public class Virologist {
         return null;
     }
 
+    public void endTurn() {
+        TurnHandler.changeActiveVirologist();
+        game.creativeNotify("End turn");
+    }
 }

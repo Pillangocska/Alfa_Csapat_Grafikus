@@ -1,52 +1,109 @@
 package GUI.view.panels;
 
-import GUI.view.frames.GameFrame;
 import GUI.view.view.View;
 import GUI.view.view.fieldView.FieldView;
+import GUI.view.view.fieldView.LaboratoryView;
+import GUI.view.view.fieldView.SafeHouseView;
+import GUI.view.view.fieldView.StoreHouseView;
+import main.com.teamalfa.blindvirologists.city.City;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
+import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
+import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
+import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import static GUI.view.frames.GameFrame.findFieldViewByField;
 
 public class MapPanel extends JPanel implements View {
+    private final ArrayList<FieldView> fieldViews = new ArrayList<>();
     FieldView mainField;
-    ArrayList<FieldView> neighbourFields = new ArrayList<>();
-
-    public MapPanel(GameFrame gf){
-        this.setBackground(Color.GREEN);
-        this.setBorder(BorderFactory.createLineBorder(Color.RED));
+    ArrayList<FieldView> neighbourFields;
+    public MapPanel(){
+        setLayout(null);
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.setBackground(Color.BLACK);
         this.setOpaque(true);
         this.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
-        this.setVisible(true);
-        this.add(mainField);
-        this.repaint();
+        bindFields();
+        update();
+    }
+
+    private void addNeighbours(){
+        int max = 1;
+        for(FieldView neighbour : neighbourFields) {
+            if(max > 6)
+                break;
+            this.add(neighbour);
+            max++;
+        }
+    }
+
+    private void positionFields(){
+        int offSet = 10;
+        int dimension = FieldView.getHexaDimension();
+        int horizontalOffset = dimension/2;
+        int verticalOffset = dimension - dimension / 4 + offSet;
+        Point center = new Point(1000/2-dimension/2, 550/2-dimension/2);
+
+        mainField.setBounds(center.x, center.y, dimension,dimension);
+
+        // northeast
+        neighbourFields.get(0).setBounds(center.x + horizontalOffset, center.y - verticalOffset, dimension, dimension);
+        // east
+        neighbourFields.get(1).setBounds(center.x + dimension, center.y, dimension, dimension);
+        // southeast
+        neighbourFields.get(2).setBounds(center.x + horizontalOffset, center.y + verticalOffset, dimension, dimension);
+        // southwest
+        neighbourFields.get(3).setBounds(center.x - horizontalOffset, center.y + verticalOffset, dimension, dimension);
+        // west
+        neighbourFields.get(4).setBounds(center.x - dimension, center.y, dimension, dimension);
+        //northwest
+        neighbourFields.get(5).setBounds(center.x - horizontalOffset, center.y - verticalOffset, dimension, dimension);
+
     }
 
     @Override
     public void update() {
-        Field currfield = TurnHandler.getActiveVirologist().getField();
-        mainField = findFieldViewByField(currfield);
-        mainField.update();
-        neighbourFields.clear();
-        for (int i = 0 ; i < currfield.getNeighbours().size(); i++) {
-            neighbourFields.add(findFieldViewByField(currfield.getNeighbours().get(i)));
-            neighbourFields.get(i).update();
+        removeAll();
+        // current virologist's field
+        Field current = TurnHandler.getActiveVirologist().getField();
+
+        //The map panel's center will be where the current virologist is
+        mainField = findFieldViewByField(current);
+
+        //It's neighbouring fields are where the neighbours are in the model
+        neighbourFields = new ArrayList<>();
+        for(Field field : current.getNeighbours()) {
+            neighbourFields.add(findFieldViewByField(field));
         }
+
+        // update the main field and add it panel
+        mainField.update();
+        this.add(mainField);
+        addNeighbours();
+
+        // position the neighbouring fields and update all of them
+        positionFields();
+        for(FieldView fv : fieldViews)
+            fv.update();
+        this.setVisible(true);
+        revalidate();
+        this.repaint();
     }
 
     @Override
     public void onClick() {
 
     }
-    @Override
-    public void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        Point origin = new Point(1000 / 2, 500 / 2);
-        drawCircle(g2d, origin, 200, true, true, 0x4d664d, 0);
-        drawPolygon(g2d,1000/2, 550/2 ,1,0x00cc00,true);
-    }
+//    @Override
+//    public void paintComponent(Graphics g) {
+//        Graphics2D g2d = (Graphics2D) g;
+//        Point origin = new Point(1000 / 2, 500 / 2);
+//        drawCircle(g2d, origin, 200, true, true, 0x4d664d, 0);
+//        //drawPolygon(g2d,1000/2, 550/2 ,1,0x00cc00,true);
+//    }
 
     public void drawCircle(Graphics2D g, Point origin, int radius,
                            boolean centered, boolean filled, int colorValue, int lineThickness) {
@@ -83,5 +140,43 @@ public class MapPanel extends JPanel implements View {
             g.fillPolygon(xpoints, ypoints, 6);
         else
             g.drawPolygon(xpoints, ypoints, 6);
+    }
+
+    private void bindFields(){
+        // bind fields
+        for(Field field : City.getAllFields()){
+            FieldView fieldView = new FieldView();
+            fieldView.setField(field);
+            fieldViews.add(fieldView);
+        }
+
+        // bind labs
+        for(Laboratory laboratory : City.getAllLaboratories()){
+            LaboratoryView labView = new LaboratoryView();
+            labView.setField(laboratory);
+            fieldViews.add(labView);
+        }
+
+        //bind safe houses
+        for(SafeHouse safeHouse : City.getAllSafeHouses()){
+            SafeHouseView safeHouseView = new SafeHouseView();
+            safeHouseView.setField(safeHouse);
+            fieldViews.add(safeHouseView);
+        }
+
+        // bind store houses
+        for(StoreHouse storeHouse : City.getAllStoreHouses()){
+            StoreHouseView storeHouseView = new StoreHouseView();
+            storeHouseView.setField(storeHouse);
+            fieldViews.add(storeHouseView);
+        }
+    }
+
+    private FieldView findFieldViewByField(Field field) {
+        // find fieldView by its field object
+        for(FieldView fieldView : fieldViews)
+            if(fieldView.getField() == field)
+                return fieldView;
+        return null;
     }
 }

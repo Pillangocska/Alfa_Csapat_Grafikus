@@ -37,7 +37,7 @@ public class TurnHandler {
     /**
      * Helper method to change the current virologist to the next one.
      */
-    private static void changeActiveVirologist() {
+    public static void changeActiveVirologist() {
         int indx = order.indexOf(activeVirologist);
         if(indx == order.size()-1) {
             reOrderVirologists();
@@ -46,6 +46,7 @@ public class TurnHandler {
         else {
             activeVirologist = order.get(indx + 1);
         }
+        activeVirologist.startTurn();
     }
 
     /**
