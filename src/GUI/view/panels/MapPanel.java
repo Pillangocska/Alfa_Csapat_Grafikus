@@ -41,11 +41,11 @@ public class MapPanel extends JPanel implements View {
     }
 
     private void positionFields(){
-        Point center = new Point(1000/2 - 40, 500/2 - 40);
         int offSet = 10;
         int dimension = FieldView.getHexaDimension();
         int horizontalOffset = dimension/2;
         int verticalOffset = dimension - dimension / 4 + offSet;
+        Point center = new Point(1000/2-dimension/2, 550/2-dimension/2);
 
         mainField.setBounds(center.x, center.y, dimension,dimension);
 

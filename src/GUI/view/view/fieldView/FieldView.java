@@ -18,7 +18,7 @@ public class FieldView extends JPanel implements View, MouseListener {
     private JLabel textField = new JLabel("Field");
     protected String text = "Field";
     protected Color color;
-    private static final int hexaDimension = 150;
+    private static final int hexaDimension = 200;
 
     public FieldView(){
         color = Color.white;
@@ -79,11 +79,10 @@ public class FieldView extends JPanel implements View, MouseListener {
         removeAll();
 
         // and update only if its current field
-        if(field == TurnHandler.getActiveVirologist().getField()) {
-            for(Virologist virologist : field.getVirologists()){
-                add(new JButton("viro"));
-            }
-        }
+        if(field == TurnHandler.getActiveVirologist().getField())
+            for(Virologist virologist : field.getVirologists())
+                add(new VirologistView(virologist));
+
     }
 
     @Override
