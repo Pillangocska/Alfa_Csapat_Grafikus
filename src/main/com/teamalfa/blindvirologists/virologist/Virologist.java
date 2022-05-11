@@ -155,6 +155,7 @@ public class Virologist {
                 if (safeHouse.getEquipments().contains(equipment)) {
                     if (backpack.add(equipment)) {
                         equipment.setVirologist(this);
+                        safeHouse.remove(equipment);
                         game.creativeNotify(equipment.getName() + " picked up.");
                         actions--;
                         return true;
