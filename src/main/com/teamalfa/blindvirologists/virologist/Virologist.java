@@ -47,7 +47,7 @@ public class Virologist {
 
     //getters setters
     public void setNotifiable(Notifiable notifiable) {
-        this.notifiable = notifiable;
+        this.game = notifiable;
     }
 
 
