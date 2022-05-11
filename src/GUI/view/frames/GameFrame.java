@@ -86,7 +86,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
             virologist.setNotifiable(this);
 
 
-            virologist.setField(City.getInstance().getAllFields().get(0));
+            City.getInstance().getAllFields().get(0).accept(virologist);
             TurnHandler.accept(virologist);
             System.out.println("Player"+i+" created");
         }

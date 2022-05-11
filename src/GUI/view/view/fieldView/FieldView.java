@@ -75,14 +75,20 @@ public class FieldView extends JPanel implements View, MouseListener {
 
     @Override
     public void update() {
+        // remove all components from field
+        removeAll();
 
+        // and update only if its current field
+        if(field == TurnHandler.getActiveVirologist().getField()) {
+            for(Virologist virologist : field.getVirologists()){
+                add(new JButton("viro"));
+            }
+        }
     }
 
     @Override
     public void onClick() {
-        Virologist current = TurnHandler.getActiveVirologist();
-        if(field != current.getField())
-            current.move(field);
+        // ez a fuggveny nem tud semmit szentem nem kell
     }
 
     @Override
