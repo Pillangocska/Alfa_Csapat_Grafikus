@@ -9,6 +9,7 @@ import java.awt.*;
 public class WhatHappenedPanel extends JPanel implements View {
     private static TextArea textArea;
 
+
     public WhatHappenedPanel(){
         textArea = new TextArea();
         textArea.setForeground(Color.RED);
@@ -16,11 +17,14 @@ public class WhatHappenedPanel extends JPanel implements View {
         textArea.setFont(new Font("Viner Hand ITC",Font.PLAIN,10));
         textArea.append("Game started...");
         textArea.setEditable(false);
-        textArea.setBounds(0,0,1000,1000);
+        textArea.setBounds(0,0,300,300);
+        JScrollPane scroll = new JScrollPane(textArea);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         this.setBackground(Color.BLUE);
         this.setLayout(null);
         this.setVisible(true);
+        this.add(scroll);
         this.add(textArea);
         this.repaint();
     }

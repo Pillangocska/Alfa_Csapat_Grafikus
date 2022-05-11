@@ -21,4 +21,5 @@ public abstract class EquipmentView extends JButton implements View, ActionListe
     public void onClick() {
 
     }
+    protected abstract void handleIcon();
 }
