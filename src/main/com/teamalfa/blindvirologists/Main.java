@@ -1,5 +1,6 @@
 package main.com.teamalfa.blindvirologists;
 
+import GUI.view.frames.GameFrame;
 import GUI.view.frames.menuFrames.MenuFrame;
 import main.com.teamalfa.blindvirologists.consoleController.ConsoleController;
 
@@ -38,7 +39,8 @@ public class Main {
     }
 
     private static void graphic() {
-        new MenuFrame();
+        //new MenuFrame();
+        new GameFrame(4);
     }
 
     public static void main(String[] args) {

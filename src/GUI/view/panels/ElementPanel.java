@@ -1,14 +1,15 @@
 package GUI.view.panels;
 
-import GUI.view.view.ElementView;
+import GUI.view.view.ElementInventoryView;
 import GUI.view.view.View;
+import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ElementPanel extends JPanel implements View {
     // NAGYON FONTOS, HOGY EZ NE A BaseBagPanelből SZÁRMAZZON LE!!
-    private ElementView view;
+    private ElementInventoryView view;
     // the label signaling the quantity of the amino acids in the virologist's backpack
     private JLabel aminoText;
     // the label signaling the quantity of ht nucleotides in the virologist's backpack
@@ -17,14 +18,13 @@ public class ElementPanel extends JPanel implements View {
     /**
      * constructs a new element panel with 0 nucleotids and amino acids displayed
      */
-    public ElementPanel() {
+    public ElementPanel(ElementBank elementBank) {
         // setting up the panel
         setOpaque(false);
 
         // creating text for the quantity of amino acids
         aminoText = new JLabel();
         aminoText.setBorder(BorderFactory.createEmptyBorder(0,0,0, 30));
-        aminoText.setText(": 0");
         aminoText.setOpaque(false);
         aminoText.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         aminoText.setForeground(Color.RED);
@@ -35,7 +35,6 @@ public class ElementPanel extends JPanel implements View {
 
         // creating text for the quantity of nucleotides
         nucleoText = new JLabel();
-        nucleoText.setText(": 0");
         nucleoText.setOpaque(false);
         nucleoText.setFont(new Font("Viner Hand ITC", Font.PLAIN, 15));
         nucleoText.setForeground(Color.RED);
@@ -49,17 +48,27 @@ public class ElementPanel extends JPanel implements View {
         add(aminoText);
         add(nucleoIcon);
         add(nucleoText);
-    }
 
-    // ide lehetne csinálni settereket a labelekhez!
+        view = new ElementInventoryView(elementBank, this);
+
+        update();
+    }
 
     @Override
     public void update() {
-        //todo
+        view.update();
     }
 
     @Override
     public void onClick() {
         //todo
+    }
+
+    public JLabel getAminoTextLabel() {
+        return aminoText;
+    }
+
+    public JLabel getNucleoTextLabel() {
+        return nucleoText;
     }
 }

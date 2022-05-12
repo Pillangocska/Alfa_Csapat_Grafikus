@@ -11,6 +11,7 @@ public class AxeView extends EquipmentView{
     private final Axe axe;
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
+
     public AxeView(Axe axe){
         setLayout(null);
         this.axe = axe;

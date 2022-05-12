@@ -1,6 +1,13 @@
 package GUI.view.panels;
 
 import GUI.view.view.View;
+import GUI.view.view.agentView.AgentView;
+import GUI.view.view.agentView.VaccineView;
+import main.com.teamalfa.blindvirologists.agents.Vaccine;
+import main.com.teamalfa.blindvirologists.agents.genetic_code.BearCode;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
+import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +16,9 @@ public class InventoryPanel extends JPanel implements View {
     // bag panels which will store the equipments in the inventory
     BaseBagPanel[] bagPanels;
     ElementPanel elementPanel;
+    AgentPanel agentPanel;
+    EquipmentPanel equipmentPanel;
+    GeneticCodePanel geneticCodePanel;
 
     /**
      * constructs a new inventory panel
@@ -31,33 +41,39 @@ public class InventoryPanel extends JPanel implements View {
 
 
         // Creating bag panels
-        bagPanels = new BaseBagPanel[9];
-        for (int i = 0; i < 8; i++)
-            bagPanels[i] = new BaseBagPanel();
-        bagPanels[8] = new AgentPanel();
+        agentPanel = new AgentPanel(TurnHandler.getActiveVirologist().getBackpack().getAgentPocket());
+        equipmentPanel = new EquipmentPanel(TurnHandler.getActiveVirologist().getBackpack().getEquipmentPocket());
+        geneticCodePanel = new GeneticCodePanel(TurnHandler.getActiveVirologist().getBackpack().getGeneticCodePocket());
 
         // Creating the panel that will hold the bag panels
         JPanel bagPanelsPanel = new JPanel();
         bagPanelsPanel.setOpaque(false);
-        GridLayout gridLayout = new GridLayout(3, 3);
+        GridLayout gridLayout = new GridLayout(1, 3);
         gridLayout.setHgap(20);
-        gridLayout.setVgap(2);
+        gridLayout.setVgap(0);
         bagPanelsPanel.setLayout(gridLayout);
 
-        // Adding bag panels
-        for (var b : bagPanels)
-            bagPanelsPanel.add(b);
+        bagPanelsPanel.add(agentPanel);
+        bagPanelsPanel.add(equipmentPanel);
+        bagPanelsPanel.add(geneticCodePanel);
+
+        JScrollPane scrollPane = new JScrollPane(bagPanelsPanel);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         constraints.gridy = 1;
         constraints.fill = GridBagConstraints.BOTH;
         constraints.insets = new Insets(0, 20, 0, 20);
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.weighty = 1.0;
-        add(bagPanelsPanel, constraints);
+        add(scrollPane, constraints);
 
 
         // create the panel displaying the elements
-        elementPanel = new ElementPanel();
+        elementPanel = new ElementPanel(TurnHandler.getActiveVirologist().getBackpack().getElementBank());
 
         // adding the panel to the parent panel
         constraints.gridy = 2;
@@ -82,7 +98,8 @@ public class InventoryPanel extends JPanel implements View {
     }
 
     public void update() {
-        //TODO
+        Backpack backpack = TurnHandler.getActiveVirologist().getBackpack();
+
     }
 
     public void onClick() {
