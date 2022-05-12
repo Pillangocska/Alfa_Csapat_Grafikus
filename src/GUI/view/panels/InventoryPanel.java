@@ -13,12 +13,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InventoryPanel extends JPanel implements View {
-    // bag panels which will store the equipments in the inventory
-    BaseBagPanel[] bagPanels;
-    ElementPanel elementPanel;
     AgentPanel agentPanel;
     EquipmentPanel equipmentPanel;
     GeneticCodePanel geneticCodePanel;
+    ElementPanel elementPanel;
 
     /**
      * constructs a new inventory panel
@@ -30,6 +28,7 @@ public class InventoryPanel extends JPanel implements View {
         setOpaque(false);
         GridBagConstraints constraints = new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
                 GridBagConstraints.PAGE_START, GridBagConstraints.NONE, new Insets(3, 0, 3, 0), 0, 0);
+
 
         // creating the title of the panel
         JLabel title = new JLabel("Inventory");
@@ -53,10 +52,12 @@ public class InventoryPanel extends JPanel implements View {
         gridLayout.setVgap(0);
         bagPanelsPanel.setLayout(gridLayout);
 
+        // adding bag panels
         bagPanelsPanel.add(agentPanel);
         bagPanelsPanel.add(equipmentPanel);
         bagPanelsPanel.add(geneticCodePanel);
 
+        // making the master panel scrollable by adding it to a scroll pane
         JScrollPane scrollPane = new JScrollPane(bagPanelsPanel);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -64,6 +65,7 @@ public class InventoryPanel extends JPanel implements View {
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
+        // manipulating the constraints and then adding the scrollable pane
         constraints.gridy = 1;
         constraints.fill = GridBagConstraints.BOTH;
         constraints.insets = new Insets(0, 20, 0, 20);
@@ -84,8 +86,8 @@ public class InventoryPanel extends JPanel implements View {
     }
 
     /**
-     * Prints the custom panel: makes the background have rounded corners.
-     * @param g
+     * Prints the panel: makes the background have rounded corners.
+     * @param g -  i have no idea what this is... :(
      */
     @Override
     public void paint(Graphics g) {
@@ -94,12 +96,28 @@ public class InventoryPanel extends JPanel implements View {
         g2.setRenderingHints(new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON));
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 40, 40);
         g2.dispose();
+
+        //also call the original jpanl paint method
         super.paint(g);
     }
 
+    /**
+     * fill the invetory gui with the items in the backpack of the current virologist
+     */
     public void update() {
-        Backpack backpack = TurnHandler.getActiveVirologist().getBackpack();
+        Backpack bp = TurnHandler.getActiveVirologist().getBackpack();
 
+        agentPanel.setAgentPocket(bp.getAgentPocket());
+        agentPanel.update();
+
+        elementPanel.setElementBank(bp.getElementBank());
+        elementPanel.update();
+
+        equipmentPanel.setEquipmentPocket(bp.getEquipmentPocket());
+        equipmentPanel.update();
+
+        geneticCodePanel.setGeneticCodePocket(bp.getGeneticCodePocket());
+        geneticCodePanel.update();
     }
 
     public void onClick() {

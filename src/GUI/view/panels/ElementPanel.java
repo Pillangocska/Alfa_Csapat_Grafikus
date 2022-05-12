@@ -71,4 +71,8 @@ public class ElementPanel extends JPanel implements View {
     public JLabel getNucleoTextLabel() {
         return nucleoText;
     }
+
+    public void setElementBank(ElementBank elementBank) {
+        view.setElementBank(elementBank);
+    }
 }

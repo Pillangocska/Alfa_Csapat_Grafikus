@@ -1,11 +1,20 @@
 package GUI.view.frames;
 
 import GUI.view.panels.*;
+import main.com.teamalfa.blindvirologists.agents.Vaccine;
+import main.com.teamalfa.blindvirologists.agents.genetic_code.AmnesiaCode;
+import main.com.teamalfa.blindvirologists.agents.genetic_code.BearCode;
+import main.com.teamalfa.blindvirologists.agents.genetic_code.DanceCode;
+import main.com.teamalfa.blindvirologists.agents.genetic_code.ParalyzeCode;
+import main.com.teamalfa.blindvirologists.agents.virus.AmnesiaVirus;
+import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
+import main.com.teamalfa.blindvirologists.agents.virus.DanceVirus;
+import main.com.teamalfa.blindvirologists.agents.virus.ParalyzeVirus;
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.city.fields.Field;
-import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
-import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
-import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
+import main.com.teamalfa.blindvirologists.equipments.Bag;
+import main.com.teamalfa.blindvirologists.equipments.Cloak;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -86,6 +95,41 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         for(int i = 1 ; i <= numberOfPlayers ; i++){
             Virologist virologist = new Virologist("Player"+i);
             virologist.setNotifiable(this);
+
+            /*
+            EZ ILYEN OCSORTÁNYOS INVENTORY DEBUG CODE, MAJD KÉSŐBB KI KELL TÖRÖLNI
+            if (i == 1) {
+                virologist.getBackpack().getAgentPocket().addAgent(new BearVirus());
+                virologist.getBackpack().getAgentPocket().addAgent(new DanceVirus());
+                virologist.getBackpack().getAgentPocket().addAgent(new AmnesiaVirus());
+                virologist.getBackpack().getAgentPocket().addAgent(new ParalyzeVirus());
+            }
+
+            if (i == 2) {
+                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new BearCode()));
+                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new AmnesiaCode()));
+                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new ParalyzeCode()));
+                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new DanceCode()));
+            }
+
+            if (i == 3) {
+                virologist.getBackpack().getEquipmentPocket().add(new Gloves());
+                virologist.getBackpack().getEquipmentPocket().add(new Axe());
+                virologist.getBackpack().getEquipmentPocket().add(new Cloak());
+                virologist.getBackpack().getEquipmentPocket().add(new Bag());
+            }
+
+            if (i == 4) {
+                virologist.getBackpack().getElementBank().setAminoAcid(10);
+                virologist.getBackpack().getElementBank().setNucleotide(10);
+
+                virologist.getBackpack().getGeneticCodePocket().add(new AmnesiaCode());
+                virologist.getBackpack().getGeneticCodePocket().add(new DanceCode());
+                virologist.getBackpack().getGeneticCodePocket().add(new BearCode());
+
+            }
+
+            */
 
 
             City.getInstance().getAllFields().get(0).accept(virologist);

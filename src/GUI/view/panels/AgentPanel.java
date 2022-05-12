@@ -19,18 +19,23 @@ public class AgentPanel extends BaseBagPanel {
     private ArrayList<InventorySlot> slots;
     private AgentPocket agentPocket;
 
+    /**
+     * constructs a new agent panel base on the parameter
+     * @param agentPocket
+     */
     public AgentPanel(AgentPocket agentPocket) {
         // initializing
-        super(agentPocket.getMaxSize());
-        this.agentPocket = agentPocket;
         setLayout(new GridBagLayout());
+        this.agentPocket = agentPocket;
         slots = new ArrayList<>();
-        update();
 
         // creating inventory slots
         for (int i = 0; i < agentPocket.getMaxSize(); i++) {
             slots.add(new InventorySlot(null));
         }
+
+        // the update method will create views and bind them to the slots
+        update();
 
         // creating the layout of the panel
         GridBagConstraints constraints = new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
@@ -54,28 +59,51 @@ public class AgentPanel extends BaseBagPanel {
 
     @Override
     /**
-     * updates the view of the agent panel: displays the agents of the current virologist. this must only be called if the composition of the
+     * updates the view of the agent panel: constructs views from agents found in the agent pocket and binds them to the inventory slots.
      */
     public void update() {
-        removeAll();
-
-        // set the number of slots this panel is going to have
-        setViewCount(agentPocket.getMaxSize());
-        // create the slots and fill them up according to the agent pocket
         views = new ArrayList<AgentView>();
         ArrayList<Agent> agents = agentPocket.getAgentHolder();
+
+        // creates a view for each agent found in the agent pocket
         for (var a : agents) {
-            if (a instanceof Vaccine) views.add(new VaccineView((Vaccine) a));
-            if (a instanceof DanceVirus) views.add(new DanceVirusView((DanceVirus) a));
-            if (a instanceof ParalyzeVirus) views.add(new ParalyzeVirusView((ParalyzeVirus) a));
-            if (a instanceof BearVirus) views.add(new BearVirusView((BearVirus) a));
-            if (a instanceof AmnesiaVirus) views.add(new AmnesiaVirusView((AmnesiaVirus) a));
+            if (a instanceof Vaccine) {
+                views.add(new VaccineView((Vaccine) a));
+                continue;
+            }
+            if (a instanceof ParalyzeVirus) {
+                views.add(new ParalyzeVirusView((ParalyzeVirus) a));
+                continue;
+            }
+            if (a instanceof BearVirus) {
+                views.add(new BearVirusView((BearVirus) a));
+                continue;
+            }
+            if (a instanceof AmnesiaVirus) {
+                views.add(new AmnesiaVirusView((AmnesiaVirus) a));
+                continue;
+            }
+            if (a instanceof DanceVirus) {
+                views.add(new DanceVirusView((DanceVirus) a));
+                continue;
+            }
         }
 
+        // binds the views to slots
+        int i = 0;
+        for (i = i; i < views.size(); i++) {
+            slots.get(i).setView(views.get(i));
+        }
 
-
+        // fill the rest with empty slots
+        for(i = i; i < slots.size(); i++)
+            slots.get(i).setView(null);
     }
 
+    /**
+     * sets the agent pocket and displays its contents
+     * @param agentPocket - the agent pocket to be set
+     */
     public void setAgentPocket(AgentPocket agentPocket) {
         this.agentPocket = agentPocket;
         update();

@@ -9,6 +9,6 @@ public class BearVirusView extends AgentView{
 
     public BearVirusView(BearVirus virus) {
         this.virus = virus;
-        setImageIcon(new ImageIcon("resources/logo.png")); // todo
+        setImageIcon(new ImageIcon("resources/viruses/redvirus.png"));
     }
 }

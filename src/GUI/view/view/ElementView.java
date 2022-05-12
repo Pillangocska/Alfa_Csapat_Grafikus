@@ -27,4 +27,8 @@ public class ElementView extends JButton implements View, ActionListener {
     public void onClick() {
 
     }
+
+    public void setElementBank(ElementBank elementBank) {
+        eb = elementBank;
+    }
 }
