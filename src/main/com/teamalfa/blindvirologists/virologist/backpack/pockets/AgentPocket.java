@@ -5,14 +5,14 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 
 import java.util.ArrayList;
 
-public class AgentPocket extends Pocket{
+public class AgentPocket extends Pocket {
 
     private Backpack backpack;
     private ArrayList<Agent> agentHolder = new ArrayList<Agent>();
 
     public AgentPocket(Backpack b) {
         backpack = b;
-        maxSize = 7;
+        maxSize = 6;
     }
 
     /**
