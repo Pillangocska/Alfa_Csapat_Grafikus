@@ -1,5 +1,6 @@
 package GUI.view.panels;
 
+import GUI.view.view.InventorySlot;
 import GUI.view.view.agentView.*;
 import main.com.teamalfa.blindvirologists.agents.Agent;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
@@ -15,40 +16,20 @@ import java.util.ArrayList;
 
 public class AgentPanel extends BaseBagPanel {
     private ArrayList<AgentView> views;
+    private ArrayList<InventorySlot> slots;
     private AgentPocket agentPocket;
 
     public AgentPanel(AgentPocket agentPocket) {
+        // initializing
         super(agentPocket.getMaxSize());
         this.agentPocket = agentPocket;
         setLayout(new GridBagLayout());
+        slots = new ArrayList<>();
         update();
-    }
 
-    @Override
-    /**
-     * updates the view of the agent panel: displays the agents of the current virologist. this must only be called if the composition of the
-     */
-    public void update() {
-        removeAll();
-
-        // set the number of slots this panel is going to have
-        setViewCount(agentPocket.getMaxSize());
-        // create the slots and fill them up according to the agent pocket
-        views = new ArrayList<AgentView>();
-        ArrayList<Agent> agents = agentPocket.getAgentHolder();
-        int i = 0;
-        for (i = i; i < agents.size(); i++) {
-            Agent a = agents.get(i);
-            if (a instanceof Vaccine) views.add(new VaccineView((Vaccine) a));
-            if (a instanceof DanceVirus) views.add(new DanceVirusView((DanceVirus) a));
-            if (a instanceof ParalyzeVirus) views.add(new ParalyzeVirusView((ParalyzeVirus) a));
-            if (a instanceof BearVirus) views.add(new BearVirusView((BearVirus) a));
-            if (a instanceof AmnesiaVirus) views.add(new AmnesiaVirusView((AmnesiaVirus) a));
-        }
-
-        // fill the rest with empty slots
-        for (i = i; i < getViewCount(); i++) {
-            views.add(new EmptyAgentInventorySlotView());
+        // creating inventory slots
+        for (int i = 0; i < agentPocket.getMaxSize(); i++) {
+            slots.add(new InventorySlot(null));
         }
 
         // creating the layout of the panel
@@ -63,16 +44,40 @@ public class AgentPanel extends BaseBagPanel {
 
         add(title, constraints);
 
-        // drawing the components
+        // adding slots
         constraints.anchor = GridBagConstraints.CENTER;
-        for(var v: views) {
+        for(var s: slots) {
             constraints.gridy++;
-            add(v, constraints);
+            add(s, constraints);
         }
+    }
+
+    @Override
+    /**
+     * updates the view of the agent panel: displays the agents of the current virologist. this must only be called if the composition of the
+     */
+    public void update() {
+        removeAll();
+
+        // set the number of slots this panel is going to have
+        setViewCount(agentPocket.getMaxSize());
+        // create the slots and fill them up according to the agent pocket
+        views = new ArrayList<AgentView>();
+        ArrayList<Agent> agents = agentPocket.getAgentHolder();
+        for (var a : agents) {
+            if (a instanceof Vaccine) views.add(new VaccineView((Vaccine) a));
+            if (a instanceof DanceVirus) views.add(new DanceVirusView((DanceVirus) a));
+            if (a instanceof ParalyzeVirus) views.add(new ParalyzeVirusView((ParalyzeVirus) a));
+            if (a instanceof BearVirus) views.add(new BearVirusView((BearVirus) a));
+            if (a instanceof AmnesiaVirus) views.add(new AmnesiaVirusView((AmnesiaVirus) a));
+        }
+
+
 
     }
 
     public void setAgentPocket(AgentPocket agentPocket) {
         this.agentPocket = agentPocket;
+        update();
     }
 }
