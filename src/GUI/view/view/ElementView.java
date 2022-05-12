@@ -7,7 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ElementView extends JButton implements View, ActionListener {
-    private ElementBank eb;
+    protected ElementBank eb;
+
+    public ElementView(ElementBank elementBank) {
+        eb = elementBank;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -22,5 +26,9 @@ public class ElementView extends JButton implements View, ActionListener {
     @Override
     public void onClick() {
 
+    }
+
+    public void setElementBank(ElementBank elementBank) {
+        eb = elementBank;
     }
 }

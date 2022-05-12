@@ -11,4 +11,8 @@ abstract public class Pocket {
      * @return the current size of the pocket
      */
     public abstract int getCurrentSize();
+
+    public int getMaxSize() {
+        return maxSize;
+    }
 }
