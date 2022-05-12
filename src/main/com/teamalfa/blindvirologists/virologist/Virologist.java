@@ -462,7 +462,8 @@ public class Virologist {
     }
 
     public void endTurn() {
-        TurnHandler.changeActiveVirologist();
+        TurnHandler.getInstance().tick();
+        //TurnHandler.changeActiveVirologist();
         game.creativeNotify(name + "'s turn ended");
     }
 }

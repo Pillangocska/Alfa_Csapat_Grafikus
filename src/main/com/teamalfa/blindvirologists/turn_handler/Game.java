@@ -14,6 +14,7 @@ public class Game implements Steppable{
 
     static {
         instance = new Game();
+        TurnHandler.accept(instance);
     }
 
     private Virologist virologist;
@@ -58,10 +59,12 @@ public class Game implements Steppable{
         for (Virologist bear : bears) {
             Field f = bear.getField();
             bear.move(f);
-            for (Virologist enemy : bear.searchForVirologist()) {
-                bear.use(new BearVirus(), enemy);
+            if(bear.searchForVirologist() != null) {
+                for (Virologist enemy : bear.searchForVirologist()) {
+                    bear.use(new BearVirus(), enemy);
+                }
+                bear.getField().destroy();
             }
-            bear.getField().destroy();
         }
     }
 
