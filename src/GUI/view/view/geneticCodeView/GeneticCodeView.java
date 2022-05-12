@@ -21,4 +21,5 @@ public abstract class GeneticCodeView extends JButton implements View, ActionLis
     public void onClick() {
 
     }
+    protected abstract void handleIcon();
 }

@@ -51,11 +51,11 @@ public class SafeHouseView extends FieldView{
             for(Equipment equipment : safeHouse.getEquipments()){
                 if(equipment.getName().equals("axe"))
                     add(new AxeView((Axe) equipment));
-                if(equipment.getName().equals("bag"))
+                else if(equipment.getName().equals("bag"))
                     add(new BagView((Bag) equipment));
-                if(equipment.getName().equals("cloak"))
+                else if(equipment.getName().equals("cloak"))
                     add(new CloakView((Cloak) equipment));
-                if(equipment.getName().equals("glove"))
+                else if(equipment.getName().equals("glove"))
                     add(new GlovesView((Gloves) equipment));
             }
         }
