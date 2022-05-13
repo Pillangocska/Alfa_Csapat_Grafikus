@@ -9,6 +9,6 @@ public class ParalyzeVirusView extends AgentView{
 
     public ParalyzeVirusView(ParalyzeVirus virus) {
         this.virus = virus;
-        setImageIcon(new ImageIcon("resources/paralyzevirus.gif"));
+        setImageIcon(new ImageIcon("resources/viruses/bluevirus.png"));
     }
 }

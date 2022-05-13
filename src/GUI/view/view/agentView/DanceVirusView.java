@@ -9,6 +9,6 @@ public class DanceVirusView extends AgentView{
 
     public DanceVirusView(DanceVirus virus) {
         this.virus = virus;
-        setImageIcon(new ImageIcon("resources/dancevirus.gif"));
+        setImageIcon(new ImageIcon("resources/viruses/yellowvirus.png"));
     }
 }

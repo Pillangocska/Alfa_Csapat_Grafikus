@@ -9,6 +9,6 @@ public class AmnesiaVirusView extends AgentView {
 
     public AmnesiaVirusView(AmnesiaVirus virus) {
         this.virus = virus;
-        setImageIcon(new ImageIcon("resources/amnesiavirus.gif"));
+        setImageIcon(new ImageIcon("resources/viruses/greenvirus.png"));
     }
 }

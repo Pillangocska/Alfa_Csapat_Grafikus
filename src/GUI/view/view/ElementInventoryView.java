@@ -13,10 +13,12 @@ public class ElementInventoryView extends ElementView {
     }
 
     private void setAminoQuantity(int q) {
+        System.out.println(q);
         panel.getAminoTextLabel().setText(": " + q);
     }
 
     private void setNucleoQuantity(int q) {
+        System.out.println(q);
         panel.getNucleoTextLabel().setText(": " + q);
     }
 
