@@ -52,16 +52,25 @@ public class MapPanel extends JPanel implements View {
         // northeast
         neighbourFields.get(0).setBounds(center.x + horizontalOffset, center.y - verticalOffset, dimension, dimension);
         // east
-        neighbourFields.get(1).setBounds(center.x + dimension, center.y, dimension, dimension);
+        if(neighbourFields.size() >= 2) {
+            neighbourFields.get(1).setBounds(center.x + dimension, center.y, dimension, dimension);
+        }
         // southeast
-        neighbourFields.get(2).setBounds(center.x + horizontalOffset, center.y + verticalOffset, dimension, dimension);
+        if(neighbourFields.size() >= 3) {
+            neighbourFields.get(2).setBounds(center.x + horizontalOffset, center.y + verticalOffset, dimension, dimension);
+        }
         // southwest
-        neighbourFields.get(3).setBounds(center.x - horizontalOffset, center.y + verticalOffset, dimension, dimension);
+        if(neighbourFields.size() >= 4) {
+            neighbourFields.get(3).setBounds(center.x - horizontalOffset, center.y + verticalOffset, dimension, dimension);
+        }
         // west
-        neighbourFields.get(4).setBounds(center.x - dimension, center.y, dimension, dimension);
+        if(neighbourFields.size() >= 5) {
+            neighbourFields.get(4).setBounds(center.x - dimension, center.y, dimension, dimension);
+        }
         //northwest
-        neighbourFields.get(5).setBounds(center.x - horizontalOffset, center.y - verticalOffset, dimension, dimension);
-
+        if(neighbourFields.size() >= 6) {
+            neighbourFields.get(5).setBounds(center.x - horizontalOffset, center.y - verticalOffset, dimension, dimension);
+        }
     }
 
     @Override
