@@ -1,5 +1,6 @@
 package GUI.view.view;
 
+import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
@@ -37,7 +38,13 @@ public class VirologistView extends JPanel implements View {
 
     private void handleIcon(){
         // ezt itt borzaszto szar igy nezzetek el
-        ImageIcon icon = new ImageIcon("resources/virologist/virologist.png");
+        ImageIcon icon;
+        if(TurnHandler.GetOrder().contains(virologist)) {
+            icon = new ImageIcon("resources/virologist/virologist.png");
+        }
+        else {
+            icon = new ImageIcon("resources/virologist/bear.png");
+        }
         Image img = icon.getImage().getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
         JLabel thumb = new JLabel();

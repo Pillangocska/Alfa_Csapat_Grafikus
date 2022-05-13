@@ -53,7 +53,7 @@ public class TurnHandler {
      * Adds the new steppable to the list.
      * @param steppable The steppable that's added to the list.
      */
-    public void accept(Steppable steppable) {
+    public static void accept(Steppable steppable) {
         steppables.add(steppable);
     }
 
