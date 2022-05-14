@@ -92,7 +92,11 @@ public class Field {
      * Setters
      */
     public void setNeighbour(Field f1) {
-        this.neighbours.add(f1);
+        // connect neighbours
+        if(!neighbours.contains(f1)) {
+            this.neighbours.add(f1);
+            f1.setNeighbour(this);
+        }
     }
 
     public void setNeighbours(ArrayList<Field> neighbours) {

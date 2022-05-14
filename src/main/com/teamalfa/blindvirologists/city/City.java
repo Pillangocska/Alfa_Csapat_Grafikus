@@ -13,10 +13,10 @@ import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
+import java.lang.Math;
 public class City {
     private static final City instance;
     private final ArrayList<Equipment> allEquipment = new ArrayList<>();
@@ -110,58 +110,62 @@ public class City {
     }
 
     private static void connectFields(){
-        // make a shallow copies of lists
-        ArrayList<Field> tmpFields = new ArrayList<>(allFields);
-        ArrayList<Field> tmpLabs = new ArrayList<>(allLaboratories);
-        ArrayList<Field> tmpStore = new ArrayList<>(allStoreHouses);
-        ArrayList<Field> tmpSafe = new ArrayList<>(allSafeHouses);
+        // create mixed array list including every field
+        ArrayList<Field> allFieldsMixed = new ArrayList<>();
+        allFieldsMixed.addAll(allFields);
+        allFieldsMixed.addAll(allLaboratories);
+        allFieldsMixed.addAll(allSafeHouses);
+        allFieldsMixed.addAll(allStoreHouses);
 
-        for(Field field : allFields) {
-            int remaining = neighbourCount;
-            int numberOfFields = ran.nextInt(remaining);
-            remaining-= numberOfFields;
-            int numberOfLabs = ran.nextInt(remaining);
-            remaining -= numberOfLabs;
-            int numberOfStore = ran.nextInt(remaining);
-            remaining -= numberOfStore;
-            int numberOfSafe = ran.nextInt(remaining);
+        // calculate width with square root of all fields
+        int width = (int)Math.sqrt((double)allFieldsMixed.size());
 
-            ArrayList<Field> neighbours = new ArrayList<>();
+        Field previousField = null;
+        ArrayList<Field> previousLine = null;
 
-            if(!tmpFields.isEmpty() && numberOfFields != 0)
-                tmpFields.remove(0);
-            for(int i = 0; i < numberOfFields; i++) {
-                if(tmpFields.isEmpty())
+        // iterate through all fields until empty
+        while(!allFieldsMixed.isEmpty()) {
+            // save current line to temporary list
+            ArrayList<Field> currentLine = new ArrayList<>();
+
+            // fill current line with random fields from all fields
+            for(int i = 0; i < width; i++) {
+                Field currentField = getRandom(allFieldsMixed);
+
+                // when could not get random field break out of loop
+                if(currentField == null)
                     break;
-                neighbours.add(tmpFields.remove(0));
-            }
 
-            if(!tmpLabs.isEmpty() && numberOfLabs != 0)
-                tmpLabs.remove(0);
-            for(int i = 0; i < numberOfLabs; i++) {
-                if(tmpLabs.isEmpty())
-                    break;
-                neighbours.add(tmpLabs.remove(0));
-            }
+                // add current field to current line
+                currentLine.add(currentField);
 
-            if(!tmpSafe.isEmpty() && numberOfSafe != 0)
-                tmpSafe.remove(0);
-            for(int i = 0; i < numberOfSafe; i++) {
-                if(tmpSafe.isEmpty())
-                    break;
-                neighbours.add(tmpSafe.remove(0));
-            }
+                // connect current field with previous field
+                if(previousField != null)
+                    previousField.setNeighbour(currentField);
 
-            if(!tmpStore.isEmpty() && numberOfStore != 0)
-                tmpStore.remove(0);
-            for(int i = 0; i < numberOfStore; i++) {
-                if(tmpStore.isEmpty())
-                    break;
-                neighbours.add(tmpStore.remove(0));
-            }
+                // connect current field with field from previous line with same idx
+                if(previousLine != null) {
+                    previousLine.get(0).setNeighbour(currentField);
 
-            field.setNeighbours(neighbours);
+                    // if it's not the last field in the line then connect
+                    // with next field from previous line
+                    if(i < width - 1)
+                        previousLine.get(i+1).setNeighbour(currentField);
+                }
+                // save current field to previous field
+                previousField = currentField;
+            }
+            // save current line to previous line
+            previousLine = currentLine;
         }
+    }
+
+    private static Field getRandom(ArrayList<Field> mixedFields){
+        if(mixedFields.isEmpty())
+            return null;
+
+        int idx = mixedFields.size() != 1 ? ran.nextInt(mixedFields.size()-1) : 0;
+        return mixedFields.remove(idx);
     }
 
     public static ArrayList<Laboratory> getAllLaboratories(){
