@@ -1,12 +1,25 @@
 package GUI.view.view.fieldView;
 
 import GUI.view.view.ElementView;
+import GUI.view.view.VirologistView;
+import GUI.view.view.equipmentView.AxeView;
+import GUI.view.view.equipmentView.BagView;
+import GUI.view.view.equipmentView.CloakView;
+import GUI.view.view.equipmentView.GlovesView;
+import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
 import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
+import main.com.teamalfa.blindvirologists.equipments.Bag;
+import main.com.teamalfa.blindvirologists.equipments.Cloak;
+import main.com.teamalfa.blindvirologists.equipments.Equipment;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import java.awt.*;
 
 public class StoreHouseView extends FieldView {
-    private ElementView elementv;
+    private ElementView elementView;
     private StoreHouse storeHouse;
 
     public StoreHouseView(){
@@ -27,5 +40,20 @@ public class StoreHouseView extends FieldView {
 
     public void setField(StoreHouse storeh) {
         field = storeh;
+    }
+
+    @Override
+    public void update() {
+        // remove all components from field
+        removeAll();
+
+        // and update only if its current field
+        if(field == TurnHandler.getActiveVirologist().getField()) {
+            for (Virologist virologist : field.getVirologists()) {
+                add(new VirologistView(virologist));
+            }
+            storeHouse = (StoreHouse) TurnHandler.getActiveVirologist().getField();
+            elementView = new ElementView(storeHouse.getElements());
+        }
     }
 }

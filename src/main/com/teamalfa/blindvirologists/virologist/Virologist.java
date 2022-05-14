@@ -371,7 +371,7 @@ public class Virologist {
     }
 
     /**
-     * Turns the virologist into bear. Removes them from the turnhandler and gives them to the virologist.
+     * Turns the virologist into bear. Removes the virologist from the turnhandler and gives the virologist to the game.
      */
     public void turntoBear() {
         if(!(Game.getInstance().getBears().contains(this))) {
@@ -423,7 +423,7 @@ public class Virologist {
                 }
                 else {
                     e.equip();
-                    game.creativeNotify(name + " unequipped " + e);
+                    game.creativeNotify(name + " equipped " + e);
                 }
             }
         }
