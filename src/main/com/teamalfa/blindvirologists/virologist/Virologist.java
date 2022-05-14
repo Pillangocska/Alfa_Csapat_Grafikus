@@ -28,7 +28,7 @@ public class Virologist {
     private Field field;
     private Notifiable game;
     private ArrayList<Field> discoveredFields = new ArrayList<>();
-    private static final int maxActions = 100; //Todo visszaallitani
+    private static final int maxActions = 3; //Todo visszaallitani
 
     private int actions;
 
@@ -96,7 +96,6 @@ public class Virologist {
             destination.accept(this);
 
             field = destination;
-            discoveredFields.add(field);
 
             actions--;
             game.creativeNotify("Moved.");
@@ -268,8 +267,8 @@ public class Virologist {
         if(actions > 0) {
             //field.searchedBy(this);
             actions--;
-            game.creativeNotify(name + " searched field.");
             discoveredFields.add(field);
+            game.creativeNotify(name + " searched field.");
         }
 
     }

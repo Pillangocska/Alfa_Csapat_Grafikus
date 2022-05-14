@@ -56,8 +56,9 @@ public class FieldView extends JPanel implements View, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         Virologist current = TurnHandler.getActiveVirologist();
-        if(field != current.getField() && current != null)
+        if(field != current.getField() && current != null) {
             current.move(field);
+        }
         else if(field.equals(current.getField())) {
             if(!TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))
                 TurnHandler.getActiveVirologist().search();
@@ -90,11 +91,18 @@ public class FieldView extends JPanel implements View, MouseListener {
         removeAll();
 
         // and update only if its current field
-        if(field == TurnHandler.getActiveVirologist().getField()) {
-            for (Virologist virologist : field.getVirologists()) {
-                add(new VirologistView(virologist));
+        if(field.equals(TurnHandler.getActiveVirologist().getField())) {
+            if(!TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field)) {
+                add(new VirologistView(TurnHandler.getActiveVirologist()));
+            }
+            else {
+                for (Virologist virologist : field.getVirologists()) {
+                    add(new VirologistView(virologist));
+                }
             }
         }
+
+
 
     }
 
