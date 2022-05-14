@@ -28,10 +28,13 @@ public class TurnHandler {
      *
      */
     public void tick() {
-        for(Steppable steppable : steppables) {
-            steppable.step();
+        if(steppables.isEmpty()) {
+            for(Steppable steppable : steppables) {
+                steppable.step();
+            }
         }
         changeActiveVirologist();
+
     }
 
     /**

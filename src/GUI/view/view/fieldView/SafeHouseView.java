@@ -18,7 +18,7 @@ public class SafeHouseView extends FieldView{
     private ArrayList<EquipmentView> equipments = new ArrayList<>();
     private SafeHouse safeHouse;
     public SafeHouseView(){
-        color = Color.getHSBColor(0,250,0);
+        color = Color.getHSBColor(12,250,48);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/SafeHouse1.png");
         backGround = newImage.getScaledInstance(200,200,Image.SCALE_DEFAULT);
         this.text = "safe";
@@ -29,7 +29,8 @@ public class SafeHouseView extends FieldView{
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         drawPolygon(g2d,200/2, 200/2 ,1,color.getRGB(),true);
-        g.drawImage(backGround,0,0,null);
+        if(TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))
+            g.drawImage(backGround,0,0,null);
         this.repaint();
     }
 
@@ -43,20 +44,25 @@ public class SafeHouseView extends FieldView{
         removeAll();
 
         // and update only if its current field
-        if(field == TurnHandler.getActiveVirologist().getField()) {
-            for (Virologist virologist : field.getVirologists()) {
-                add(new VirologistView(virologist));
+        if(field.equals(TurnHandler.getActiveVirologist().getField())) {
+            if(TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field)) {
+                for (Virologist virologist : field.getVirologists()) {
+                    add(new VirologistView(virologist));
+                }
+                safeHouse = (SafeHouse) TurnHandler.getActiveVirologist().getField();
+                for (Equipment equipment : safeHouse.getEquipments()) {
+                    if (equipment.getName().equals("axe"))
+                        add(new AxeView((Axe) equipment));
+                    else if (equipment.getName().equals("bag"))
+                        add(new BagView((Bag) equipment));
+                    else if (equipment.getName().equals("cloak"))
+                        add(new CloakView((Cloak) equipment));
+                    else if (equipment.getName().equals("glove"))
+                        add(new GlovesView((Gloves) equipment));
+                }
             }
-            safeHouse = (SafeHouse) TurnHandler.getActiveVirologist().getField();
-            for(Equipment equipment : safeHouse.getEquipments()){
-                if(equipment.getName().equals("axe"))
-                    add(new AxeView((Axe) equipment));
-                else if(equipment.getName().equals("bag"))
-                    add(new BagView((Bag) equipment));
-                else if(equipment.getName().equals("cloak"))
-                    add(new CloakView((Cloak) equipment));
-                else if(equipment.getName().equals("glove"))
-                    add(new GlovesView((Gloves) equipment));
+            else {
+                add(new VirologistView(TurnHandler.getActiveVirologist()));
             }
         }
     }

@@ -1,5 +1,6 @@
 package GUI.view.view.equipmentView;
 
+import GUI.view.frames.GameFrame;
 import main.com.teamalfa.blindvirologists.equipments.Cloak;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
@@ -7,6 +8,7 @@ import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GlovesView extends EquipmentView{
     protected Gloves gloves;
