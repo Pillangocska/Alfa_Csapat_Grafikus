@@ -1,7 +1,8 @@
 package GUI.view.panels;
 
-import GUI.view.frames.GameFrame;
+import GUI.view.buttons.RoundedOutlinedButton;
 import GUI.view.frames.Notifiable;
+import GUI.view.labels.RoundedJLabel;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import javax.swing.*;

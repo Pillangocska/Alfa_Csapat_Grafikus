@@ -1,14 +1,6 @@
 package GUI.view.panels;
 
-import GUI.view.view.InventorySlot;
-import GUI.view.view.agentView.*;
 import GUI.view.view.equipmentView.*;
-import main.com.teamalfa.blindvirologists.agents.Agent;
-import main.com.teamalfa.blindvirologists.agents.Vaccine;
-import main.com.teamalfa.blindvirologists.agents.virus.AmnesiaVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.DanceVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.ParalyzeVirus;
 import main.com.teamalfa.blindvirologists.equipments.Bag;
 import main.com.teamalfa.blindvirologists.equipments.Cloak;
 import main.com.teamalfa.blindvirologists.equipments.Equipment;

@@ -1,4 +1,6 @@
-package GUI.view.view;
+package GUI.view.panels;
+
+import GUI.view.panels.InventorySlot;
 
 import javax.swing.*;
 import java.awt.*;

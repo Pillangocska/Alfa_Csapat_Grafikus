@@ -1,15 +1,7 @@
 package GUI.view.panels;
 
-import GUI.view.view.InventorySlot;
-import GUI.view.view.agentView.*;
 import GUI.view.view.geneticCodeView.*;
-import main.com.teamalfa.blindvirologists.agents.Agent;
-import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.genetic_code.*;
-import main.com.teamalfa.blindvirologists.agents.virus.AmnesiaVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.DanceVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.ParalyzeVirus;
 import main.com.teamalfa.blindvirologists.virologist.backpack.pockets.GeneticCodePocket;
 
 import javax.swing.*;

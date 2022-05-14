@@ -1,6 +1,5 @@
 package GUI.view.panels;
 
-import GUI.view.view.InventorySlot;
 import GUI.view.view.agentView.*;
 import main.com.teamalfa.blindvirologists.agents.Agent;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;

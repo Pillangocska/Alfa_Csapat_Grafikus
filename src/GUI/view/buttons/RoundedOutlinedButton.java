@@ -1,4 +1,4 @@
-package GUI.view.panels;
+package GUI.view.buttons;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,7 +1,6 @@
 package GUI.view.panels;
 
 import GUI.view.view.View;
-import GUI.view.view.WornEquipmentInventorySlot;
 import GUI.view.view.equipmentView.*;
 import main.com.teamalfa.blindvirologists.equipments.Bag;
 import main.com.teamalfa.blindvirologists.equipments.Cloak;

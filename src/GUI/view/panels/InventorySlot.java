@@ -1,4 +1,4 @@
-package GUI.view.view;
+package GUI.view.panels;
 
 import GUI.view.view.agentView.AgentView;
 
