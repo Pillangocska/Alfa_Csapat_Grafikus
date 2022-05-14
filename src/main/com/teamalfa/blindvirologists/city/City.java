@@ -1,9 +1,7 @@
 package main.com.teamalfa.blindvirologists.city;
 
-import main.com.teamalfa.blindvirologists.agents.genetic_code.AmnesiaCode;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.BearCode;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.DanceCode;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.ParalyzeCode;
+import main.com.teamalfa.blindvirologists.agents.GeneticCodeBank;
+import main.com.teamalfa.blindvirologists.agents.genetic_code.*;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.city.fields.Laboratory;
 import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
@@ -15,6 +13,7 @@ import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,6 +24,8 @@ public class City {
     private static final ArrayList<Laboratory> allLaboratories = new ArrayList<>();
     private static final ArrayList<StoreHouse> allStoreHouses = new ArrayList<>();
     private static final ArrayList<SafeHouse> allSafeHouses = new ArrayList<>();
+    private static final Random ran = new Random();
+    private static final int neighbourCount = 6;
 
     //Creates one object in the beginning of the game.
     static {
@@ -52,287 +53,114 @@ public class City {
      * Generates the HEXAGON map the players can play on.
      * With random generating random number of fields between 5 & 20
      */
-    public void GenerateMap() {
-        Random random = new Random();
-        int numberOfFields = random.nextInt(20-5+1)+5;
-        int numberOfLabs = random.nextInt(12-4+1)+4;
-        int numberOfStoreH = random.nextInt(15-5+1)+5;
-        int numberOfSafeH = random.nextInt(15-2+1)+2;
-        //Generating field numbers
-        for(int i = 0; i < numberOfFields; i++){
-            allFields.add(new Field()); //Field created
-        }
-        for(int i = 0; i < numberOfLabs; i++){
-            //Generating random genetic codes for lab
-            Laboratory laboratory = new Laboratory();
-            int y = random.nextInt(4)+1;
-            switch (y) {
-                case 1:
-                    ParalyzeCode paralyzeCode = new ParalyzeCode();
-                    laboratory.setGeneticCode(paralyzeCode);
-                    break;
-                case 2:
-                    AmnesiaCode amnesiaCode = new AmnesiaCode();
-                    laboratory.setGeneticCode(amnesiaCode);
-                    break;
-                case 3:
-                    BearCode bearCode = new BearCode();
-                    laboratory.setGeneticCode(bearCode);
-                    break;
-                case 4:
-                    DanceCode danceCode = new DanceCode();
-                    laboratory.setGeneticCode(danceCode);
-                default:
-                    break;
+    public void GenerateMap(){
+        // create labs based on code number
+        int numberOfCodes = GeneticCodeBank.getInstance().getCodes().size();
+
+        for(int i = 0; i < numberOfCodes; i++) {
+            GeneticCode currentCode = GeneticCodeBank.getInstance().getCodes().get(i);
+
+            boolean createAgain = true;
+            while(createAgain && allLaboratories.size() < numberOfCodes) {
+                Laboratory lab = new Laboratory();
+                lab.setGeneticCode(currentCode);
+                allLaboratories.add(lab);
+                createAgain = ran.nextBoolean();
             }
-            allLaboratories.add(laboratory); //Laboratory created
+
+            int numberOfLabs = allLaboratories.size();
+            for(int j = 0; j < numberOfLabs; j++)
+                allLaboratories.add(new Laboratory());
         }
-        for(int i = 0; i < numberOfStoreH; i++){
-            //Generating random elements for storehouse
+
+        // create safe houses based on equipment numbers
+        int numberOfEquipments = allEquipment.size();
+
+        for (Equipment equipment : allEquipment) {
+
+            boolean createAgain = true;
+            while (createAgain && allSafeHouses.size() < numberOfEquipments) {
+                SafeHouse safeHouse = new SafeHouse();
+                safeHouse.add(equipment);
+                allSafeHouses.add(safeHouse);
+                createAgain = ran.nextBoolean();
+            }
+
+            int numberOfSafe = allSafeHouses.size();
+            for (int j = 0; j < numberOfSafe; j++)
+                allSafeHouses.add(new SafeHouse());
+        }
+
+        // create store houses with random element numbers
+        boolean createAgain = true;
+        while(createAgain && allStoreHouses.size() < allLaboratories.size()) {
+            ElementBank elements = new ElementBank(ran.nextInt(50), ran.nextInt(50));
             StoreHouse storeHouse = new StoreHouse();
-            storeHouse.setElements(new ElementBank(random.nextInt(20)+1,random.nextInt(20)+1));
-            allStoreHouses.add(storeHouse); //Storehouse created
+            storeHouse.setElements(elements);
+            allStoreHouses.add(storeHouse);
+            createAgain = ran.nextBoolean();
         }
-        for(int i = 0; i < numberOfSafeH; i++){
-            //Generating random equipments for safehouses
-            SafeHouse safeHouse = new SafeHouse();
-            int x = random.nextInt(4-1+1)+1;
-            switch (x) {
-                case 1:
-                    safeHouse.add(new Gloves());
+
+        // create fields
+        int numberOfFields = allLaboratories.size() + allSafeHouses.size() + allStoreHouses.size();
+        for(int i = 0; i < numberOfFields; i++)
+            allFields.add(new Field());
+
+        connectFields();
+    }
+
+    private static void connectFields(){
+        // make a shallow copies of lists
+        ArrayList<Field> tmpFields = new ArrayList<>(allFields);
+        ArrayList<Field> tmpLabs = new ArrayList<>(allLaboratories);
+        ArrayList<Field> tmpStore = new ArrayList<>(allStoreHouses);
+        ArrayList<Field> tmpSafe = new ArrayList<>(allSafeHouses);
+
+        for(Field field : allFields) {
+            int remaining = neighbourCount;
+            int numberOfFields = ran.nextInt(remaining);
+            remaining-= numberOfFields;
+            int numberOfLabs = ran.nextInt(remaining);
+            remaining -= numberOfLabs;
+            int numberOfStore = ran.nextInt(remaining);
+            remaining -= numberOfStore;
+            int numberOfSafe = ran.nextInt(remaining);
+
+            ArrayList<Field> neighbours = new ArrayList<>();
+
+            if(!tmpFields.isEmpty() && numberOfFields != 0)
+                tmpFields.remove(0);
+            for(int i = 0; i < numberOfFields; i++) {
+                if(tmpFields.isEmpty())
                     break;
-                case 2:
-                    safeHouse.add(new Bag(50));
-                case 3:
-                    safeHouse.add(new Cloak());
-                case 4:
-                    safeHouse.add(new Axe());
-                default:
+                neighbours.add(tmpFields.remove(0));
+            }
+
+            if(!tmpLabs.isEmpty() && numberOfLabs != 0)
+                tmpLabs.remove(0);
+            for(int i = 0; i < numberOfLabs; i++) {
+                if(tmpLabs.isEmpty())
                     break;
+                neighbours.add(tmpLabs.remove(0));
             }
-            allSafeHouses.add(safeHouse); //Safe-house created
-        }
-        int hexConst = 6;
-        //Setting up neighbours for fields first
-        for(int i = 0; i < numberOfFields && allFields.get(i).getNeighbours().size() != hexConst; i++){
-            //One field gets 1 to 2 normal field neighbours
-            int numberOfFieldNeighbours = random.nextInt(2-1+1)+1;
-            for(int j = 0; j < numberOfFieldNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfFields);
-                if(!(allFields.get(i).getNeighbours().contains(allFields.get(addIndex)))
-                        && i != addIndex
-                        && allFields.get(i).getNeighbours().size() < hexConst
-                        && allFields.get(addIndex).getNeighbours().size() < hexConst) {
-                    allFields.get(i).setNeighbour(allFields.get(addIndex));
-                    allFields.get(addIndex).setNeighbour(allFields.get(i));
-                }
+
+            if(!tmpSafe.isEmpty() && numberOfSafe != 0)
+                tmpSafe.remove(0);
+            for(int i = 0; i < numberOfSafe; i++) {
+                if(tmpSafe.isEmpty())
+                    break;
+                neighbours.add(tmpSafe.remove(0));
             }
-            //0 to 2 Laboratories
-            int numberOfLabNeighbours = random.nextInt(1+1);
-            for(int j = 0; j < numberOfLabNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfLabs);
-                if(!(allFields.get(i).getNeighbours().contains(allLaboratories.get(addIndex)))
-                        && allFields.get(i).getNeighbours().size() < hexConst
-                        && allLaboratories.get(addIndex).getNeighbours().size() < hexConst) {
-                    allFields.get(i).setNeighbour(allLaboratories.get(addIndex));
-                    allLaboratories.get(addIndex).setNeighbour(allFields.get(i));
-                }
+
+            if(!tmpStore.isEmpty() && numberOfStore != 0)
+                tmpStore.remove(0);
+            for(int i = 0; i < numberOfStore; i++) {
+                if(tmpStore.isEmpty())
+                    break;
+                neighbours.add(tmpStore.remove(0));
             }
-            //0 to 2 SafeHouses
-            int numberOfSafeHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfSafeHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfSafeH);
-                if(!(allFields.get(i).getNeighbours().contains(allSafeHouses.get(addIndex)))
-                        && allFields.get(i).getNeighbours().size() < hexConst
-                        && allSafeHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allFields.get(i).setNeighbour(allSafeHouses.get(addIndex));
-                    allSafeHouses.get(addIndex).setNeighbour(allFields.get(i));
-                }
-            }
-            //0 to 2 StoreHouses
-            int numberOfStoreHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfStoreHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfStoreH);
-                if(!(allFields.get(i).getNeighbours().contains(allStoreHouses.get(addIndex)))
-                        && allFields.get(i).getNeighbours().size() < hexConst
-                        && allStoreHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allFields.get(i).setNeighbour(allStoreHouses.get(1));
-                    allStoreHouses.get(1).setNeighbour(allFields.get(i));
-                }
-            }
-        }
-        //Setting up neighbours for laboratories
-        for(int i = 0; i < numberOfLabs && allLaboratories.get(i).getNeighbours().size() != hexConst; i++){
-            //1 to 2 field neighbours
-            int numberOfFieldNeighbours = random.nextInt(2-1+1)+1;
-            for(int j = 0; j < numberOfFieldNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfFields);
-                if(!(allLaboratories.get(i).getNeighbours().contains(allFields.get(addIndex)))
-                        && allLaboratories.get(i).getNeighbours().size() < hexConst
-                        && allFields.get(addIndex).getNeighbours().size() < hexConst) {
-                    allLaboratories.get(i).setNeighbour(allFields.get(addIndex));
-                    allFields.get(addIndex).setNeighbour(allLaboratories.get(i));
-                }
-            }
-            //0 to 2 Laboratories
-            int numberOfLabNeighbours = random.nextInt(1+1);
-            for(int j = 0; j < numberOfLabNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfLabs);
-                if(!(allLaboratories.get(i).getNeighbours().contains(allLaboratories.get(addIndex)))
-                        && i != addIndex
-                        && allLaboratories.get(i).getNeighbours().size() < hexConst
-                        && allLaboratories.get(addIndex).getNeighbours().size() < hexConst) {
-                    allLaboratories.get(i).setNeighbour(allLaboratories.get(addIndex));
-                    allLaboratories.get(addIndex).setNeighbour(allLaboratories.get(i));
-                }
-            }
-            //0 to 2 SafeHouses
-            int numberOfSafeHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfSafeHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfSafeH);
-                if(!(allLaboratories.get(i).getNeighbours().contains(allSafeHouses.get(addIndex)))
-                        && allLaboratories.get(i).getNeighbours().size() < hexConst
-                        && allSafeHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allLaboratories.get(i).setNeighbour(allSafeHouses.get(addIndex));
-                    allSafeHouses.get(addIndex).setNeighbour(allLaboratories.get(i));
-                }
-            }
-            //0 to 3 StoreHouses
-            int numberOfStoreHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfStoreHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfStoreH);
-                if(!(allLaboratories.get(i).getNeighbours().contains(allStoreHouses.get(addIndex)))
-                        && allLaboratories.get(i).getNeighbours().size() < hexConst
-                        && allStoreHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allLaboratories.get(i).setNeighbour(allStoreHouses.get(addIndex));
-                    allStoreHouses.get(addIndex).setNeighbour(allLaboratories.get(i));
-                }
-            }
-        }
-        //Setting up neighbours for safehouses
-        for(int i = 0; i < numberOfSafeH && allSafeHouses.get(i).getNeighbours().size() != hexConst; i++){
-            //1 to 5 field neighbours
-            int numberOfFieldNeighbours = random.nextInt(2-1+1)+1;
-            for(int j = 0; j < numberOfFieldNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfFields);
-                if(!(allSafeHouses.get(i).getNeighbours().contains(allFields.get(addIndex)))
-                        && allSafeHouses.get(i).getNeighbours().size() < hexConst
-                        && allFields.get(addIndex).getNeighbours().size() < hexConst) {
-                    allSafeHouses.get(i).setNeighbour(allFields.get(addIndex));
-                    allFields.get(addIndex).setNeighbour(allSafeHouses.get(i));
-                }
-            }
-            //0 to 2 Laboratories
-            int numberOfLabNeighbours = random.nextInt(1+1);
-            for(int j = 0; j < numberOfLabNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfLabs);
-                if(!(allSafeHouses.get(i).getNeighbours().contains(allLaboratories.get(addIndex)))
-                        && allSafeHouses.get(i).getNeighbours().size() < hexConst
-                        && allLaboratories.get(addIndex).getNeighbours().size() < hexConst) {
-                    allSafeHouses.get(i).setNeighbour(allLaboratories.get(addIndex));
-                    allLaboratories.get(addIndex).setNeighbour(allSafeHouses.get(i));
-                }
-            }
-            //0 to 2 SafeHouses
-            int numberOfSafeHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfSafeHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfSafeH);
-                if(!(allSafeHouses.get(i).getNeighbours().contains(allSafeHouses.get(addIndex)))
-                        && i != addIndex
-                        && allSafeHouses.get(i).getNeighbours().size() < hexConst
-                        && allSafeHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allSafeHouses.get(i).setNeighbour(allSafeHouses.get(addIndex));
-                    allSafeHouses.get(addIndex).setNeighbour(allSafeHouses.get(i));
-                }
-            }
-            //0 to 3 StoreHouses
-            int numberOfStoreHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfStoreHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfStoreH);
-                if(!(allSafeHouses.get(i).getNeighbours().contains(allStoreHouses.get(addIndex)))
-                        && allSafeHouses.get(i).getNeighbours().size() < hexConst
-                        && allStoreHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allSafeHouses.get(i).setNeighbour(allStoreHouses.get(addIndex));
-                    allStoreHouses.get(addIndex).setNeighbour(allSafeHouses.get(i));
-                }
-            }
-        }
-        //Setting up neighbours for storehouses
-        for(int i = 0; i < numberOfStoreH && allStoreHouses.get(i).getNeighbours().size() != hexConst; i++){
-            //1 to 5 field neighbours
-            int numberOfFieldNeighbours = random.nextInt(2-1+1)+1;
-            for(int j = 0; j < numberOfFieldNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfFields);
-                if(!(allStoreHouses.get(i).getNeighbours().contains(allFields.get(addIndex)))
-                        && allStoreHouses.get(i).getNeighbours().size() < hexConst
-                        && allFields.get(addIndex).getNeighbours().size() < hexConst) {
-                    allStoreHouses.get(i).setNeighbour(allFields.get(addIndex));
-                    allFields.get(addIndex).setNeighbour(allStoreHouses.get(i));
-                }
-            }
-            //0 to 2 Laboratories
-            int numberOfLabNeighbours = random.nextInt(1+1);
-            for(int j = 0; j < numberOfLabNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfLabs);
-                if(!(allStoreHouses.get(i).getNeighbours().contains(allLaboratories.get(addIndex)))
-                        && allStoreHouses.get(i).getNeighbours().size() < hexConst
-                        && allLaboratories.get(addIndex).getNeighbours().size() < hexConst) {
-                    allStoreHouses.get(i).setNeighbour(allLaboratories.get(addIndex));
-                    allLaboratories.get(addIndex).setNeighbour(allStoreHouses.get(i));
-                }
-            }
-            //0 to 2 SafeHouses
-            int numberOfSafeHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfSafeHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfSafeH);
-                if(!(allStoreHouses.get(i).getNeighbours().contains(allSafeHouses.get(addIndex)))
-                        && allStoreHouses.get(i).getNeighbours().size() < hexConst
-                        && allSafeHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allStoreHouses.get(i).setNeighbour(allSafeHouses.get(addIndex));
-                    allSafeHouses.get(addIndex).setNeighbour(allStoreHouses.get(i));
-                }
-            }
-            //0 to 2 StoreHouses
-            int numberOfStoreHNeighbours = random.nextInt(2+1);
-            for(int j = 0; j < numberOfStoreHNeighbours; j++) {
-                int addIndex = random.nextInt(numberOfStoreH);
-                if(!(allStoreHouses.get(i).getNeighbours().contains(allStoreHouses.get(addIndex)))
-                        && i != addIndex
-                        && allStoreHouses.get(i).getNeighbours().size() < hexConst
-                        && allStoreHouses.get(addIndex).getNeighbours().size() < hexConst) {
-                    allStoreHouses.get(i).setNeighbour(allStoreHouses.get(addIndex));
-                    allStoreHouses.get(addIndex).setNeighbour(allStoreHouses.get(i));
-                }
-            }
-        }
-        //Let's have a look at the result
-        for(int i = 0 ; i < numberOfFields-1 ; i++) {
-            System.out.println("------------------------------------");
-            System.out.println(allFields.get(i).toString()+"Neighbours:");
-            for (int j = 0 ; j < allFields.get(i).getNeighbours().size()-1; j++) {
-                System.out.println(allFields.get(i).getNeighbours().get(j).toString());
-            }
-        }
-        for(int i = 0 ; i < numberOfLabs-1 ; i++) {
-            System.out.println("------------------------------------");
-            System.out.println(allLaboratories.get(i).toString()+"Neighbours:");
-            for (int j = 0 ; j < allLaboratories.get(i).getNeighbours().size()-1; j++) {
-                System.out.println(allLaboratories.get(i).getNeighbours().get(j).toString());
-            }
-        }
-        for(int i = 0 ; i < numberOfStoreH-1 ; i++) {
-            System.out.println("------------------------------------");
-            System.out.println(allStoreHouses.get(i).toString()+"Neighbours:");
-            for (int j = 0 ; j < allStoreHouses.get(i).getNeighbours().size()-1; j++) {
-                System.out.println(allStoreHouses.get(i).getNeighbours().get(j).toString());
-            }
-        }
-        for(int i = 0 ; i < numberOfSafeH-1 ; i++) {
-            System.out.println("------------------------------------");
-            System.out.println(allSafeHouses.get(i).toString()+"Neighbours:");
-            for (int j = 0 ; j < allSafeHouses.get(i).getNeighbours().size()-1; j++) {
-                System.out.println(allSafeHouses.get(i).getNeighbours().get(j).toString());
-            }
+
+            field.setNeighbours(neighbours);
         }
     }
 

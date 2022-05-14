@@ -98,8 +98,8 @@ public class Field {
     public void setNeighbours(ArrayList<Field> neighbours) {
         if(neighbours != null) {
             this.neighbours = neighbours;
-            for (Field neighbour : neighbours) {
-                neighbour.setNeighbour(this);
+            for (int i = 0; i < neighbours.size(); i++) {
+                neighbours.get(i).setNeighbour(this);
             }
         }
     }

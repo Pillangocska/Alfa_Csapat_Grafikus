@@ -56,7 +56,7 @@ public class FieldView extends JPanel implements View, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         Virologist current = TurnHandler.getActiveVirologist();
-        if(field != current.getField() && current != null)
+        if(current != null && field != current.getField())
             current.move(field);
     }
 
