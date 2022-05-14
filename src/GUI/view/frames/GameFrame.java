@@ -30,6 +30,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private WornEquipmentPanel wornEquipmentPanel;
     private MapPanel mapPanel;
     private WhatHappenedPanel whatHappenedPanel;
+    private static JPanel helpPanel;
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -80,7 +81,19 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         layeredPane.add(statusPanel,Integer.valueOf(1));
         layeredPane.add(inventoryPanel,Integer.valueOf(1));
         this.add(layeredPane);
+
+        //to print out comboboxes
+        helpPanel = new JPanel();
+        helpPanel.setLayout(null);
+        this.add(helpPanel);
+
         this.repaint();
+    }
+
+    //getter
+
+    public static JPanel getHelpPanel() {
+        return helpPanel;
     }
 
     //szerintem ez felesleges

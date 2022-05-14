@@ -58,6 +58,10 @@ public class FieldView extends JPanel implements View, MouseListener {
         Virologist current = TurnHandler.getActiveVirologist();
         if(field != current.getField() && current != null)
             current.move(field);
+        else if(field.equals(current.getField())) {
+            if(!TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))
+                TurnHandler.getActiveVirologist().search();
+        }
     }
 
     @Override
@@ -103,7 +107,8 @@ public class FieldView extends JPanel implements View, MouseListener {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         drawPolygon(g2d,hexaDimension/2, hexaDimension/2 ,1,color.getRGB(),true);
-        g.drawImage(backGround,1,1,null);
+        if(TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))
+            g.drawImage(backGround,1,1,null);
         this.repaint();
     }
 
