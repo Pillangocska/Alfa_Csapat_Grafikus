@@ -89,8 +89,7 @@ public class City {
         }
         for(int i = 0; i < numberOfStoreH; i++){
             //Generating random elements for storehouse
-            StoreHouse storeHouse = new StoreHouse();
-            storeHouse.setElements(new ElementBank(random.nextInt(20)+1,random.nextInt(20)+1));
+            StoreHouse storeHouse = new StoreHouse(random.nextInt(20)+1,random.nextInt(20)+1);
             allStoreHouses.add(storeHouse); //Storehouse created
         }
         for(int i = 0; i < numberOfSafeH; i++){

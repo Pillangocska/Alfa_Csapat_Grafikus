@@ -14,6 +14,7 @@ import main.com.teamalfa.blindvirologists.equipments.Cloak;
 import main.com.teamalfa.blindvirologists.equipments.Equipment;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.pockets.EquipmentPocket;
 
 import javax.swing.*;
@@ -56,7 +57,7 @@ public class EquipmentPanel extends BaseBagPanel {
         add(title, constraints);
 
         // adding slots
-        constraints.anchor = GridBagConstraints.CENTER;
+        //constraints.anchor = GridBagConstraints.CENTER;
         for(var s: slots) {
             constraints.gridy++;
             add(s, constraints);
@@ -69,24 +70,27 @@ public class EquipmentPanel extends BaseBagPanel {
      */
     public void update() {
         views = new ArrayList<>();
-        ArrayList<Equipment> piecesOfEquipment = equipmentPocket.getEquipmentHolder();
+        // it is important to make a shallow copy!
+        ArrayList<Equipment> piecesOfEquipment = new ArrayList<>(equipmentPocket.getEquipmentHolder());
+        ArrayList<Equipment> wornPiecesOfEquipment = TurnHandler.getActiveVirologist().getWornEquipment();
+        //piecesOfEquipment.removeAll(wornPiecesOfEquipment);
 
         // creates a view for each agent found in the agent pocket
         for (var eq : piecesOfEquipment) {
             if (eq instanceof Gloves) {
-                views.add(new GlovesView((Gloves) eq));
+                views.add(new GlovesInventoryView((Gloves) eq, false));
                 continue;
             }
             if (eq instanceof Cloak) {
-                views.add(new CloakView((Cloak) eq));
+                views.add(new CloakInventoryView((Cloak) eq, false));
                 continue;
             }
             if (eq instanceof Axe) {
-                views.add(new AxeView((Axe) eq));
+                views.add(new AxeInventoryView((Axe) eq, false));
                 continue;
             }
             if (eq instanceof Bag) {
-                views.add(new BagView((Bag) eq));
+                views.add(new BagInventoryView((Bag) eq, false));
                 continue;
             }
         }

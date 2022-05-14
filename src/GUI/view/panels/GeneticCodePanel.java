@@ -48,7 +48,7 @@ public class GeneticCodePanel extends BaseBagPanel {
         add(title, constraints);
 
         // adding slots
-        constraints.anchor = GridBagConstraints.CENTER;
+        //constraints.anchor = GridBagConstraints.CENTER;
         for(var s: slots) {
             constraints.gridy++;
             add(s, constraints);

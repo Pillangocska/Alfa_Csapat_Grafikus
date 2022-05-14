@@ -1,14 +1,30 @@
 package GUI.view.panels;
 
 import GUI.view.view.View;
+import GUI.view.view.WornEquipmentInventorySlot;
+import GUI.view.view.equipmentView.*;
+import main.com.teamalfa.blindvirologists.equipments.Bag;
+import main.com.teamalfa.blindvirologists.equipments.Cloak;
+import main.com.teamalfa.blindvirologists.equipments.Equipment;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class WornEquipmentPanel extends JPanel implements View {
-    BaseBagPanel[] bagPanels;
+    private Virologist virologist;
+    private WornEquipmentInventorySlot[] slots;
+    private EquipmentView[] views;
 
-    public WornEquipmentPanel(){
+    public WornEquipmentPanel() {
+        // initializing attributes
+        this.slots = new WornEquipmentInventorySlot[3];
+        this.views = new EquipmentView[3];
+
         // creating the layout of the panel. creating constraints that will later be manipulated at each element
         setLayout(new GridBagLayout());
         setBackground(Color.GRAY.darker().darker().darker());
@@ -24,31 +40,27 @@ public class WornEquipmentPanel extends JPanel implements View {
         title.setForeground(Color.RED);
         add(title,constraints);
 
-        //Creating bag panels
-        bagPanels = new BaseBagPanel[3];
-        for(int i = 0 ; i < 3 ; i++)
-            bagPanels[i] = new BaseBagPanel();
+        // create inventory slots
+        for (int i = 0; i < 3; i++)
+            slots[i] = new WornEquipmentInventorySlot(null);
 
-        // Creating the panel that will hold the bag panels
-        JPanel bagPanelsPanel = new JPanel();
-        bagPanelsPanel.setOpaque(false);
-        GridLayout gridLayout = new GridLayout(1, 3);
-        gridLayout.setHgap(20);
-        gridLayout.setVgap(2);
-        bagPanelsPanel.setLayout(gridLayout);
+        // the update method will create views and bind them to the slots
+        update();
+
+        // Creating the panel that will hold the slots
+        JPanel slotPanel = new JPanel();
+        slotPanel.setOpaque(false);
 
         // Adding bag panels
-        //for (var b : bagPanels)
-        bagPanelsPanel.add(bagPanels[0]);
-        bagPanelsPanel.add(bagPanels[1]);
-        bagPanelsPanel.add(bagPanels[2]);
+        for (var s : slots)
+            slotPanel.add(s);
 
         constraints.gridy = 1;
         constraints.fill =GridBagConstraints.BOTH;
         constraints.insets = new Insets(0,20,0,20);
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.weighty = 1.0;
-        add(bagPanelsPanel,constraints);
+        add(slotPanel,constraints);
     }
 
     @Override
@@ -63,7 +75,33 @@ public class WornEquipmentPanel extends JPanel implements View {
 
     @Override
     public void update() {
+        virologist = TurnHandler.getActiveVirologist();
+        ArrayList<Equipment> worn = virologist.getWornEquipment();
 
+        // creating views and binding them to the slots
+        int i = 0;
+        for (i = i; i < 3; i++) {
+            // if the slot is filled
+            if (i < worn.size()) {
+                if (worn.get(i) instanceof Gloves)
+                    views[i] = new GlovesInventoryView((Gloves) worn.get(i), true);
+
+                if (worn.get(i) instanceof Cloak)
+                    views[i] = new CloakInventoryView((Cloak) worn.get(i), true);
+
+                if (worn.get(i) instanceof Axe)
+                    views[i] = new AxeInventoryView((Axe) worn.get(i), true);
+
+                if (worn.get(i) instanceof Bag)
+                    views[i] = new BagInventoryView((Bag) worn.get(i), true);
+
+                slots[i].setView(views[i]);
+            }
+
+            // if it is not filled
+            else
+                slots[i].setView(null);
+        }
     }
 
     @Override

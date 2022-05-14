@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class InventorySlot extends JPanel {
     private JButton view;
-    private static int sideLength = 60;
+    protected static int sideLength = 60;
 
     public InventorySlot(JButton view) {
         setOpaque(false);

@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class CloakView extends EquipmentView {
-    private Cloak cloak;
+    protected Cloak cloak;
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
 
@@ -34,6 +34,7 @@ public class CloakView extends EquipmentView {
         thumb.setBounds(0, 0, iconWidth, iconHeight);
         add(thumb);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         TurnHandler.getActiveVirologist().pickUpEquipment(cloak);
