@@ -41,8 +41,7 @@ public class Main {
     }
 
     private static void graphic() {
-        //new MenuFrame();
-        new GameFrame(4);
+        new MenuFrame();
     }
 
     public static void main(String[] args) {

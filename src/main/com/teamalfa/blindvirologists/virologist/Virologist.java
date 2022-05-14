@@ -14,6 +14,7 @@ import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -27,7 +28,7 @@ public class Virologist {
     private Field field;
     private Notifiable game;
     private ArrayList<Field> discoveredFields = new ArrayList<>();
-    private static final int maxActions = 100; //Todo visszaallitani
+    private static final int maxActions = 3; //Todo visszaallitani
 
     private int actions;
 
@@ -65,6 +66,7 @@ public class Virologist {
         return backpack;
     }
     public Notifiable getGame() { return game; }
+    public ArrayList<Field> getDiscoveredFields() { return discoveredFields; }
 
     /**
      * Resets the action counter.
@@ -263,10 +265,10 @@ public class Virologist {
      */
     public void search() {
         if(actions > 0) {
-            field.searchedBy(this);
+            //field.searchedBy(this);
             actions--;
-            game.creativeNotify(name + " searched field.");
             discoveredFields.add(field);
+            game.creativeNotify(name + " searched field.");
         }
 
     }
