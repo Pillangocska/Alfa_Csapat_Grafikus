@@ -2,17 +2,7 @@ package GUI.view.view.fieldView;
 
 import GUI.view.view.ElementView;
 import GUI.view.view.VirologistView;
-import GUI.view.view.equipmentView.AxeView;
-import GUI.view.view.equipmentView.BagView;
-import GUI.view.view.equipmentView.CloakView;
-import GUI.view.view.equipmentView.GlovesView;
-import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
 import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
-import main.com.teamalfa.blindvirologists.equipments.Bag;
-import main.com.teamalfa.blindvirologists.equipments.Cloak;
-import main.com.teamalfa.blindvirologists.equipments.Equipment;
-import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
-import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
@@ -56,6 +46,7 @@ public class StoreHouseView extends FieldView {
                 }
                 storeHouse = (StoreHouse) TurnHandler.getActiveVirologist().getField();
                 elementView = new ElementView(storeHouse.getElements());
+                add(elementView);
             }
             else {
                 add(new VirologistView(TurnHandler.getActiveVirologist()));

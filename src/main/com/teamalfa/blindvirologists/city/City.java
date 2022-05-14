@@ -304,7 +304,7 @@ public class City {
                 }
             }
         }
-        //Let's have a look at the result
+        /* //For debugging
         for(int i = 0 ; i < numberOfFields-1 ; i++) {
             System.out.println("------------------------------------");
             System.out.println(allFields.get(i).toString()+"Neighbours:");
@@ -332,7 +332,7 @@ public class City {
             for (int j = 0 ; j < allSafeHouses.get(i).getNeighbours().size()-1; j++) {
                 System.out.println(allSafeHouses.get(i).getNeighbours().get(j).toString());
             }
-        }
+        } */
     }
 
     public static ArrayList<Laboratory> getAllLaboratories(){
