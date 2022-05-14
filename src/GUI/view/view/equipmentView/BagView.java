@@ -13,6 +13,7 @@ public class BagView extends EquipmentView{
     private final int iconHeight = 1196 / 20;
 
     public BagView(Bag bag){
+        super(bag);
         setLayout(null);
         this.bag = bag;
         setPreferredSize(new Dimension(iconWidth, iconHeight));

@@ -12,6 +12,7 @@ public class ParalyzeCodeView extends GeneticCodeView {
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
     public ParalyzeCodeView(ParalyzeCode code) {
+        super(code);
         setLayout(null);
         this.code = code;
         setPreferredSize(new Dimension(iconWidth, iconHeight));
