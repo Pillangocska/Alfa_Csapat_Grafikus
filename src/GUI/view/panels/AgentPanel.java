@@ -1,6 +1,5 @@
 package GUI.view.panels;
 
-import GUI.view.view.InventorySlot;
 import GUI.view.view.agentView.*;
 import main.com.teamalfa.blindvirologists.agents.Agent;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
@@ -50,7 +49,7 @@ public class AgentPanel extends BaseBagPanel {
         add(title, constraints);
 
         // adding slots
-        constraints.anchor = GridBagConstraints.CENTER;
+        //constraints.anchor = GridBagConstraints.CENTER;
         for(var s: slots) {
             constraints.gridy++;
             add(s, constraints);

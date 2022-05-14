@@ -1,20 +1,8 @@
 package GUI.view.frames;
 
 import GUI.view.panels.*;
-import main.com.teamalfa.blindvirologists.agents.Vaccine;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.AmnesiaCode;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.BearCode;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.DanceCode;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.ParalyzeCode;
-import main.com.teamalfa.blindvirologists.agents.virus.AmnesiaVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.DanceVirus;
-import main.com.teamalfa.blindvirologists.agents.virus.ParalyzeVirus;
+import GUI.view.view.VirologistView;
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.equipments.Bag;
-import main.com.teamalfa.blindvirologists.equipments.Cloak;
-import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
-import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -30,7 +18,21 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private WornEquipmentPanel wornEquipmentPanel;
     private MapPanel mapPanel;
     private WhatHappenedPanel whatHappenedPanel;
-    private static JPanel helpPanel;
+    public static VirologistView target = null;
+
+    public static void setHighlightedVirologistView(VirologistView virologistView) {
+        if (target != virologistView) {
+            if (target != null)
+                target.setHighlighted(false);
+            if (virologistView != null)
+                virologistView.setHighlighted(true);
+        }
+        target = virologistView;
+    }
+
+    public static VirologistView getHighlightedVirologistView() {
+        return target;
+    }
 
     public GameFrame(int numberOfPlayers){
         //Starting the game
@@ -155,11 +157,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
      * Updates all Views
      */
     public void updateView() {
-        /*
-        for (View view : views) {
-            view.update();
-        }
-        */
         statusPanel.update();
         wornEquipmentPanel.update();
         inventoryPanel.update();

@@ -4,6 +4,8 @@ import GUI.view.frames.GameFrame;
 import GUI.view.frames.menuFrames.MenuFrame;
 import main.com.teamalfa.blindvirologists.consoleController.ConsoleController;
 
+import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {

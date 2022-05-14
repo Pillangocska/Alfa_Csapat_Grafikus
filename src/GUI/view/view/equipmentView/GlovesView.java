@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GlovesView extends EquipmentView{
-    private Gloves gloves;
+    protected Gloves gloves;
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
 
@@ -36,6 +36,7 @@ public class GlovesView extends EquipmentView{
         thumb.setBounds(0, 0, iconWidth, iconHeight);
         add(thumb);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         TurnHandler.getActiveVirologist().pickUpEquipment(gloves);

@@ -1,4 +1,4 @@
-package GUI.view.panels;
+package GUI.view.labels;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
