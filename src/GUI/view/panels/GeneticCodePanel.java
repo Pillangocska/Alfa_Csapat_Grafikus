@@ -20,7 +20,7 @@ public class GeneticCodePanel extends BaseBagPanel {
         slots = new ArrayList<>();
 
         // creating inventory slots
-        for (int i = 0; i < 4; i++) { // azt a négyest valahonnan ki kéne inkább olvasni...
+        for (int i = 0; i < 4; i++) {
             slots.add(new InventorySlot(null));
         }
 
