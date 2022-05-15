@@ -25,7 +25,10 @@ public class AxeView extends EquipmentView{
 
     @Override
     protected void handleIcon() {
+        removeAll();
         ImageIcon icon = new ImageIcon("resources/axe.png");
+        if (axe.isWornOut())
+            icon = new ImageIcon("resources/shattered_axe.png");
         Image img = icon.getImage().getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
         JLabel thumb = new JLabel();

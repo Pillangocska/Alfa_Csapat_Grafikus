@@ -1,7 +1,12 @@
 package GUI.view.view.agentView;
 
+import GUI.view.frames.GameFrame;
 import GUI.view.panels.AgentPanel;
 import GUI.view.view.View;
+import GUI.view.view.VirologistView;
+import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +28,7 @@ public abstract class AgentView extends JButton implements View, ActionListener 
         setFocusPainted(false);
         setVerticalAlignment(CENTER);
         setHorizontalAlignment(CENTER);
+        this.addActionListener(this);
 
         setSize(mysize);
     }
@@ -37,9 +43,7 @@ public abstract class AgentView extends JButton implements View, ActionListener 
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        //todo
-    }
+    public void actionPerformed(ActionEvent e) {   }
 
     @Override
     public void update() {

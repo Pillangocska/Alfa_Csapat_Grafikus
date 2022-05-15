@@ -1,9 +1,14 @@
 package GUI.view.view.agentView;
 
+import GUI.view.frames.GameFrame;
+import GUI.view.view.VirologistView;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.genetic_code.*;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
+import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class VaccineView extends AgentView {
     private Vaccine vaccine;
@@ -24,5 +29,14 @@ public class VaccineView extends AgentView {
 
         // set the vaccine
         this.vaccine = vaccine;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        VirologistView highlightedVirologistView = GameFrame.getHighlightedVirologistView();
+        if (highlightedVirologistView != null) {
+            Virologist target = highlightedVirologistView.getVirologist();
+            TurnHandler.getActiveVirologist().use(vaccine, target);
+        }
     }
 }

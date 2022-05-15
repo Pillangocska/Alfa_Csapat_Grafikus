@@ -3,6 +3,7 @@ package GUI.view.frames;
 import GUI.view.panels.*;
 import GUI.view.view.VirologistView;
 import main.com.teamalfa.blindvirologists.city.City;
+import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -103,14 +104,11 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
             virologist.setNotifiable(this);
 
             /*
-            EZ ILYEN OCSORTÁNYOS INVENTORY DEBUG CODE, MAJD KÉSŐBB KI KELL TÖRÖLNI
+            EZ ILYEN OCSORTÁNYOS DEBUG KÓD, AMIT KI KELL TÖRÖLNI KÉSŐBB
             if (i == 1) {
-                virologist.getBackpack().getAgentPocket().addAgent(new BearVirus());
-                virologist.getBackpack().getAgentPocket().addAgent(new DanceVirus());
-                virologist.getBackpack().getAgentPocket().addAgent(new AmnesiaVirus());
-                virologist.getBackpack().getAgentPocket().addAgent(new ParalyzeVirus());
+                virologist.getBackpack().getEquipmentPocket().add(new Axe());
             }
-
+            /*
             if (i == 2) {
                 virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new BearCode()));
                 virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new AmnesiaCode()));

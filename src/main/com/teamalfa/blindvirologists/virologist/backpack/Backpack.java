@@ -34,8 +34,9 @@ public class Backpack {
      * @return true if it was successful, false otherwise.
      */
     public boolean add(Equipment equipment) {
+        boolean result = equipmentPocket.add(equipment);
         virologist.getGame().creativeNotify(equipment.getName() + " added.");
-        return equipmentPocket.add(equipment);
+        return result;
     }
 
     /**
@@ -82,6 +83,7 @@ public class Backpack {
         Virus virus = geneticCode.createVirus(elementBank);
         if(virus != null) {
             agentPocket.addAgent(virus);
+            virologist.getGame().creativeNotify("New virus crafted!");
         }
         return virus;
     }
@@ -94,6 +96,7 @@ public class Backpack {
         Vaccine vaccine = geneticCode.createVaccine(elementBank);
         if (vaccine != null) {
             agentPocket.addAgent(vaccine);
+            virologist.getGame().creativeNotify("New vaccine crafted!");
         }
         return vaccine;
     }

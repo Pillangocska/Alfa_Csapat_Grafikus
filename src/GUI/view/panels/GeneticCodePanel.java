@@ -40,7 +40,6 @@ public class GeneticCodePanel extends BaseBagPanel {
         add(title, constraints);
 
         // adding slots
-        //constraints.anchor = GridBagConstraints.CENTER;
         for(var s: slots) {
             constraints.gridy++;
             add(s, constraints);
@@ -54,19 +53,19 @@ public class GeneticCodePanel extends BaseBagPanel {
         // creates a view for each agent found in the agent pocket
         for (var gc : geneticCodes) {
             if (gc instanceof ParalyzeCode) {
-                views.add(new ParalyzeCodeView((ParalyzeCode) gc));
+                views.add(new ParalyzeCodeInventoryView((ParalyzeCode) gc));
                 continue;
             }
             if (gc instanceof BearCode) {
-                views.add(new BearCodeView((BearCode) gc));
+                views.add(new BearCodeInventoryView((BearCode) gc));
                 continue;
             }
             if (gc instanceof AmnesiaCode) {
-                views.add(new AmnesiaCodeView((AmnesiaCode) gc));
+                views.add(new AmnesiaCodeInventoryView((AmnesiaCode) gc));
                 continue;
             }
             if (gc instanceof DanceCode) {
-                views.add(new DanceCodeView((DanceCode) gc));
+                views.add(new DanceCodeInventoryView((DanceCode) gc));
                 continue;
             }
         }

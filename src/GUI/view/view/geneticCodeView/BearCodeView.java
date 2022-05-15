@@ -12,6 +12,7 @@ public class BearCodeView extends GeneticCodeView {
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
     public BearCodeView(BearCode code) {
+        super(code);
         setLayout(null);
         this.code = code;
         setPreferredSize(new Dimension(iconWidth+20, iconHeight+20));

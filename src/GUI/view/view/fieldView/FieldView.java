@@ -101,9 +101,6 @@ public class FieldView extends JPanel implements View, MouseListener {
                 }
             }
         }
-
-
-
     }
 
     @Override
