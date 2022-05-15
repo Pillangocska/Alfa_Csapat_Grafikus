@@ -23,7 +23,7 @@ public class StoreHouseView extends FieldView {
     private StoreHouse storeHouse;
 
     public StoreHouseView(){
-        color = Color.getHSBColor(0,250,0);
+        color = Color.getHSBColor(0,250,140);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/StoreHouse1.png");
         backGround = newImage.getScaledInstance(200,200,Image.SCALE_DEFAULT);
         this.text = "store";
@@ -34,7 +34,8 @@ public class StoreHouseView extends FieldView {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         drawPolygon(g2d,200/2, 200/2 ,1,color.getRGB(),true);
-        g.drawImage(backGround,0,0,null);
+        if(TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))
+            g.drawImage(backGround,0,0,null);
         this.repaint();
     }
 
@@ -48,12 +49,17 @@ public class StoreHouseView extends FieldView {
         removeAll();
 
         // and update only if its current field
-        if(field == TurnHandler.getActiveVirologist().getField()) {
-            for (Virologist virologist : field.getVirologists()) {
-                add(new VirologistView(virologist));
+        if(field.equals(TurnHandler.getActiveVirologist().getField())) {
+            if(TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field)) {
+                for (Virologist virologist : field.getVirologists()) {
+                    add(new VirologistView(virologist));
+                }
+                storeHouse = (StoreHouse) TurnHandler.getActiveVirologist().getField();
+                elementView = new ElementView(storeHouse.getElements());
             }
-            storeHouse = (StoreHouse) TurnHandler.getActiveVirologist().getField();
-            elementView = new ElementView(storeHouse.getElements());
+            else {
+                add(new VirologistView(TurnHandler.getActiveVirologist()));
+            }
         }
     }
 }

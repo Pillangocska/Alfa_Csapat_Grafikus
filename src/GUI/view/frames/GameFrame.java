@@ -83,8 +83,11 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         layeredPane.add(statusPanel,Integer.valueOf(1));
         layeredPane.add(inventoryPanel,Integer.valueOf(1));
         this.add(layeredPane);
+
         this.repaint();
     }
+
+    //getter
 
     //szerintem ez felesleges
     public void logEvent(String message) {

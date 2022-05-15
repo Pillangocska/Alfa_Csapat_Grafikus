@@ -56,8 +56,13 @@ public class FieldView extends JPanel implements View, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         Virologist current = TurnHandler.getActiveVirologist();
-        if(current != null && field != current.getField())
+        if(field != current.getField() && current != null) {
             current.move(field);
+        }
+        else if(field.equals(current.getField())) {
+            if(!TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))
+                TurnHandler.getActiveVirologist().search();
+        }
     }
 
     @Override
@@ -86,12 +91,16 @@ public class FieldView extends JPanel implements View, MouseListener {
         removeAll();
 
         // and update only if its current field
-        if(field == TurnHandler.getActiveVirologist().getField()) {
-            for (Virologist virologist : field.getVirologists()) {
-                add(new VirologistView(virologist));
+        if(field.equals(TurnHandler.getActiveVirologist().getField())) {
+            if(!TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field)) {
+                add(new VirologistView(TurnHandler.getActiveVirologist()));
+            }
+            else {
+                for (Virologist virologist : field.getVirologists()) {
+                    add(new VirologistView(virologist));
+                }
             }
         }
-
     }
 
     @Override
@@ -103,7 +112,8 @@ public class FieldView extends JPanel implements View, MouseListener {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         drawPolygon(g2d,hexaDimension/2, hexaDimension/2 ,1,color.getRGB(),true);
-        g.drawImage(backGround,1,1,null);
+        if(TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))
+            g.drawImage(backGround,1,1,null);
         this.repaint();
     }
 
