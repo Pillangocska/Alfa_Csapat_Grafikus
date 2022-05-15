@@ -92,14 +92,18 @@ public class Field {
      * Setters
      */
     public void setNeighbour(Field f1) {
-        this.neighbours.add(f1);
+        // connect neighbours
+        if(!neighbours.contains(f1)) {
+            this.neighbours.add(f1);
+            f1.setNeighbour(this);
+        }
     }
 
     public void setNeighbours(ArrayList<Field> neighbours) {
         if(neighbours != null) {
             this.neighbours = neighbours;
-            for (Field neighbour : neighbours) {
-                neighbour.setNeighbour(this);
+            for (int i = 0; i < neighbours.size(); i++) {
+                neighbours.get(i).setNeighbour(this);
             }
         }
     }

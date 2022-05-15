@@ -11,7 +11,7 @@ public class Vaccine extends Agent {
         this.geneticCode = geneticcode;
         name = "vaccine";
 
-        TurnHandler.getInstance().accept(this);
+        TurnHandler.accept(this);
     }
 
     /**
