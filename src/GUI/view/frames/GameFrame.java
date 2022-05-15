@@ -115,6 +115,7 @@ public class GameFrame extends JFrame implements Notifiable {
      * @param numberOfPlayers How many players playing the game
      */
     public void startGame (int numberOfPlayers) {
+        Game.setNumberOfPlayers(numberOfPlayers);
         Game.getInstance().startGame();
         //Adding players to the turnhandler
         for(int i = 1 ; i <= numberOfPlayers ; i++){

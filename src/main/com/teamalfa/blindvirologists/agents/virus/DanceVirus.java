@@ -3,6 +3,7 @@ package main.com.teamalfa.blindvirologists.agents.virus;
 import main.com.teamalfa.blindvirologists.agents.genetic_code.DanceCode;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.random.MyRandom;
+import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import java.util.ArrayList;
@@ -16,12 +17,10 @@ public class DanceVirus extends Virus {
         geneticCode = new DanceCode();
         name = "dance virus";
         priority = 3;
-        expiry = duration = 5;
+        expiry = duration = 2 * Game.getNumberOfPlayers();
 
         cost.setNucleotide(15);
         cost.setAminoAcid(15);
-
-        TurnHandler.getInstance().accept(this);
     }
 
     /**

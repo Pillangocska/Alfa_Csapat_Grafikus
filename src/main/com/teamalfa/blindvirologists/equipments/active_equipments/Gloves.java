@@ -1,6 +1,7 @@
 package main.com.teamalfa.blindvirologists.equipments.active_equipments;
 
 import main.com.teamalfa.blindvirologists.agents.virus.Virus;
+import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
@@ -9,7 +10,7 @@ public class Gloves extends ActiveEquipment {
     private Virus usedVirus = null;
 
     public Gloves() {
-        cooldownDuration = 3;
+        cooldownDuration = 2 * Game.getNumberOfPlayers();
         usetime = 3;
         cooldown = 0;
         name = "glove";
@@ -35,9 +36,9 @@ public class Gloves extends ActiveEquipment {
      */
     public boolean use(Virologist target){
         if(usedVirus != null && usetime > 0 && cooldown == 0) {
+            cooldown = cooldownDuration;
             virologist.removeVirus(usedVirus);
             usedVirus.apply(target);
-            startCooldown();
             usetime--;
             usedVirus = null;
             return true;
@@ -52,6 +53,13 @@ public class Gloves extends ActiveEquipment {
         virologist.removeWorn(this);
         virologist.removeActive(this);
         TurnHandler.getInstance().remove(this);
+        if(virologist.getWornEquipment().contains(this))
+        {
+            virologist.removeWorn(this);
+            virologist.removeActive(this);
+        }
+        if(virologist.getBackpack().getEquipmentPocket().getEquipmentHolder().contains(this))
+            virologist.getBackpack().getEquipmentPocket().getEquipmentHolder().remove(this);
     }
 
     /**
@@ -64,6 +72,8 @@ public class Gloves extends ActiveEquipment {
         else if(cooldown > 0)
             cooldown--;
     }
+
+    //getters
 
     @Override
     public String getType() {
