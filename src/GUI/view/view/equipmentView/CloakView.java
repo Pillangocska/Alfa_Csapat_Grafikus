@@ -14,6 +14,7 @@ public class CloakView extends EquipmentView {
     private final int iconHeight = 1196 / 20;
 
     public CloakView(Cloak cloak) {
+        super(cloak);
         setLayout(null);
         this.cloak = cloak;
         setPreferredSize(new Dimension(iconWidth, iconHeight));

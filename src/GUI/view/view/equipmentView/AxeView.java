@@ -13,6 +13,7 @@ public class AxeView extends EquipmentView{
     private final int iconHeight = 1196 / 20;
 
     public AxeView(Axe axe){
+        super(axe);
         setLayout(null);
         this.axe = axe;
         setPreferredSize(new Dimension(iconWidth, iconHeight));
@@ -25,7 +26,10 @@ public class AxeView extends EquipmentView{
 
     @Override
     protected void handleIcon() {
+        removeAll();
         ImageIcon icon = new ImageIcon("resources/axe.png");
+        if (axe.isWornOut())
+            icon = new ImageIcon("resources/shattered_axe.png");
         Image img = icon.getImage().getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
         JLabel thumb = new JLabel();
