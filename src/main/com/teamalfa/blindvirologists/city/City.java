@@ -61,7 +61,6 @@ public class City {
         for(int i = 0; i < numberOfCodes; i++) {
             GeneticCode currentCode = GeneticCodeBank.getInstance().getCodes().get(i);
 
-            int chanceToCreateAgain = 0;
             int labCountWithCurrentCode = 0;
 
             // create laboratories with current genetic code
@@ -69,7 +68,6 @@ public class City {
                 Laboratory lab = new Laboratory();
                 lab.setGeneticCode(currentCode);
                 allLaboratories.add(lab);
-                chanceToCreateAgain = ran.nextInt(100);
                 labCountWithCurrentCode++;
             }
 
@@ -84,7 +82,6 @@ public class City {
 
         // iterate through all possible equipments
         for (Equipment equipment : allEquipment) {
-            int chanceToCreateAgain = 0;
             int safeCountWithCurrentEquipment = 0;
 
             // create safe houses with current equipment
@@ -93,7 +90,6 @@ public class City {
                 safeHouse.add(equipment);
                 allSafeHouses.add(safeHouse);
                 safeCountWithCurrentEquipment++;
-                chanceToCreateAgain = ran.nextInt(100);
             }
 
             // create empty safe houses
@@ -103,13 +99,11 @@ public class City {
         }
 
         // create store houses with random element numbers
-        int chanceToCreateAgain = 0;
         while(allStoreHouses.size() < allLaboratories.size()) {
             ElementBank elements = new ElementBank(ran.nextInt(50), ran.nextInt(50));
             StoreHouse storeHouse = new StoreHouse();
             storeHouse.setElements(elements);
             allStoreHouses.add(storeHouse);
-            chanceToCreateAgain = ran.nextInt(100);
         }
 
         // create fields
@@ -156,7 +150,7 @@ public class City {
 
                 // connect current field with field from previous line with same idx
                 if(previousLine != null) {
-                    previousLine.get(0).setNeighbour(currentField);
+                    previousLine.get(i).setNeighbour(currentField);
 
                     // if it's not the last field in the line then connect
                     // with next field from previous line
