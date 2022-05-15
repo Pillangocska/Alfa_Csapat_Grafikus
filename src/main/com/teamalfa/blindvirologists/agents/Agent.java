@@ -61,6 +61,7 @@ abstract public class Agent implements Steppable {
     public Virologist getTarget() {
         return target;
     }
+    public void setTarget(Virologist virologist) { target = virologist; }
 
     /**
      * Handles the duration and expiry of the agents.
