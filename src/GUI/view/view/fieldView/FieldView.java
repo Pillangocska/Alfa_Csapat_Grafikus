@@ -3,7 +3,6 @@ package GUI.view.view.fieldView;
 import GUI.view.frames.GameFrame;
 import GUI.view.view.View;
 import GUI.view.view.VirologistView;
-import GUI.view.view.equipmentView.AxeView;
 import GUI.view.view.equipmentView.EquipmentView;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
@@ -48,7 +47,6 @@ public class FieldView extends JPanel implements View, MouseListener {
      */
     protected Image newImage;
     protected Image backGround;
-    protected Image hiddenImage;
     /**
      * dimensions for the hexagon
      */
@@ -60,7 +58,6 @@ public class FieldView extends JPanel implements View, MouseListener {
     public FieldView(){
         color = new Color(3, 18, 9);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/field1.png");
-        hiddenImage = Toolkit.getDefaultToolkit().createImage("resources/fog.gif");
         backGround = newImage.getScaledInstance(198,198,Image.SCALE_DEFAULT);
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(100,100));
