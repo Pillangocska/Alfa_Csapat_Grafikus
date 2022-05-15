@@ -24,11 +24,13 @@ public class FieldView extends JPanel implements View, MouseListener {
     protected Color color;
     protected Image newImage;
     protected Image backGround;
+    protected Image hiddenImage;
     private static final int hexaDimension = 200;
 
     public FieldView(){
         color = Color.white;
         newImage = Toolkit.getDefaultToolkit().createImage("resources/field1.png");
+        hiddenImage = Toolkit.getDefaultToolkit().createImage("resources/fog.gif");
         backGround = newImage.getScaledInstance(198,198,Image.SCALE_DEFAULT);
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(100,100));

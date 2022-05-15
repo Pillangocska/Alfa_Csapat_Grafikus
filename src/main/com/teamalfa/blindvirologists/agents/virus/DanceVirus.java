@@ -16,6 +16,9 @@ public class DanceVirus extends Virus {
         geneticCode = new DanceCode();
         name = "dance virus";
 
+        cost.setNucleotide(15);
+        cost.setAminoAcid(15);
+
         TurnHandler.getInstance().accept(this);
     }
 
@@ -31,11 +34,8 @@ public class DanceVirus extends Virus {
     }
 
     private Field pickRandom(ArrayList<Field> neighbours){
-        int size = neighbours.size();
-
-        int idx = -1;
-        idx = new Random().nextInt(size);
-
+        int size = neighbours.size() - 1;
+        int idx = size != 1 ? new Random().nextInt(size) : 0;
         return neighbours.get(idx);
     }
 }

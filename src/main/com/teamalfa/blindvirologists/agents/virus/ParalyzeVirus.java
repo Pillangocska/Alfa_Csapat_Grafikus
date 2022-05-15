@@ -12,6 +12,9 @@ public class ParalyzeVirus extends Virus {
         geneticCode = new ParalyzeCode();
         name = "paralyze virus";
 
+        cost.setNucleotide(18);
+        cost.setAminoAcid(18);
+
         TurnHandler.getInstance().accept(this);
     }
 

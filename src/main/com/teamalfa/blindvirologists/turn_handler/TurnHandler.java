@@ -28,8 +28,8 @@ public class TurnHandler {
      *
      */
     public static void tick() {
-        for(Steppable steppable : steppables) {
-            steppable.step();
+        for(int i = 0; i < steppables.size(); i++) {
+            steppables.get(i).step();
         }
         changeActiveVirologist();
 

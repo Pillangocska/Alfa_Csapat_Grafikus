@@ -23,6 +23,7 @@ public class AgentPocket extends Pocket {
     public boolean addAgent(Agent agent) {
         if(agentHolder.size() < maxSize) {
             agentHolder.add(agent);
+            agent.setTarget(backpack.getVirologist());
             return true;
         }
         return false;

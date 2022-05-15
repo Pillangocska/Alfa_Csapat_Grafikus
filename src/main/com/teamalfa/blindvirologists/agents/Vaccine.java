@@ -11,7 +11,10 @@ public class Vaccine extends Agent {
         this.geneticCode = geneticcode;
         name = "vaccine";
 
-        TurnHandler.getInstance().accept(this);
+        cost.setAminoAcid(10);
+        cost.setNucleotide(10);
+
+        TurnHandler.accept(this);
     }
 
     /**

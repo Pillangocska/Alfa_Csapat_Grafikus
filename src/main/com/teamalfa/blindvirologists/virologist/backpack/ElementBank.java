@@ -51,9 +51,11 @@ public class ElementBank {
        ElementBank added = new ElementBank(elements.aminoAcid, elements.nucleotide);
        if(nucleotide > nucleotideMaxSize){
            nucleotide = nucleotideMaxSize;
+           added.setNucleotide(nucleotide);
        }
        if(aminoAcid > aminoAcidMaxSize){
            aminoAcid = aminoAcidMaxSize;
+           added.setAminoAcid(aminoAcid);
        }
 
        return added;
@@ -68,6 +70,8 @@ public class ElementBank {
 
         Boolean ret = false;
         if(added.getAminoAcid() < aminoAcid && added.getNucleotide() < nucleotide) {
+            aminoAcid -= added.getAminoAcid();
+            nucleotide -= added.getNucleotide();
             ret = true;
         }
         return ret;

@@ -8,7 +8,7 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
  *  abstract class for all the genetic codes
  *  further viruses and vaccines should implement all these functions
  */
-abstract public class GeneticCode {
+abstract public class GeneticCode implements Cloneable{
     protected String type;
     protected String name;
     abstract public Virus createVirus(ElementBank elementBank);
@@ -29,5 +29,10 @@ abstract public class GeneticCode {
 
     public String getName() {
         return name;
+    }
+
+    public GeneticCode clone() throws CloneNotSupportedException
+    {
+        return (GeneticCode) super.clone();
     }
 }
