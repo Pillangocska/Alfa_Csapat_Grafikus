@@ -9,10 +9,22 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import java.awt.*;
 
+/**
+ * Represents laboratories in the game.
+ */
 public class LaboratoryView extends FieldView{
+    /**
+     * The genetic code that's in the laboratory.
+     */
     private GeneticCodeView code;
+    /**
+     * The laboratory itself.
+     */
     private Laboratory laboratory;
 
+    /**
+     * ctr
+     */
     public LaboratoryView(){
         color = new Color(3, 18, 9);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/lab.png");
@@ -21,10 +33,18 @@ public class LaboratoryView extends FieldView{
         setFieldText("lab");
     }
 
+    /**
+     * setter
+     * @param lab sets the laboratory to this laboratory.
+     */
     public void setField(Laboratory lab) {
         field = lab;
     }
 
+    /**
+     * Graphics paint method, paints the hexagons on the game.
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -34,6 +54,10 @@ public class LaboratoryView extends FieldView{
         this.repaint();
     }
 
+    /**
+     * Called when the game view gets updated.
+     * Removes every component from the field, and updates it if it's the current field.
+     */
     @Override
     public void update() {
         // remove all components from field
@@ -51,19 +75,15 @@ public class LaboratoryView extends FieldView{
                 if(currentCode != null) {
                     switch(currentCode.getName()) {
                         case "amnesia code": add(new AmnesiaCodeView((AmnesiaCode) laboratory.getGeneticCode()));
-                        System.out.println("amnesia");
                         break;
 
                         case "bear code": add(new BearCodeView((BearCode) laboratory.getGeneticCode()));
-                        System.out.println("baer");
                         break;
 
                         case "dance code": add(new DanceCodeView((DanceCode) laboratory.getGeneticCode()));
-                        System.out.println("dance");
                         break;
 
                         case "paralyze code": add(new ParalyzeCodeView((ParalyzeCode) laboratory.getGeneticCode()));
-                        System.out.println("paralyze");
                         break;
 
                         default:

@@ -9,8 +9,8 @@ public class ElementBank {
     public ElementBank(int amino, int nucleotide){
         this.aminoAcid = amino;
         this.nucleotide = nucleotide;
-        aminoAcidMaxSize = 20;
-        nucleotideMaxSize = 20;
+        aminoAcidMaxSize = 40;
+        nucleotideMaxSize = 40;
 
     }
 

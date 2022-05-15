@@ -18,18 +18,54 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Represents the virologist who is the player.
+ */
 public class Virologist {
+    /**
+     * The name
+     */
     private final String name;
+    /**
+     * Vaccine genetic codes.
+     */
     private final ArrayList<GeneticCode> protectionBank;
+    /**
+     * The active viruses.
+     */
     private final ArrayList<Virus> activeViruses;
+    /**
+     * The worn equipments.
+     */
     private final ArrayList<Equipment> wornEquipment = new ArrayList<>();
+    /**
+     * The active equipments,
+     */
     private final ArrayList<ActiveEquipment> activeEquipments = new ArrayList<>();
+    /**
+     * The backpack
+     */
     private final Backpack backpack;
+    /**
+     * The field it stands on.
+     */
     private Field field;
+    /**
+     * Connects the GUI with the modell
+     */
     private Notifiable game;
+    /**
+     * The fields that has been searched by the virologist
+     */
     private final ArrayList<Field> discoveredFields = new ArrayList<>();
-    private static final int maxActions = 50; //Todo visszaallitani
+    /**
+     * The max actions.
+     */
+    private static final int maxActions = 5;
 
+    /**
+     * Number of actions.
+     */
     private int actions;
 
 
@@ -185,11 +221,18 @@ public class Virologist {
         return false;
     }
 
+    /**
+     * Calls the field's searchedby method.
+     */
     public void pickUpMaterial() {
         if(!isParalyzed())
             field.searchedBy(this);
     }
 
+    /**
+     * If it's possuvle calls the backpack's add method.
+     * @param elements The elments that needs to be added.
+     */
     public void pickUpMaterial(ElementBank elements) {
         if(!isParalyzed() && actions > 0 && !backpack.getElementBank().isFull()) {
             backpack.add(elements);
@@ -495,6 +538,10 @@ public class Virologist {
         return false;
     }
 
+    /**
+     * Robs the enemy virologist from elements.
+     * @param target The targeted virologist.
+     */
     public void robElements(Virologist target) {
         if (target.isParalyzed()) {
             if (!isParalyzed()) {
@@ -569,6 +616,9 @@ public class Virologist {
         return null;
     }
 
+    /**
+     * Calls the Turnhandler's tick method. Notifies the game.
+     */
     public void endTurn() {
             TurnHandler.tick();
             game.creativeNotify(name + "'s turn ended");

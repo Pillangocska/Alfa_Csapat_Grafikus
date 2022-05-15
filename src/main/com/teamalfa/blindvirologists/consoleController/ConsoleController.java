@@ -14,7 +14,7 @@ import main.com.teamalfa.blindvirologists.equipments.Equipment;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.ActiveEquipment;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
-import main.com.teamalfa.blindvirologists.random.MyRandom;
+import main.com.teamalfa.blindvirologists.consoleController.random.MyRandom;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;

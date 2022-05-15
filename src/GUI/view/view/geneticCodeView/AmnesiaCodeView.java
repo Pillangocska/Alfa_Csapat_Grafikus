@@ -7,11 +7,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * Represents the amnesia genetic code in the GUI.
+ */
 public class AmnesiaCodeView extends GeneticCodeView {
+    /**
+     * The amnesia code it represents
+     */
     private final AmnesiaCode code;
+    /**
+     * The width of the icon
+     */
     private final int iconWidth = 896 / 20;
+    /**
+     * The height of the icon.
+     */
     private final int iconHeight = 1196 / 20;
 
+    /**
+     * ctr
+     * @param code code param.
+     */
     public AmnesiaCodeView(AmnesiaCode code) {
         super(code);
         setLayout(null);
@@ -24,6 +40,9 @@ public class AmnesiaCodeView extends GeneticCodeView {
         this.addActionListener(this);
     }
 
+    /**
+     * Redraws the icon when the game view is updated.
+     */
     @Override
     protected void handleIcon() {
         ImageIcon icon = new ImageIcon("resources/amnesiavirus.gif");
@@ -33,6 +52,10 @@ public class AmnesiaCodeView extends GeneticCodeView {
         add(thumb);
     }
 
+    /**
+     * When clicked calls the active virologist's learn method.
+     * @param e actionevent
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         TurnHandler.getActiveVirologist().learn(code);

@@ -2,9 +2,8 @@ package main.com.teamalfa.blindvirologists.agents.virus;
 
 import main.com.teamalfa.blindvirologists.agents.genetic_code.DanceCode;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
-import main.com.teamalfa.blindvirologists.random.MyRandom;
+import main.com.teamalfa.blindvirologists.consoleController.random.MyRandom;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
-import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 import java.util.ArrayList;
 import java.util.Random;

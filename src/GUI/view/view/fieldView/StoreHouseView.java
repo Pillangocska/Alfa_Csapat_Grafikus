@@ -8,18 +8,34 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import java.awt.*;
 
+/**
+ * Represents storehouses in the game.
+ */
 public class StoreHouseView extends FieldView {
+    /**
+     * The elementView on the store house.
+     */
     private ElementView elementView;
+    /**
+     * The store house itself.
+     */
     private StoreHouse storeHouse;
 
+    /**
+     * ctr
+     */
     public StoreHouseView(){
-        color = Color.getHSBColor(0,250,140);
+        color = new Color(3, 18, 9);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/StoreHouse1.png");
         backGround = newImage.getScaledInstance(200,200,Image.SCALE_DEFAULT);
         this.text = "store";
         setFieldText("store");
     }
 
+    /**
+     * Graphics paint method, paints the hexagons on the game.
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -29,10 +45,18 @@ public class StoreHouseView extends FieldView {
         this.repaint();
     }
 
+    /**
+     * setter
+     * @param storeh sets the store house to this store house.
+     */
     public void setField(StoreHouse storeh) {
         field = storeh;
     }
 
+    /**
+     * Called when the game view gets updated.
+     * Removes every component from the field, and updates it if it's the current field.
+     */
     @Override
     public void update() {
         // remove all components from field

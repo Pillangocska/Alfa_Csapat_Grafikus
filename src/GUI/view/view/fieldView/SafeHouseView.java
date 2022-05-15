@@ -14,17 +14,34 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Represents the safehouses in the game.
+ */
 public class SafeHouseView extends FieldView{
+    /**
+     * Equipment views that are currently on the safe house.
+     */
     private ArrayList<EquipmentView> equipments = new ArrayList<>();
+    /**
+     * The safehouse
+     */
     private SafeHouse safeHouse;
+
+    /**
+     * ctr
+     */
     public SafeHouseView(){
-        color = Color.getHSBColor(12,250,48);
+        color = new Color(3, 18, 9);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/SafeHouse1.png");
         backGround = newImage.getScaledInstance(200,200,Image.SCALE_DEFAULT);
         this.text = "safe";
         setFieldText("safe");
     }
 
+    /**
+     * Graphics paint method, paints the hexagons on the game.
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -34,10 +51,18 @@ public class SafeHouseView extends FieldView{
         this.repaint();
     }
 
+    /**
+     * setter
+     * @param safeh sets the safehouse to this safehouse.
+     */
     public void setField(SafeHouse safeh) {
         field = safeh;
     }
 
+    /**
+     * Called when the game view gets updated.
+     * Removes every component from the field, and updates it if it's the current field.
+     */
     @Override
     public void update() {
         // remove all components from field

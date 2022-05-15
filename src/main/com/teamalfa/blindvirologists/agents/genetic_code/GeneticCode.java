@@ -27,10 +27,19 @@ abstract public class GeneticCode implements Cloneable{
         return code.getType() == type;
     }
 
+    /**
+     * getter
+      * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * cloning
+     * @return
+     * @throws CloneNotSupportedException
+     */
     public GeneticCode clone() throws CloneNotSupportedException
     {
         return (GeneticCode) super.clone();

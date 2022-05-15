@@ -1,6 +1,6 @@
 package main.com.teamalfa.blindvirologists.equipments;
 
-import main.com.teamalfa.blindvirologists.random.MyRandom;
+import main.com.teamalfa.blindvirologists.consoleController.random.MyRandom;
 
 import java.util.Random;
 
