@@ -28,7 +28,7 @@ public class Virologist {
     private Field field;
     private Notifiable game;
     private ArrayList<Field> discoveredFields = new ArrayList<>();
-    private static final int maxActions = 3; //Todo visszaallitani
+    private static final int maxActions = 20; //Todo visszaallitani
 
     private int actions;
 

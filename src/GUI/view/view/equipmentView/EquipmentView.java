@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 public abstract class EquipmentView extends JButton implements View, ActionListener {
     Equipment eq;
 
+    public EquipmentView(Equipment eq) {
+        this.eq = eq;
+    }
 
     @Override
     public void update() {
@@ -21,5 +24,10 @@ public abstract class EquipmentView extends JButton implements View, ActionListe
     public void onClick() {
 
     }
+
+    public Equipment getEquipment() {
+        return eq;
+    }
+
     protected abstract void handleIcon();
 }

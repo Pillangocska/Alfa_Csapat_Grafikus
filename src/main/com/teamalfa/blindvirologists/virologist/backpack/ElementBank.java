@@ -9,8 +9,8 @@ public class ElementBank {
     public ElementBank(int amino, int nucleotide){
         this.aminoAcid = amino;
         this.nucleotide = nucleotide;
-        aminoAcidMaxSize = 20;
-        nucleotideMaxSize = 20;
+        aminoAcidMaxSize = 40;
+        nucleotideMaxSize = 40;
 
     }
 
@@ -49,11 +49,12 @@ public class ElementBank {
        aminoAcid += elements.aminoAcid;
 
        ElementBank added = new ElementBank(elements.aminoAcid, elements.nucleotide);
-       added.nucleotide = nucleotide > nucleotideMaxSize ? added.nucleotide - (nucleotide - nucleotideMaxSize) : nucleotide;
-       added.aminoAcid = aminoAcid > aminoAcidMaxSize ? added.aminoAcid - (aminoAcid - aminoAcidMaxSize) : aminoAcid;
-
-       nucleotide -= (elements.nucleotide + added.nucleotide);
-       aminoAcid -= (elements.aminoAcid + added.aminoAcid);
+       if(nucleotide > nucleotideMaxSize){
+           nucleotide = nucleotideMaxSize;
+       }
+       if(aminoAcid > aminoAcidMaxSize){
+           aminoAcid = aminoAcidMaxSize;
+       }
 
        return added;
     }

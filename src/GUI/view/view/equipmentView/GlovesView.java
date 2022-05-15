@@ -16,6 +16,7 @@ public class GlovesView extends EquipmentView{
     private final int iconHeight = 1196 / 20;
 
     public GlovesView(Gloves gloves) {
+        super(gloves);
         setLayout(null);
         this.gloves = gloves;
         setPreferredSize(new Dimension(iconWidth, iconHeight));
