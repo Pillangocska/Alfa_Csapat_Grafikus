@@ -7,16 +7,22 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Important to not be inherited from BaseBagPanel!
+ */
 public class ElementPanel extends JPanel implements View {
-    // NAGYON FONTOS, HOGY EZ NE A BaseBagPanelből SZÁRMAZZON LE!!
+    /**
+     * The label signaling the quantity of the amino acids in the virologist's backpack
+     */
     private ElementInventoryView view;
-    // the label signaling the quantity of the amino acids in the virologist's backpack
+    /**
+     * The label signaling the quantity of ht nucleotides in the virologist's backpack
+     */
     private JLabel aminoText;
-    // the label signaling the quantity of ht nucleotides in the virologist's backpack
     private JLabel nucleoText;
 
     /**
-     * constructs a new element panel with 0 nucleotids and amino acids displayed
+     * Constructs a new element panel with 0 nucleotides and amino acids displayed
      */
     public ElementPanel(ElementBank elementBank) {
         // setting up the panel
@@ -60,10 +66,12 @@ public class ElementPanel extends JPanel implements View {
     }
 
     @Override
-    public void onClick() {
-        //todo
-    }
+    public void onClick() { }
 
+    /**
+     * Getters and setters
+     * @return The required parameter that indicates the name
+     */
     public JLabel getAminoTextLabel() {
         return aminoText;
     }

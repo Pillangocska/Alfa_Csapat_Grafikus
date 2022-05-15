@@ -20,7 +20,7 @@ public class AgentPanel extends BaseBagPanel {
 
     /**
      * constructs a new agent panel base on the parameter
-     * @param agentPocket
+     * @param agentPocket The pocket in the backpack that contains agents
      */
     public AgentPanel(AgentPocket agentPocket) {
         // initializing
@@ -45,23 +45,20 @@ public class AgentPanel extends BaseBagPanel {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Viner Hand ITC", Font.PLAIN, 12));
         title.setForeground(Color.RED);
-
         add(title, constraints);
 
         // adding slots
-        //constraints.anchor = GridBagConstraints.CENTER;
         for(var s: slots) {
             constraints.gridy++;
             add(s, constraints);
         }
     }
-
-    @Override
     /**
-     * updates the view of the agent panel: constructs views from agents found in the agent pocket and binds them to the inventory slots.
+     * Updates the view of the agent panel: constructs views from agents found in the agent pocket and binds them to the inventory slots.
      */
+    @Override
     public void update() {
-        views = new ArrayList<AgentView>();
+        views = new ArrayList<>();
         ArrayList<Agent> agents = agentPocket.getAgentHolder();
 
         // creates a view for each agent found in the agent pocket
@@ -84,7 +81,6 @@ public class AgentPanel extends BaseBagPanel {
             }
             if (a instanceof DanceVirus) {
                 views.add(new DanceVirusView((DanceVirus) a));
-                continue;
             }
         }
 
@@ -100,8 +96,8 @@ public class AgentPanel extends BaseBagPanel {
     }
 
     /**
-     * sets the agent pocket and displays its contents
-     * @param agentPocket - the agent pocket to be set
+     * Sets the agent pocket and displays its contents
+     * @param agentPocket - The agent pocket to be set
      */
     public void setAgentPocket(AgentPocket agentPocket) {
         this.agentPocket = agentPocket;

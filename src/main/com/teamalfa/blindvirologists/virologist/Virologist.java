@@ -15,21 +15,20 @@ import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Virologist {
-    private String name;
-    private ArrayList<GeneticCode> protectionBank;
-    private ArrayList<Virus> activeViruses;
-    private ArrayList<Equipment> wornEquipment = new ArrayList<>();
-    private ArrayList<ActiveEquipment> activeEquipments = new ArrayList<>();
-    private Backpack backpack;
+    private final String name;
+    private final ArrayList<GeneticCode> protectionBank;
+    private final ArrayList<Virus> activeViruses;
+    private final ArrayList<Equipment> wornEquipment = new ArrayList<>();
+    private final ArrayList<ActiveEquipment> activeEquipments = new ArrayList<>();
+    private final Backpack backpack;
     private Field field;
     private Notifiable game;
-    private ArrayList<Field> discoveredFields = new ArrayList<>();
-    private static final int maxActions = 20; //Todo visszaallitani
+    private final ArrayList<Field> discoveredFields = new ArrayList<>();
+    private static final int maxActions = 50; //Todo visszaallitani
 
     private int actions;
 
@@ -82,7 +81,7 @@ public class Virologist {
     /**
      * The method is called when the virologist moves to another field,
      * it checks if the virologist is affected by any viruses, if yes
-     * the affectmovement method of the virus with the highest priority number is called.
+     * the affect-movement method of the virus with the highest priority number is called.
      * It overrides the parameter of the field the virologist would like to step onto, or returns with null.
      * If the return statement is null than the destination field doesn't change, if it's not then it changes to the return statement.
      * After that the virologist is removed from their current field, and is accepted by the destination field.
@@ -390,7 +389,7 @@ public class Virologist {
      * Removes the virologist from the turnhandler or from the game.
      */
     public void die() {
-        if(TurnHandler.getInstance().GetOrder().contains(this)) {
+        if(TurnHandler.GetOrder().contains(this)) {
             TurnHandler.getInstance().remove(this);
         }
         else {
@@ -435,10 +434,10 @@ public class Virologist {
     }
 
     /**
-     * Robs a pieces of equipment from it's original owner.
+     * Robs a piece of equipment from it's original owner.
      * @param e
      */
-    public void robEquipment(Equipment e) {
+    public boolean robEquipment(Equipment e) {
         if (actions > 0 && e.getVirologist().isParalyzed()) {
             Virologist target = e.getVirologist();
             boolean wasWorn = target.getWornEquipment().remove(e);
@@ -448,18 +447,71 @@ public class Virologist {
                     e.setVirologist(this);
                     game.creativeNotify(name + " robbed " + e.getName() + " from " + e.getVirologist().getName() + ".");
                     actions--;
+                    return true;
                 }
                 else {
-                    target.backpack.add(e);
+                    target.getBackpack().add(e);
                     if (wasWorn)
                         target.getWornEquipment().add(e);
+                    game.creativeNotify("You can't take " + e.getName() + ", because you have no free inventory space.");
+                    return false;
                 }
             }
+            else {
+                game.creativeNotify("You can't rob " + e.getName() + ", because you are paralyzed.");
+                return false;
+            }
+        }
+        game.creativeNotify("You can't rob " + e.getName() + ", because they are not paralyzed.");
+        return false;
+    }
+
+    /**
+     * Robs an agent from it's original owner.
+     * @param a - the agent you want to rob
+     * @param target - the agent's current owner
+     */
+    public boolean robAgent(Agent a, Virologist target) {
+        if (actions > 0 && target.isParalyzed()) {
+            target.getBackpack().getAgentPocket().getAgentHolder().remove(a);
+            if (!isParalyzed()) {
+                if (backpack.getAgentPocket().addAgent(a)) {
+                    game.creativeNotify(name + " robbed " + a.getName() + " from " + target.getName() + ".");
+                    actions--;
+                    return true;
+                }
+                else {
+                    target.getBackpack().getAgentPocket().addAgent(a);
+                    game.creativeNotify("You can't take " + a.getName() + ", because you have no free inventory space.");
+                    return false;
+                }
+            }
+            else {
+                game.creativeNotify("You can't rob " + target.getName() + ", because you are paralyzed.");
+                return false;
+            }
+        }
+        game.creativeNotify("You can't rob " + target.getName() + ", because they are not paralyzed.");
+        return false;
+    }
+
+    public void robElements(Virologist target) {
+        if (target.isParalyzed()) {
+            if (!isParalyzed()) {
+                ElementBank targetElementBank = target.getBackpack().getElementBank();
+                ElementBank actorElementBank = backpack.getElementBank();
+                actorElementBank.add(targetElementBank);
+                game.creativeNotify("You robbed elements from " + target.getName() + ".");
+            } else {
+                game.creativeNotify("You can't rob " + target.getName() + ", because you are paralyzed.");
+            }
+        } else {
+            game.creativeNotify("You can't rob " + target.getName() + ", because they are not paralyzed.");
         }
     }
 
     /**
-     * Wears/unwears the equipment if they are not paralyzed and standing in a safehouse.
+     * Wears/unwears the equipment if they are not paralyzed and standing in a safe-house.
      * @param e The toggled equipment.
      */
     public void toggle(Equipment e){
@@ -468,7 +520,7 @@ public class Virologist {
         if(f.canChangeEquipment() && actions > 0){
             boolean isParalysed = false;
             for (var vir : activeViruses) {
-                if (isParalysed = vir.affectUsage());
+                if (isParalysed == vir.affectUsage());
                 break;
             }
             if (!isParalysed) {
@@ -492,7 +544,7 @@ public class Virologist {
      * @return True if paralyzed, false if not.
      */
     public boolean isParalyzed(){
-        return !activeViruses.isEmpty() ? activeViruses.get(0).affectUsage() : false;
+        return !activeViruses.isEmpty() && activeViruses.get(0).affectUsage();
     }
 
 
@@ -518,9 +570,8 @@ public class Virologist {
     }
 
     public void endTurn() {
-        TurnHandler.getInstance().tick();
-        //TurnHandler.changeActiveVirologist();
-        game.creativeNotify(name + "'s turn ended");
+            TurnHandler.tick();
+            game.creativeNotify(name + "'s turn ended");
     }
 
 }

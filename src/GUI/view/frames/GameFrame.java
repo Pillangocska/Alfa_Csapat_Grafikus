@@ -9,17 +9,37 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GameFrame extends JFrame implements ActionListener, Notifiable {
+public class GameFrame extends JFrame implements Notifiable {
+    /**
+     * Status panel for the current player and end turn button
+     */
     private final StatusPanel statusPanel;
+    /**
+     * Panel for items like equipments, genetic codes, and agents
+     */
     private final InventoryPanel inventoryPanel;
+    /**
+     * The equipments that the virologist is currently wearing
+     */
     private final WornEquipmentPanel wornEquipmentPanel;
+    /**
+     * This is where you can watch the generated hexagon map
+     */
     private final MapPanel mapPanel;
+    /**
+     * This panel gives a basic feedback of what is happening in the game
+     */
     private final WhatHappenedPanel whatHappenedPanel;
+    /**
+     * The current view of the virologist
+     */
     public static VirologistView target = null;
 
+    /**
+     * Set a virologist to be highlighted on the screen
+     * @param virologistView The virologist who is highlighted
+     */
     public static void setHighlightedVirologistView(VirologistView virologistView) {
         if (target != virologistView) {
             if (target != null)
@@ -30,10 +50,18 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         target = virologistView;
     }
 
+    /**
+     *
+     * @return The current highlighted virologist
+     */
     public static VirologistView getHighlightedVirologistView() {
         return target;
     }
 
+    /**
+     *
+     * @param numberOfPlayers How many players playing the game
+     */
     public GameFrame(int numberOfPlayers){
         //Starting the game
         this.startGame(numberOfPlayers);
@@ -58,35 +86,34 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         //Creating worn equipment panel
         wornEquipmentPanel = new WornEquipmentPanel();
         wornEquipmentPanel.setBounds(960,5, 300,110);
-        //views.add((View)wornEquipmentPanel);
 
         //Creating the inventory panel
         inventoryPanel = new InventoryPanel();
         inventoryPanel.setBounds(960,115,300,300);
-        //views.add((View)inventoryPanel);
 
         //Creating what happened panel
         whatHappenedPanel = new WhatHappenedPanel();
-        whatHappenedPanel.setBounds(960,415,300,360);
-        //views.add((View)whatHappenedPanel);
+        whatHappenedPanel.setBounds(960,415,300,258);
 
         //Creating map panel
         mapPanel = new MapPanel();
         mapPanel.setBounds(0,80,1000,550);
-        //views.add((View)mapPanel);
 
         this.setLayout(null);
         this.setVisible(true);
-        layeredPane.add(mapPanel,Integer.valueOf(0));//Default Layer(bottom)
-        layeredPane.add(whatHappenedPanel,Integer.valueOf(1));//The rest will go to the front
+        layeredPane.add(mapPanel,Integer.valueOf(0));           //Default Layer(bottom)
+        layeredPane.add(whatHappenedPanel,Integer.valueOf(1));  //The rest will go to the front
         layeredPane.add(wornEquipmentPanel,Integer.valueOf(1));
         layeredPane.add(statusPanel,Integer.valueOf(1));
         layeredPane.add(inventoryPanel,Integer.valueOf(1));
         this.add(layeredPane);
-
         this.repaint();
     }
 
+    /**
+     * Starts the game with numberOfPlayers
+     * @param numberOfPlayers How many players playing the game
+     */
     public void startGame (int numberOfPlayers) {
         Game.setNumberOfPlayers(numberOfPlayers);
         Game.getInstance().startGame();
@@ -117,11 +144,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         inventoryPanel.update();
         whatHappenedPanel.update();
         mapPanel.update();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO
     }
 
     /**

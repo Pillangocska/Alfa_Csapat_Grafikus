@@ -17,7 +17,7 @@ public class WhatHappenedPanel extends JPanel implements View {
         textArea.setFont(new Font("Viner Hand ITC",Font.PLAIN,10));
         textArea.append("Game started...");
         textArea.setEditable(false);
-        textArea.setBounds(0,0,300,300);
+        textArea.setBounds(0,0,300,275);
         JScrollPane scroll = new JScrollPane(textArea);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 

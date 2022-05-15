@@ -2,6 +2,7 @@ package GUI.view.panels;
 
 import GUI.view.buttons.RoundedOutlinedButton;
 import GUI.view.frames.GameFrame;
+import GUI.view.menus.RobPopupMenu;
 import GUI.view.view.View;
 import GUI.view.view.VirologistView;
 import GUI.view.view.agentView.AgentView;
@@ -91,17 +92,13 @@ public class InventoryPanel extends JPanel implements View {
         add(elementPanel, constraints);
 
         // create a new button to rob
-        JButton rob = new RoundedOutlinedButton("Rob highlighted virologist");
-        rob.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VirologistView targetView = GameFrame.getHighlightedVirologistView();
-                if (targetView != null) {
-                    Virologist target = targetView.getVirologist();
-                    System.out.println("itt vagyok");
-                    JOptionPane dialog = new RobOptionPane(TurnHandler.getActiveVirologist().rob(target));
-                    dialog.setVisible(true);
-                }
+        JButton rob = new RoundedOutlinedButton("Rob");
+        rob.addActionListener(e -> {
+            VirologistView targetView = GameFrame.getHighlightedVirologistView();
+            if (targetView != null) {
+                Virologist target = targetView.getVirologist();
+                JPopupMenu robMenu = new RobPopupMenu(target);
+                robMenu.show(targetView, 0, 0);
             }
         });
 

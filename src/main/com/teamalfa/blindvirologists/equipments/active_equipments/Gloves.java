@@ -15,7 +15,7 @@ public class Gloves extends ActiveEquipment {
         cooldown = 0;
         name = "glove";
 
-        TurnHandler.getInstance().accept(this);
+        TurnHandler.accept(this);
     }
 
     //setters
@@ -29,9 +29,9 @@ public class Gloves extends ActiveEquipment {
 
     /**
      * Removes the virus from the virologist and applies it to the target virologist.
-     * Only if the usetime is greater than 0, and the cooldown is at zero.
+     * Only if the usetime is greater than 0, and the cool down is at zero.
      * Usetime-1;
-     * And starts the cooldown.
+     * And starts the cool down.
      * @param target
      */
     public boolean use(Virologist target){
@@ -63,8 +63,8 @@ public class Gloves extends ActiveEquipment {
     }
 
     /**
-     * If the cooldown is greater than zero, decreases it.
-     * If the usetime is zero calls the wornout methond.
+     * If the cool down is greater than zero, decreases it.
+     * If the usetime is zero calls the wornout method.
      */
     public void step() {
         if(usetime == 0)
