@@ -380,6 +380,7 @@ public class Virologist {
             TurnHandler.getInstance().remove(this);
             Game.getInstance().accept(this);
         }
+        actions = 0;
         game.creativeNotify(name + "turned to bear :c");
     }
 
