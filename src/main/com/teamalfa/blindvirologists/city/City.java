@@ -57,7 +57,7 @@ public class City {
         // get number of all possible genetic codes
         int numberOfCodes = GeneticCodeBank.getInstance().getCodes().size();
 
-        // iterate through all codes
+        // create laboratories with codes
         for(int i = 0; i < numberOfCodes; i++) {
             GeneticCode currentCode = GeneticCodeBank.getInstance().getCodes().get(i);
 
@@ -70,14 +70,15 @@ public class City {
                 allLaboratories.add(lab);
                 labCountWithCurrentCode++;
             }
-
-            // create empty laboratories
-            int numberOfLabs = allLaboratories.size();
-            for(int j = 0; j < numberOfLabs; j++)
-                allLaboratories.add(new Laboratory());
         }
 
-        // create safe houses based on equipment numbers
+        // create empty laboratories
+        int numberOfLabs = allLaboratories.size();
+        for(int j = 0; j < numberOfLabs; j++)
+            allLaboratories.add(new Laboratory());
+
+
+        // create safe houses with equipments
         int numberOfEquipments = allEquipment.size();
 
         // iterate through all possible equipments
@@ -85,26 +86,32 @@ public class City {
             int safeCountWithCurrentEquipment = 0;
 
             // create safe houses with current equipment
-            while (safeCountWithCurrentEquipment < numberOfEquipments * numberOfEquipments) {
+            while (safeCountWithCurrentEquipment < numberOfEquipments) {
                 SafeHouse safeHouse = new SafeHouse();
                 safeHouse.add(equipment);
                 allSafeHouses.add(safeHouse);
                 safeCountWithCurrentEquipment++;
             }
-
-            // create empty safe houses
-            int numberOfSafe = allSafeHouses.size();
-            for (int j = 0; j < numberOfSafe; j++)
-                allSafeHouses.add(new SafeHouse());
         }
 
+        // create empty safe houses
+        int numberOfSafe = allSafeHouses.size();
+        for (int j = 0; j < numberOfSafe; j++)
+            allSafeHouses.add(new SafeHouse());
+
         // create store houses with random element numbers
-        while(allStoreHouses.size() < allLaboratories.size()) {
+        while(allStoreHouses.size() < allLaboratories.size() / 2) {
             ElementBank elements = new ElementBank(ran.nextInt(50), ran.nextInt(50));
             StoreHouse storeHouse = new StoreHouse();
             storeHouse.setElements(elements);
             allStoreHouses.add(storeHouse);
         }
+
+
+        // create empty storehouses
+        int numberOfStoreHouses = allStoreHouses.size();
+        for(int i = 0; i < numberOfStoreHouses; i++)
+            allStoreHouses.add(new StoreHouse());
 
         // create fields
         int numberOfFields = allLaboratories.size() + allSafeHouses.size() + allStoreHouses.size();
