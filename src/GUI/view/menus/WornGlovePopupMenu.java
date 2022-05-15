@@ -45,6 +45,7 @@ public class WornGlovePopupMenu extends JPopupMenu {
                 }
             });
             newVirusItem.setText(v.getName());
+            add(newVirusItem);
         }
     }
 }

@@ -19,8 +19,10 @@ public class BagInventoryView extends BagView {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(!isWorn)
-            popupMenu.show(this, 0, 0);
-        else
+            if(TurnHandler.getActiveVirologist().getField().canChangeEquipment())
+                popupMenu.show(this, 0, 0);
+        else {
             TurnHandler.getActiveVirologist().toggle(bag);
+        }
     }
 }

@@ -14,37 +14,38 @@ import java.awt.event.ActionEvent;
 
 public class WornAxePopupMenu extends JPopupMenu {
     private Axe axe;
-    public WornAxePopupMenu(Axe axe) {
+    public WornAxePopupMenu(Axe axe, boolean canUseAxe, boolean canChangeEquipment) {
         this.axe = axe;
         setOpaque(false);
         setBorderPainted(false);
 
-        JMenuItem use = new NiceMenuItem();
-        use.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (getInvoker() instanceof AxeInventoryView && GameFrame.getHighlightedVirologistView() != null) {
-                    Virologist target = GameFrame.getHighlightedVirologistView().getVirologist();
-                    TurnHandler.getActiveVirologist().use(axe, target);
+        if(canUseAxe) {
+            JMenuItem use = new NiceMenuItem();
+            use.setAction(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (getInvoker() instanceof AxeInventoryView && GameFrame.getHighlightedVirologistView() != null) {
+                        Virologist target = GameFrame.getHighlightedVirologistView().getVirologist();
+                        TurnHandler.getActiveVirologist().use(axe, target);
+                    }
                 }
-            }
-        });
-        use.setText("Use");
+            });
+            use.setText("Use");
+            add(use);
+        }
 
-
-        JMenuItem unequip = new NiceMenuItem();
-        unequip.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (getInvoker() instanceof  EquipmentView) {
-                    TurnHandler.getActiveVirologist().toggle(axe);
+        if(canChangeEquipment) {
+            JMenuItem unequip = new NiceMenuItem();
+            unequip.setAction(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (getInvoker() instanceof EquipmentView) {
+                        TurnHandler.getActiveVirologist().toggle(axe);
+                    }
                 }
-            }
-        });
-        unequip.setText("Unequip");
-
-        add(use);
-
-        add(unequip);
+            });
+            unequip.setText("Unequip");
+            add(unequip);
+        }
     }
 }
