@@ -279,7 +279,7 @@ public class Virologist {
      * It calls the current field's searchedBy method.
      */
     public void search() {
-        if(actions > 0) {
+        if(actions > 0 && !isParalyzed()) {
             //field.searchedBy(this);
             actions--;
             discoveredFields.add(field);

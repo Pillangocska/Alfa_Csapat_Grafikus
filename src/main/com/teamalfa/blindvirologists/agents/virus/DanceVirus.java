@@ -15,6 +15,8 @@ public class DanceVirus extends Virus {
     public DanceVirus(){
         geneticCode = new DanceCode();
         name = "dance virus";
+        priority = 3;
+        expiry = duration = 5;
 
         cost.setNucleotide(15);
         cost.setAminoAcid(15);
