@@ -3,7 +3,6 @@ package GUI.view.frames;
 import GUI.view.panels.*;
 import GUI.view.view.VirologistView;
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -15,10 +14,10 @@ import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame implements ActionListener, Notifiable {
     private final StatusPanel statusPanel;
-    private InventoryPanel inventoryPanel;
-    private WornEquipmentPanel wornEquipmentPanel;
-    private MapPanel mapPanel;
-    private WhatHappenedPanel whatHappenedPanel;
+    private final InventoryPanel inventoryPanel;
+    private final WornEquipmentPanel wornEquipmentPanel;
+    private final MapPanel mapPanel;
+    private final WhatHappenedPanel whatHappenedPanel;
     public static VirologistView target = null;
 
     public static void setHighlightedVirologistView(VirologistView virologistView) {
@@ -88,55 +87,13 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         this.repaint();
     }
 
-    //getter
-
-    //szerintem ez felesleges
-    public void logEvent(String message) {
-        whatHappenedPanel.logOnPanel(message);
-        this.updateView();
-    }
-
     public void startGame (int numberOfPlayers) {
         Game.getInstance().startGame();
         //Adding players to the turnhandler
         for(int i = 1 ; i <= numberOfPlayers ; i++){
             Virologist virologist = new Virologist("Player"+i);
             virologist.setNotifiable(this);
-
-            /*
-            EZ ILYEN OCSORTÁNYOS DEBUG KÓD, AMIT KI KELL TÖRÖLNI KÉSŐBB
-            if (i == 1) {
-                virologist.getBackpack().getEquipmentPocket().add(new Axe());
-            }
-            /*
-            if (i == 2) {
-                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new BearCode()));
-                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new AmnesiaCode()));
-                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new ParalyzeCode()));
-                virologist.getBackpack().getAgentPocket().addAgent(new Vaccine(new DanceCode()));
-            }
-
-            if (i == 3) {
-                virologist.getBackpack().getEquipmentPocket().add(new Gloves());
-                virologist.getBackpack().getEquipmentPocket().add(new Axe());
-                virologist.getBackpack().getEquipmentPocket().add(new Cloak());
-                virologist.getBackpack().getEquipmentPocket().add(new Bag());
-            }
-
-            if (i == 4) {
-                virologist.getBackpack().getElementBank().setAminoAcid(10);
-                virologist.getBackpack().getElementBank().setNucleotide(10);
-
-                virologist.getBackpack().getGeneticCodePocket().add(new AmnesiaCode());
-                virologist.getBackpack().getGeneticCodePocket().add(new DanceCode());
-                virologist.getBackpack().getGeneticCodePocket().add(new BearCode());
-
-            }
-
-            */
-
-
-            City.getInstance().getAllFields().get(0).accept(virologist);
+            City.getAllFields().get(0).accept(virologist);
             TurnHandler.accept(virologist);
         }
     }
@@ -148,6 +105,10 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
         //Game ends if all virologists died
         if(TurnHandler.GetOrder().size() == 0){
             JOptionPane.showMessageDialog(null,"Everyone died","Game lost",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
+        if(TurnHandler.getActiveVirologist().getBackpack().getGeneticCodePocket().getGeneticCodes().size() == 4){
+            JOptionPane.showMessageDialog(null,"Congratulations! You won!","Game over",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
         statusPanel.update();
@@ -165,7 +126,6 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
     /**
      * Passes the event massage to the WhatHappenedPanel
      * Updates all Views
-     * @param massage
      */
     @Override
     public void creativeNotify(String massage) {

@@ -13,6 +13,7 @@ public class GeneticCodeBank {
         codes.add(new ParalyzeCode());
         codes.add(new DanceCode());
         codes.add(new AmnesiaCode());
+        codes.add(new BearCode());
     }
 
     /**
