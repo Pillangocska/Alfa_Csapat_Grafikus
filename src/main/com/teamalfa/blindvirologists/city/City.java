@@ -25,7 +25,6 @@ public class City {
     private static final ArrayList<StoreHouse> allStoreHouses = new ArrayList<>();
     private static final ArrayList<SafeHouse> allSafeHouses = new ArrayList<>();
     private static final Random ran = new Random();
-    private static final int neighbourCount = 6;
 
     //Creates one object in the beginning of the game.
     static {
@@ -51,7 +50,7 @@ public class City {
 
     /**
      * Generates the HEXAGON map the players can play on.
-     * With random generating random number of fields between 5 & 20
+     * With random generating random number of fields between 5 & 25
      */
     public void GenerateMap(){
         // get number of all possible genetic codes
@@ -130,7 +129,7 @@ public class City {
         allFieldsMixed.addAll(allStoreHouses);
 
         // calculate width with square root of all fields
-        int width = (int)Math.sqrt((double)allFieldsMixed.size());
+        int width = (int)Math.sqrt(allFieldsMixed.size());
 
         Field previousField = null;
         ArrayList<Field> previousLine = null;

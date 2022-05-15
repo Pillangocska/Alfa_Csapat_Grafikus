@@ -145,6 +145,11 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
      * Updates all Views
      */
     public void updateView() {
+        //Game ends if all virologists died
+        if(TurnHandler.GetOrder().size() == 0){
+            JOptionPane.showMessageDialog(null,"Everyone died","Game lost",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
         statusPanel.update();
         wornEquipmentPanel.update();
         inventoryPanel.update();
