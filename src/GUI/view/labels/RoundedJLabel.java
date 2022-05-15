@@ -12,6 +12,10 @@ public class RoundedJLabel extends JLabel {
         setBorder(new EmptyBorder(12, 10, 12, 10));
     }
 
+    /**
+     * Overriding the paint function
+     * @param g  the <code>Graphics</code> context in which to paint
+     */
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();

@@ -2,9 +2,6 @@ package GUI.view.menus;
 
 import GUI.view.frames.GameFrame;
 import GUI.view.view.equipmentView.AxeInventoryView;
-import GUI.view.view.equipmentView.EquipmentView;
-import main.com.teamalfa.blindvirologists.city.fields.SafeHouse;
-import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
@@ -12,6 +9,9 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * Pop up menu for the current glove
+ */
 public class WornGlovePopupMenu extends JPopupMenu {
     private Gloves gloves;
 

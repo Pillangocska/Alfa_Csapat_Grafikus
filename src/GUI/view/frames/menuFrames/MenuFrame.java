@@ -8,9 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame implements ActionListener {
+    /**
+     * You can adjust the number of players of the game
+     */
     JSlider playerSlider;
+    /**
+     * Play button to start the game
+     */
     JButton playButton;
+    /**
+     * Exit button to close the program
+     */
     JButton exitButton;
+    /**
+     * For opening the help frame where you can see the rules
+     * and how to play the game
+     */
     JButton kittyButton;
 
     public MenuFrame() {
@@ -75,7 +88,6 @@ public class MenuFrame extends JFrame implements ActionListener {
         exitButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         exitButton.setFocusPainted(false);
 
-
         this.setLayout(null);
         this.setVisible(true);
         this.add(kittyButton);
@@ -86,6 +98,10 @@ public class MenuFrame extends JFrame implements ActionListener {
         this.repaint();
     }
 
+    /**
+     * Overriding action performed to bind actions to the buttons
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == exitButton){
