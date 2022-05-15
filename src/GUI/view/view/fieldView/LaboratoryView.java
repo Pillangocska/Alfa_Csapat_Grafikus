@@ -50,15 +50,19 @@ public class LaboratoryView extends FieldView{
                 if(currentCode != null) {
                     switch(currentCode.getName()) {
                         case "amnesia code": add(new AmnesiaCodeView((AmnesiaCode) laboratory.getGeneticCode()));
+                        System.out.println("amnesia");
                         break;
 
                         case "bear code": add(new BearCodeView((BearCode) laboratory.getGeneticCode()));
+                        System.out.println("baer");
                         break;
 
                         case "dance code": add(new DanceCodeView((DanceCode) laboratory.getGeneticCode()));
+                        System.out.println("dance");
                         break;
 
                         case "paralyze code": add(new ParalyzeCodeView((ParalyzeCode) laboratory.getGeneticCode()));
+                        System.out.println("paralyze");
                         break;
 
                         default:

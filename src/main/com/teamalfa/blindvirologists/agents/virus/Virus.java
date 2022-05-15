@@ -59,7 +59,7 @@ abstract public class Virus extends Agent {
     }
 
     public void step() {
-        if(expiry > 0 && target.getBackpack().getAgentPocket().getAgentHolder().contains(this))
+        if(expiry > 0 && target == null)
             expiry--;
         else if(expiry == 0 && target.getBackpack().getAgentPocket().getAgentHolder().contains(this)) {
             target.getBackpack().getAgentPocket().getAgentHolder().remove(this);
