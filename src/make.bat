@@ -7,7 +7,8 @@ javac^
  main\com\teamalfa\blindvirologists\consoleController\*.java^
  main\com\teamalfa\blindvirologists\equipments\active_equipments\*.java^
  main\com\teamalfa\blindvirologists\equipments\*.java^
- main\com\teamalfa\blindvirologists\random\*.java^
+ main\com\teamalfa\blindvirologists\consoleController\random\*.java^
+ main\com\teamalfa\blindvirologists\consoleController\*.java^
  main\com\teamalfa\blindvirologists\turn_handler\*.java^
  main\com\teamalfa\blindvirologists\virologist\backpack\pockets\*.java^
  main\com\teamalfa\blindvirologists\virologist\backpack\*.java^
