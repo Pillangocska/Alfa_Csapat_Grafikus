@@ -67,7 +67,7 @@ public class GameFrame extends JFrame implements ActionListener, Notifiable {
 
         //Creating what happened panel
         whatHappenedPanel = new WhatHappenedPanel();
-        whatHappenedPanel.setBounds(960,415,300,360);
+        whatHappenedPanel.setBounds(960,415,300,258);
         //views.add((View)whatHappenedPanel);
 
         //Creating map panel
