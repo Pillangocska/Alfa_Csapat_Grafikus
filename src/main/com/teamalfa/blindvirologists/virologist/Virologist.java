@@ -101,7 +101,10 @@ public class Virologist {
             field = destination;
 
             actions--;
-            game.creativeNotify("Moved.");
+            if(!isParalyzed())
+                game.creativeNotify("Moved.");
+            else
+                game.creativeNotify("Paralyzed.");
         }
     }
 
