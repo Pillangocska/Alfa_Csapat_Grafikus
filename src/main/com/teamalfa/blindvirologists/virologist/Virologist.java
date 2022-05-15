@@ -372,6 +372,8 @@ public class Virologist {
         else {
             Game.getInstance().remove(this);
         }
+        field.remove(this);
+        actions = 0;
         game.creativeNotify(name + "died:c");
     }
 
