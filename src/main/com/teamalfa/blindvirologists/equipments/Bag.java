@@ -42,6 +42,11 @@ public class Bag extends Equipment{
             virologist.removeWorn(this);
         }
     }
+
+    /**
+     * Checks if the bag is empty so it can be unequipped.
+     * @return true if it's empty, false if there's still elements in it.
+     */
     private boolean canBeUnequipped(){
         return this.virologist.getBackpack().getElementBank().getAminoAcidMaxSize() - extraSize > this.virologist.getBackpack().getElementBank().getAminoAcid()
                 && this.virologist.getBackpack().getElementBank().getNucleotideMaxSize() - extraSize > this.virologist.getBackpack().getElementBank().getNucleotide();

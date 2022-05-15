@@ -14,8 +14,6 @@ public class Vaccine extends Agent {
 
         cost.setAminoAcid(10);
         cost.setNucleotide(10);
-
-        TurnHandler.accept(this);
     }
 
     /**

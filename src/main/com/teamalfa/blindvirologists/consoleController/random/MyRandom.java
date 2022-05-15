@@ -1,4 +1,4 @@
-package main.com.teamalfa.blindvirologists.random;
+package main.com.teamalfa.blindvirologists.consoleController.random;
 
 public class MyRandom{
     private static MyRandom instance = null;

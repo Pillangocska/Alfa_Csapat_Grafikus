@@ -31,6 +31,10 @@ abstract public class Equipment {
         return false;
     }
 
+    /**
+     * getters
+     */
+
     public String getName() { return name; }
 
     abstract public String getType();

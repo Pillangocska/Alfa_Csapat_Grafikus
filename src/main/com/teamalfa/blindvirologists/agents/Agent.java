@@ -68,5 +68,9 @@ abstract public class Agent implements Steppable {
      */
     public abstract void step();
 
+    /**
+     * getter
+     * @return
+     */
     public String getName() { return name; }
 }

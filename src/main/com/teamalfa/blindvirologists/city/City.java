@@ -120,6 +120,9 @@ public class City {
         connectFields();
     }
 
+    /**
+     * Connects the genrated fields,
+     */
     private static void connectFields(){
         // create mixed array list including every field
         ArrayList<Field> allFieldsMixed = new ArrayList<>();

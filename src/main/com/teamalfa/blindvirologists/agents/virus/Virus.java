@@ -58,6 +58,9 @@ abstract public class Virus extends Agent {
         return priority;
     }
 
+    /**
+     * Every step it lowers the duration/expiry by one, if it gets to zero, remove them from the backpack/virologist.
+     */
     public void step() {
         if(expiry > 0 && target.getBackpack().getAgentPocket().getAgentHolder().contains(this))
             expiry--;

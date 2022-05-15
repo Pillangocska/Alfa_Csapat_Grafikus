@@ -11,7 +11,10 @@ public class TurnHandler {
     private static ArrayList<Virologist> order = new ArrayList<>();
     private static Virologist activeVirologist; // the virologist, who's turn is active
 
-    // Needed for singleton design pattern.
+    /**
+     * Needed for singleton design pattern.
+     */
+
     static {
       instance = new TurnHandler();
     }

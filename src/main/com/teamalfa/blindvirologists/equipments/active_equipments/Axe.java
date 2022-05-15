@@ -43,6 +43,10 @@ public class Axe extends ActiveEquipment{
         // Ennek is üresnek kell lennie, mert nincs rajta cooldown.
     }
 
+    /**
+     * Helper for the console.
+     * @return Axe
+     */
     @Override
     public String getType() {
         return "Axe";

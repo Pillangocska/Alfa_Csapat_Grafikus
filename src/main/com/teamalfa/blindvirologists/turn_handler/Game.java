@@ -13,6 +13,9 @@ public class Game implements Steppable{
     private static int numberOfPlayers;
     private ArrayList<Virologist> bears;
 
+    /**
+     * Singleton
+     */
     static {
         instance = new Game();
         TurnHandler.accept(instance);
@@ -24,10 +27,17 @@ public class Game implements Steppable{
         bears = new ArrayList<>();
     }
 
+    /**
+     * gets the instance
+     * @return the instance
+     */
     public static Game getInstance() {
         return instance;
     }
 
+    /**
+     * generates the map
+     */
     public void startGame() {
         City.getInstance().GenerateMap();
     }
@@ -72,6 +82,12 @@ public class Game implements Steppable{
         }
     }
 
+    /**
+     * For console use
+     * @param bear the bear
+     * @param origin origin field
+     * @param destination new field
+     */
     private void printMovement(Virologist bear, Field origin, Field destination) {
         System.out.println("Bear moved: ");
         System.out.println("ID: ");
@@ -84,6 +100,9 @@ public class Game implements Steppable{
         controlBears();
     }
 
+    /**
+     * getters, setters
+     */
     public ArrayList<Virologist> getBears() {
         return bears;
     }
