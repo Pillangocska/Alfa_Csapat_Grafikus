@@ -172,6 +172,53 @@ public class City {
         }
     }
 
+    public void generateTestMap() {
+        // get number of all possible genetic codes
+        int numberOfCodes = GeneticCodeBank.getInstance().getCodes().size();
+
+        // create laboratories with codes
+        for(GeneticCode currentCode : GeneticCodeBank.getInstance().getCodes()) {
+            int labCountWithCurrentCode = 0;
+
+            // create laboratories with current genetic code
+            while(labCountWithCurrentCode < numberOfCodes) {
+                Laboratory lab = new Laboratory();
+                lab.setGeneticCode(currentCode);
+                allLaboratories.add(lab);
+                labCountWithCurrentCode++;
+            }
+        }
+
+        // create safe houses with equipments
+        int numberOfEquipments = allEquipment.size();
+
+        // iterate through all possible equipments
+        for (Equipment equipment : allEquipment) {
+            int safeCountWithCurrentEquipment = 0;
+
+            // create safe houses with current equipment
+            while (safeCountWithCurrentEquipment < numberOfEquipments) {
+                SafeHouse safeHouse = new SafeHouse();
+                safeHouse.add(equipment);
+                allSafeHouses.add(safeHouse);
+                safeCountWithCurrentEquipment++;
+            }
+        }
+
+        // create store houses with random element numbers
+        while(allStoreHouses.size() < allLaboratories.size() / 2) {
+            ElementBank elements = new ElementBank(ran.nextInt(50), ran.nextInt(50));
+            StoreHouse storeHouse = new StoreHouse();
+            storeHouse.setElements(elements);
+            allStoreHouses.add(storeHouse);
+        }
+
+
+        allFields.add(new Field());
+
+        connectFields();
+    }
+
     private static Field getRandom(ArrayList<Field> mixedFields){
         if(mixedFields.isEmpty())
             return null;

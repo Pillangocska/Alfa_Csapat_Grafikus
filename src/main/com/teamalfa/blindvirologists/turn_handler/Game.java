@@ -28,7 +28,7 @@ public class Game implements Steppable{
     }
 
     public void startGame() {
-        City.getInstance().GenerateMap();
+        City.getInstance().generateTestMap();
     }
 
     public void endGame(ArrayList<Virologist> winners) {}
