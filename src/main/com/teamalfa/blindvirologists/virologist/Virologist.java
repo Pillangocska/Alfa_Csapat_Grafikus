@@ -32,7 +32,6 @@ public class Virologist {
 
     private int actions;
 
-    public int getActions(){ return actions; }
 
     /**
      * Constructs a virologist with an empty inventory.
@@ -67,6 +66,9 @@ public class Virologist {
     }
     public Notifiable getGame() { return game; }
     public ArrayList<Field> getDiscoveredFields() { return discoveredFields; }
+
+    public int getActions(){ return actions; }
+    public void setActions(int num ) { actions = num; }
 
     /**
      * Resets the action counter.
@@ -423,11 +425,11 @@ public class Virologist {
                 actions--;
                 if (wornEquipment.contains(e)) {
                     e.unEquip();
-                    game.creativeNotify(name + " unequipped " + e);
+                    game.creativeNotify(name + " unequipped " + e.getName());
                 }
                 else {
                     e.equip();
-                    game.creativeNotify(name + " equipped " + e);
+                    game.creativeNotify(name + " equipped " + e.getName());
                 }
             }
         }

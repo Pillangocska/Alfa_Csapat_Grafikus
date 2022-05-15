@@ -34,11 +34,8 @@ public class DanceVirus extends Virus {
         int size = neighbours.size();
 
         int idx = -1;
-        if(!MyRandom.getInstance().isChoiceDeterministic()) {
-            idx = new Random().nextInt(size);
-        }else {
-            idx = MyRandom.getInstance().getChoice() % size;
-        }
+        idx = new Random().nextInt(size);
+
         return neighbours.get(idx);
     }
 }

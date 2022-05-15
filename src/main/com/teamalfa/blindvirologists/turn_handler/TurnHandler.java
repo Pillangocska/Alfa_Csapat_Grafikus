@@ -27,11 +27,9 @@ public class TurnHandler {
      * Makes every steppable step.
      *
      */
-    public void tick() {
-        if(steppables.isEmpty()) {
-            for(Steppable steppable : steppables) {
-                steppable.step();
-            }
+    public static void tick() {
+        for(Steppable steppable : steppables) {
+            steppable.step();
         }
         changeActiveVirologist();
 
