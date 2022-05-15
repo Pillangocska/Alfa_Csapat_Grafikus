@@ -423,10 +423,10 @@ public class Virologist {
     }
 
     /**
-     * Robs a pieces of equipment from it's original owner.
+     * Robs a piece of equipment from it's original owner.
      * @param e
      */
-    public void robEquipment(Equipment e) {
+    public boolean robEquipment(Equipment e) {
         if (actions > 0 && e.getVirologist().isParalyzed()) {
             Virologist target = e.getVirologist();
             boolean wasWorn = target.getWornEquipment().remove(e);
@@ -436,13 +436,66 @@ public class Virologist {
                     e.setVirologist(this);
                     game.creativeNotify(name + " robbed " + e.getName() + " from " + e.getVirologist().getName() + ".");
                     actions--;
+                    return true;
                 }
                 else {
-                    target.backpack.add(e);
+                    target.getBackpack().add(e);
                     if (wasWorn)
                         target.getWornEquipment().add(e);
+                    game.creativeNotify("You can't take " + e.getName() + ", because you have no free inventory space.");
+                    return false;
                 }
             }
+            else {
+                game.creativeNotify("You can't rob " + e.getName() + ", because you are paralyzed.");
+                return false;
+            }
+        }
+        game.creativeNotify("You can't rob " + e.getName() + ", because they are not paralyzed.");
+        return false;
+    }
+
+    /**
+     * Robs an agent from it's original owner.
+     * @param a - the agent you want to rob
+     * @param target - the agent's current owner
+     */
+    public boolean robAgent(Agent a, Virologist target) {
+        if (actions > 0 && target.isParalyzed()) {
+            target.getBackpack().getAgentPocket().getAgentHolder().remove(a);
+            if (!isParalyzed()) {
+                if (backpack.getAgentPocket().addAgent(a)) {
+                    game.creativeNotify(name + " robbed " + a.getName() + " from " + target.getName() + ".");
+                    actions--;
+                    return true;
+                }
+                else {
+                    target.getBackpack().getAgentPocket().addAgent(a);
+                    game.creativeNotify("You can't take " + a.getName() + ", because you have no free inventory space.");
+                    return false;
+                }
+            }
+            else {
+                game.creativeNotify("You can't rob " + target.getName() + ", because you are paralyzed.");
+                return false;
+            }
+        }
+        game.creativeNotify("You can't rob " + target.getName() + ", because they are not paralyzed.");
+        return false;
+    }
+
+    public void robElements(Virologist target) {
+        if (target.isParalyzed()) {
+            if (!isParalyzed()) {
+                ElementBank targetElementBank = target.getBackpack().getElementBank();
+                ElementBank actorElementBank = backpack.getElementBank();
+                actorElementBank.add(targetElementBank);
+                game.creativeNotify("You robbed elements from " + target.getName() + ".");
+            } else {
+                game.creativeNotify("You can't rob " + target.getName() + ", because you are paralyzed.");
+            }
+        } else {
+            game.creativeNotify("You can't rob " + target.getName() + ", because they are not paralyzed.");
         }
     }
 
