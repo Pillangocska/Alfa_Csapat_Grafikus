@@ -15,20 +15,50 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+/**
+ * Represents the fields in the game
+ */
 public class FieldView extends JPanel implements View, MouseListener {
+    /**
+     * The field it represents
+     */
     protected Field field;
+    /**
+     * VirologistViews on the field.
+     */
     private ArrayList<VirologistView> virologistOnField = new ArrayList<>();
+    /**
+     * Equipmentviews on the field
+     */
     private ArrayList<EquipmentView> equipmentViews = new ArrayList<>();
+    /**
+     * for testing
+     */
     private JLabel textField = new JLabel("Field");
+    /**
+     * for testing
+     */
     protected String text = "Field";
+    /**
+     * the color of the field before searched on it.
+     */
     protected Color color;
+    /**
+     * draw images
+     */
     protected Image newImage;
     protected Image backGround;
     protected Image hiddenImage;
+    /**
+     * dimensions for the hexagon
+     */
     private static final int hexaDimension = 200;
 
+    /**
+     * ctr
+     */
     public FieldView(){
-        color = Color.white;
+        color = new Color(3, 18, 9);
         newImage = Toolkit.getDefaultToolkit().createImage("resources/field1.png");
         hiddenImage = Toolkit.getDefaultToolkit().createImage("resources/fog.gif");
         backGround = newImage.getScaledInstance(198,198,Image.SCALE_DEFAULT);
@@ -39,23 +69,52 @@ public class FieldView extends JPanel implements View, MouseListener {
         this.setVisible(true);
         this.addMouseListener(this);
     }
+
+    /**
+     * getter for the hexadimension.
+     * @return the hexadimension.
+     */
     public static int getHexaDimension(){
         return hexaDimension;
     }
+
+    /**
+     * setter for the field
+     * @param f the field it gets set on
+     */
     public void setField(Field f){
         this.field = f;
     }
+
+    /**
+     * setter for the textfield
+     * @param text the text it's set to
+     */
     public void setFieldText(String text) {
         textField.setText(text);
     }
+
+    /**
+     * getter for the field
+     * @return the field
+     */
     public Field getField(){
         return field;
     }
+
+    /**
+     * MouseListener method, doesn't needed
+     * @param e
+     */
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {}
 
-    }
-
+    /**
+     * If mousepressed on a neighbouring field it calls the move method on the active virologist.
+     * If it's pressed on the current field and it hasn't been searched yet, it calls the search method on
+     * the active virologist.
+     * @param e mousevent
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         Virologist current = TurnHandler.getActiveVirologist();
@@ -69,11 +128,17 @@ public class FieldView extends JPanel implements View, MouseListener {
         }
     }
 
+    /**
+     * MouseListener method, doesn't needed
+     * @param e
+     */
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e) {}
 
-    }
-
+    /**
+     * for testing
+     * @param e mousevent
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         String name = "null";
@@ -84,11 +149,19 @@ public class FieldView extends JPanel implements View, MouseListener {
         textField.setText(name);
     }
 
+    /**
+     * for testing.
+     * @param e mousevent
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         textField.setText(text);
     }
 
+    /**
+     * Called when the game view gets updated.
+     * Removes every component from the field, and updates it if it's the current field.
+     */
     @Override
     public void update() {
         // remove all components from field
@@ -107,11 +180,16 @@ public class FieldView extends JPanel implements View, MouseListener {
         }
     }
 
+    /**
+     * Doesn't do anxthing.
+     */
     @Override
-    public void onClick() {
-        // ez a fuggveny nem tud semmit szentem nem kell
-    }
+    public void onClick() {}
 
+    /**
+     * Graphics paint method, paints the hexagons on the game.
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -121,6 +199,15 @@ public class FieldView extends JPanel implements View, MouseListener {
         this.repaint();
     }
 
+    /**
+     * Drawing the hexagon.
+     * @param g The drawing tool.
+     * @param xcenter The x coordinate of the center point.
+     * @param ycenter The y coordinate of the center point.
+     * @param lineThickness The thickness of the line.
+     * @param colorValue The number of the colors.
+     * @param filled Bool if it's filled or not.
+     */
     public void drawPolygon(Graphics2D g, int xcenter, int ycenter, int lineThickness, int colorValue, boolean filled) {
         g.setColor(new Color(colorValue));
         g.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));

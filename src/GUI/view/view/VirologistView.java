@@ -16,14 +16,40 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 
+/**
+ * Represents the virologists in the GUI.
+ */
 public class VirologistView extends JButton implements View, ActionListener {
+    /**
+     * The width of the icon.
+     */
     private final int iconWidth = 896 / 20;
+    /**
+     * The height of the icon.
+     */
     private final int iconHeight = 1196 / 20;
+    /**
+     * The virologist it represents in the GUI.
+     */
     private Virologist virologist;
+    /**
+     * True if it's highlighte, false if not.
+     */
     private boolean isHighlighted;
+    /**
+     * Picks the right color for the player.
+     */
     private static HashMap<Virologist, String> colorMap = new HashMap<Virologist, String>();
+    /**
+     * The acceptable colors for the player shirts.
+     */
     private static final String colors[] = new String[] {"blue", "green", "grey", "orange", "red", "yellow"};
 
+
+    /**
+     * ctr
+     * @param virologist the virologist it represents
+     */
     public VirologistView(Virologist virologist){
         if (colorMap.get(virologist) == null)
             colorMap.put(virologist, colors[colorMap.size()]);
@@ -37,16 +63,25 @@ public class VirologistView extends JButton implements View, ActionListener {
         this.addActionListener(this);
     }
 
+    /**
+     * doesnt do anything
+     */
     @Override
     public void update() {
 
     }
 
+    /**
+     * doesnt do anything
+     */
     @Override
     public void onClick() {
 
     }
 
+    /**
+     * Redraws the virologist's icon when the map is updated.
+     */
     private void handleIcon(){
         // ezt itt borzaszto szar igy nezzetek el
         String color = colorMap.get(virologist);
@@ -70,6 +105,10 @@ public class VirologistView extends JButton implements View, ActionListener {
         add(thumb);
     }
 
+    /**
+     * ActionListener's method, highlights the virologist if clicked, or takes away the highlight.
+     * @param e The action that has been performed.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isHighlighted)
@@ -78,11 +117,19 @@ public class VirologistView extends JButton implements View, ActionListener {
             GameFrame.setHighlightedVirologistView(this);
     }
 
+    /**
+     * Updates the icon.
+     * @param value the boolean value ishighlted gets.
+     */
     public void setHighlighted(boolean value) {
         isHighlighted = value;
         handleIcon();
     }
 
+    /**
+     * getter
+     * @return the virologist
+     */
     public Virologist getVirologist() {
         return virologist;
     }

@@ -9,11 +9,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Represents the element banks in the GUI
+ */
 public class ElementView extends JButton implements View, ActionListener {
+    /**
+     * The element bank it represents.
+     */
     protected ElementBank eb;
+    /**
+     * The width of the icon.
+     */
     private final int iconWidth = 896 / 20;
+    /**
+     * The height of the icon.
+     */
     private final int iconHeight = 1196 / 20;
 
+    /**
+     * Ctr tab tab
+     * @param elementBank the elemnt it represents.
+     */
     public ElementView(ElementBank elementBank) {
         setLayout(null);
         this.eb = elementBank;
@@ -24,6 +40,10 @@ public class ElementView extends JButton implements View, ActionListener {
         setBorderPainted(false);
         this.addActionListener(this);
     }
+
+    /**
+     * Updates the icon if the view is updated.
+     */
     protected void handleIcon() {
         if(eb.getAminoAcid() > 0 || eb.getNucleotide() > 0) {
             ImageIcon icon = new ImageIcon("resources/elementbank.png");
@@ -39,6 +59,10 @@ public class ElementView extends JButton implements View, ActionListener {
         }
     }
 
+    /**
+     * ActionListener's method, calls the virologist's pickupmaterial method when clicked.
+     * @param e actionevent
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(eb.getAminoAcid() > 0 || eb.getNucleotide() > 0) {
@@ -46,16 +70,26 @@ public class ElementView extends JButton implements View, ActionListener {
         }
     }
 
+    /**
+     * doesn't do anything
+     */
     @Override
     public void update() {
 
     }
 
+    /**
+     * doesn't do anything
+     */
     @Override
     public void onClick() {
 
     }
 
+    /**
+     * setter
+     * @param elementBank sets the value, like we all don't know what a setter do bruh
+     */
     public void setElementBank(ElementBank elementBank) {
         eb = elementBank;
     }
