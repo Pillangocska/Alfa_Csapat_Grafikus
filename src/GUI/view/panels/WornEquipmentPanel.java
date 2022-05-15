@@ -14,11 +14,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The equipments that the virologist is currently wearing
+ */
 public class WornEquipmentPanel extends JPanel implements View {
+    /**
+     * The virologist who's wearing the equipments
+     */
     private Virologist virologist;
+    /**
+     * The slot for the equipments
+     */
     private WornEquipmentInventorySlot[] slots;
+    /**
+     * The views for the equipments
+     */
     private EquipmentView[] views;
 
+    /**
+     * Creates the panel for the worn equipments
+     */
     public WornEquipmentPanel() {
         // initializing attributes
         this.slots = new WornEquipmentInventorySlot[3];
@@ -62,6 +77,10 @@ public class WornEquipmentPanel extends JPanel implements View {
         add(slotPanel,constraints);
     }
 
+    /**
+     * Overriding the paint method
+     * @param g  the <code>Graphics</code> context in which to paint
+     */
     @Override
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D) g.create();
@@ -72,6 +91,10 @@ public class WornEquipmentPanel extends JPanel implements View {
         super.paint(g);
     }
 
+    /**
+     * Updating the views and graphics when s
+     * something happens
+     */
     @Override
     public void update() {
         virologist = TurnHandler.getActiveVirologist();
@@ -103,6 +126,9 @@ public class WornEquipmentPanel extends JPanel implements View {
         }
     }
 
+    /**
+     * Doesn't do anything
+     */
     @Override
     public void onClick() {
 

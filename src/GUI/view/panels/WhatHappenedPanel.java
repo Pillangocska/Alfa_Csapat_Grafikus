@@ -1,13 +1,18 @@
 package GUI.view.panels;
 
 import GUI.view.view.View;
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This panel gives a response to the player
+ * about what is happening in the game
+ */
 public class WhatHappenedPanel extends JPanel implements View {
+    /**
+     * Textarea where the message can be shown
+     */
     private static TextArea textArea;
-
 
     public WhatHappenedPanel(){
         textArea = new TextArea();
@@ -28,12 +33,15 @@ public class WhatHappenedPanel extends JPanel implements View {
         this.repaint();
     }
 
+    /**
+     * Logs a message to the text-box
+     * @param message The message to be logged
+     */
     public void logOnPanel(String message){
         textArea.append("\n"+message);
     }
-
     @Override
-    public void update() {/*doesn't do anything yet*/}
+    public void update() {/*doesn't do anything*/}
 
     @Override
     public void onClick() {/*doesn't do anything*/}

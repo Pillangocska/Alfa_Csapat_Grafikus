@@ -100,7 +100,7 @@ public class City {
 
         // create store houses with random element numbers
         while(allStoreHouses.size() < allLaboratories.size() / 2) {
-            ElementBank elements = new ElementBank(ran.nextInt(25), ran.nextInt(25));
+            ElementBank elements = new ElementBank(ran.nextInt(50), ran.nextInt(50));
             StoreHouse storeHouse = new StoreHouse();
             storeHouse.setElements(elements);
             allStoreHouses.add(storeHouse);

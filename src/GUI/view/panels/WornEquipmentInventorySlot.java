@@ -1,16 +1,24 @@
 package GUI.view.panels;
 
-import GUI.view.panels.InventorySlot;
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The equipments that the virologist is currently wearing
+ */
 public class WornEquipmentInventorySlot extends InventorySlot {
-
+    /**
+     * This is the slot containing the equipment
+     * @param view The view for the slot
+     */
     public WornEquipmentInventorySlot(JButton view) {
         super(view);
     }
 
+    /**
+     * It sets the view of slot
+     * @param view The view that needs to be created
+     */
     @Override
     public void setView(JButton view) {
         super.setView(view);

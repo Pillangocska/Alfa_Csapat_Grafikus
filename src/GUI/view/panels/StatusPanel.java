@@ -9,12 +9,31 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
+/**
+ * Status panel for the current player and end turn button
+ */
+public class StatusPanel extends JPanel implements ActionListener{
+    /**
+     * Button to end the turn
+     */
     private JButton endTurnButton;
+    /**
+     * The player that is currently playing
+     */
     private JLabel currentPlayerLabel;
+    /**
+     * Indicates how many actions does the player have left
+     */
     private JLabel actionCounter;
+    /**
+     * The object that needs to be notified
+     */
     private Notifiable notifiable;
 
+    /**
+     * Creates a status-panel
+     * @param notifiable The object that needs to be notified
+     */
     public StatusPanel(Notifiable notifiable) {
         this.notifiable = notifiable;
         endTurnButton = new RoundedOutlinedButton("End Turn");
@@ -38,17 +57,24 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
         this.add(currentPlayerInformationContainer);
     }
 
+    /**
+     * Updates every graphical object
+     */
     public void update() {
         this.currentPlayerLabel.setText(TurnHandler.getActiveVirologist().getName());
         this.actionCounter.setText(Integer.toString(TurnHandler.getActiveVirologist().getActions()));
         this.repaint();
     }
 
+    /**
+     * By pressing the end-turn button the virologist
+     * passes their turn
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == endTurnButton) {
             TurnHandler.getActiveVirologist().endTurn();
-            //TurnHandler.tick();
             notifiable.creativeNotify("New turn");
         }
     }
