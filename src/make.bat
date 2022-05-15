@@ -4,6 +4,7 @@ javac^
  main\com\teamalfa\blindvirologists\agents\*.java^
  main\com\teamalfa\blindvirologists\city\fields\*.java^
  main\com\teamalfa\blindvirologists\city\*.java^
+ main\com\teamalfa\blindvirologists\consoleController\*.java^
  main\com\teamalfa\blindvirologists\equipments\active_equipments\*.java^
  main\com\teamalfa\blindvirologists\equipments\*.java^
  main\com\teamalfa\blindvirologists\random\*.java^
