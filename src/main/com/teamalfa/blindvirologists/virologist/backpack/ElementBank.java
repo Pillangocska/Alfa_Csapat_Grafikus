@@ -80,6 +80,10 @@ public class ElementBank {
         nucleotide = aminoAcid = 0;
     }
 
+    public boolean isFull() {
+        return nucleotide == nucleotideMaxSize && aminoAcid == aminoAcidMaxSize;
+    }
+
     //getters, setters
     public int getAminoAcid() {
         return aminoAcid;

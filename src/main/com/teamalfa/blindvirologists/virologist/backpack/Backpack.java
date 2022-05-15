@@ -63,7 +63,7 @@ public class Backpack {
     public void add(ElementBank elements) {
         ElementBank added = elementBank.add(elements);
         elements.remove(added);
-        virologist.getGame().creativeNotify("Elements added.");
+        //virologist.getGame().creativeNotify("Elements added.");
     }
 
     /**

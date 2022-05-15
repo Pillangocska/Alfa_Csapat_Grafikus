@@ -35,7 +35,7 @@ public class ElementView extends JButton implements View, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        TurnHandler.getActiveVirologist().getBackpack().add(this.eb);
+        TurnHandler.getActiveVirologist().pickUpMaterial(this.eb);
     }
 
     @Override

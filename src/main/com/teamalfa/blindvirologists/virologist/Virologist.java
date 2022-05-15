@@ -13,6 +13,7 @@ import main.com.teamalfa.blindvirologists.equipments.active_equipments.ActiveEqu
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
+import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -172,10 +173,18 @@ public class Virologist {
     }
 
     public void pickUpMaterial() {
-        if(!isParalyzed() && actions > 0) {
+        if(!isParalyzed())
             field.searchedBy(this);
+    }
+
+    public void pickUpMaterial(ElementBank elements) {
+        if(!isParalyzed() && actions > 0 && !backpack.getElementBank().isFull()) {
+            backpack.add(elements);
             actions--;
-            game.creativeNotify("Material picked up.");
+            game.creativeNotify("Element added.");
+        }
+        else {
+            game.creativeNotify("ElementBank is full.");
         }
     }
 
