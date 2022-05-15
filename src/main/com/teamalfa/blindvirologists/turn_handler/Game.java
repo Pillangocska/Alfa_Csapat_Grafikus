@@ -57,12 +57,13 @@ public class Game implements Steppable{
      */
 
     public void controlBears() {
-        for (Virologist bear : bears) {
+        for (int i = 0; i < bears.size(); i++) {
+            Virologist bear = bears.get(i);
             Field f = bear.getField();
-            if (bear.getActions() <= 50)
+            if(bear.getActions() <= 50)
                 bear.setActions(100);
             bear.move(f);
-            if (bear.searchForVirologist() != null) {
+            if(bear.searchForVirologist() != null) {
                 for (Virologist enemy : bear.searchForVirologist()) {
                     bear.use(new BearVirus(), enemy);
                 }

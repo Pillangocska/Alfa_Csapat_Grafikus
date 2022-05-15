@@ -55,7 +55,6 @@ public class EquipmentPanel extends BaseBagPanel {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Viner Hand ITC", Font.PLAIN, 12));
         title.setForeground(Color.RED);
-
         add(title, constraints);
 
         // adding slots
@@ -65,17 +64,15 @@ public class EquipmentPanel extends BaseBagPanel {
             add(s, constraints);
         }
     }
-
-    @Override
     /**
-     * updates the view of the equipment panel: constructs views from pices of equipment found in the equipment pocket and binds them to the inventory slots.
+     * Updates the view of the equipment panel: constructs views from pices of equipment found in the equipment pocket and binds them to the inventory slots.
      */
+    @Override
     public void update() {
         views = new ArrayList<>();
         // it is important to make a shallow copy!
         ArrayList<Equipment> piecesOfEquipment = new ArrayList<>(equipmentPocket.getEquipmentHolder());
         ArrayList<Equipment> wornPiecesOfEquipment = TurnHandler.getActiveVirologist().getWornEquipment();
-        //piecesOfEquipment.removeAll(wornPiecesOfEquipment);
 
         // creates a view for each agent found in the agent pocket
         for (var eq : piecesOfEquipment) {
@@ -93,7 +90,6 @@ public class EquipmentPanel extends BaseBagPanel {
             }
             if (eq instanceof Bag) {
                 views.add(new BagInventoryView((Bag) eq, false));
-                continue;
             }
         }
 
