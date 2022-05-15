@@ -22,18 +22,19 @@ public class AxeInventoryView extends AxeView {
     public void actionPerformed(ActionEvent e) {
         if (isWorn) {
             if (!axe.isWornOut()) {
-                if (GameFrame.getHighlightedVirologistView() != null) {
-                    popupMenu = new WornAxePopupMenu(axe);
-                    popupMenu.show(this, 0, 0);
-                }
+                popupMenu = new WornAxePopupMenu(axe, GameFrame.getHighlightedVirologistView() != null,
+                        TurnHandler.getActiveVirologist().getField().canChangeEquipment());
+                popupMenu.show(this, 0, 0);
             }
             else {
                 TurnHandler.getActiveVirologist().toggle(axe);
             }
         }
         else {
-            popupMenu = new EquipmentPopupMenu(axe);
-            popupMenu.show(this, 0, 0);
+            if(TurnHandler.getActiveVirologist().getField().canChangeEquipment()) {
+                popupMenu = new EquipmentPopupMenu(axe);
+                popupMenu.show(this, 0, 0);
+            }
         }
 
         handleIcon();

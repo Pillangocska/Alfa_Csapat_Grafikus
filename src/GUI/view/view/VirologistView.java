@@ -14,14 +14,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashMap;
 
 public class VirologistView extends JButton implements View, ActionListener {
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
     private Virologist virologist;
     private boolean isHighlighted;
+    private static HashMap<Virologist, String> colorMap = new HashMap<Virologist, String>();
+    private static final String colors[] = new String[] {"blue", "green", "grey", "orange", "red", "yellow"};
 
     public VirologistView(Virologist virologist){
+        if (colorMap.get(virologist) == null)
+            colorMap.put(virologist, colors[colorMap.size()]);
         setLayout(null);
         this.virologist = virologist;
         setPreferredSize(new Dimension(iconWidth, iconHeight));
@@ -44,12 +49,14 @@ public class VirologistView extends JButton implements View, ActionListener {
 
     private void handleIcon(){
         // ezt itt borzaszto szar igy nezzetek el
+        String color = colorMap.get(virologist);
         ImageIcon icon;
         if(TurnHandler.GetOrder().contains(virologist)) {
+            String iconPath = "resources/virologist/" + color + "_virologist";
             if (isHighlighted)
-                icon = new ImageIcon("resources/virologist/glowing_virologist.png");
-            else
-                icon = new ImageIcon("resources/virologist/virologist.png");
+                iconPath = iconPath + "_glowing";
+            iconPath = iconPath + ".png";
+            icon = new ImageIcon(iconPath);
         }
         else {
             icon = new ImageIcon("resources/virologist/bear.png");
