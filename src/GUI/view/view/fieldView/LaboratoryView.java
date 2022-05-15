@@ -33,6 +33,7 @@ public class LaboratoryView extends FieldView{
             g.drawImage(backGround,-45,-8,null);
         this.repaint();
     }
+
     @Override
     public void update() {
         // remove all components from field

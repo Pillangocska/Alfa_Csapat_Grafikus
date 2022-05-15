@@ -16,6 +16,9 @@ public class DanceVirus extends Virus {
         geneticCode = new DanceCode();
         name = "dance virus";
 
+        cost.setNucleotide(15);
+        cost.setAminoAcid(15);
+
         TurnHandler.getInstance().accept(this);
     }
 
