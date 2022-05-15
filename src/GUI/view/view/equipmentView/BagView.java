@@ -8,9 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class BagView extends EquipmentView{
-    public Bag bag;
+    protected Bag bag;
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
+
     public BagView(Bag bag){
         setLayout(null);
         this.bag = bag;

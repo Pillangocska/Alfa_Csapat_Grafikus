@@ -5,7 +5,7 @@ import GUI.view.view.View;
 import javax.swing.*;
 
 /**
- * abstract base class to represent panels in the inventory. this might not be needed...
+ * base class to represent panels in the inventory. this might not be needed...
  */
 public class BaseBagPanel extends JPanel implements View {
     public BaseBagPanel() {

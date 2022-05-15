@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class AxeView extends EquipmentView{
-    private final Axe axe;
+    protected final Axe axe;
     private final int iconWidth = 896 / 20;
     private final int iconHeight = 1196 / 20;
 
