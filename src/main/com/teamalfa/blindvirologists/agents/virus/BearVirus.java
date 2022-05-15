@@ -10,6 +10,8 @@ public class BearVirus extends DanceVirus{
         priority = 1;
         geneticCode = new BearCode();
         name = "bear virus";
+        cost.setNucleotide(40);
+        cost.setAminoAcid(40);
 
         TurnHandler.getInstance().accept(this);
     }
