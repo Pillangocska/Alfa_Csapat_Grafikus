@@ -485,9 +485,18 @@ public class Virologist {
     }
 
     public void robElements(Virologist target) {
-        ElementBank targetElementBank = target.getBackpack().getElementBank();
-        ElementBank actorElementBank = backpack.getElementBank();
-        actorElementBank.add(targetElementBank);
+        if (target.isParalyzed()) {
+            if (!isParalyzed()) {
+                ElementBank targetElementBank = target.getBackpack().getElementBank();
+                ElementBank actorElementBank = backpack.getElementBank();
+                actorElementBank.add(targetElementBank);
+                game.creativeNotify("You robbed elements from " + target.getName() + ".");
+            } else {
+                game.creativeNotify("You can't rob " + target.getName() + ", because you are paralyzed.");
+            }
+        } else {
+            game.creativeNotify("You can't rob " + target.getName() + ", because they are not paralyzed.");
+        }
     }
 
     /**
