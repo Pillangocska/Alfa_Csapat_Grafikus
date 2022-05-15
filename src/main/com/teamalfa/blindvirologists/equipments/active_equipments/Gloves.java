@@ -35,9 +35,9 @@ public class Gloves extends ActiveEquipment {
      */
     public boolean use(Virologist target){
         if(usedVirus != null && usetime > 0 && cooldown == 0) {
+            startCooldown();
             virologist.removeVirus(usedVirus);
             usedVirus.apply(target);
-            startCooldown();
             usetime--;
             usedVirus = null;
             return true;

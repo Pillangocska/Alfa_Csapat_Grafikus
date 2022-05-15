@@ -21,8 +21,6 @@ public class DanceVirus extends Virus {
 
         cost.setNucleotide(15);
         cost.setAminoAcid(15);
-
-        TurnHandler.getInstance().accept(this);
     }
 
     /**

@@ -1,6 +1,7 @@
 package main.com.teamalfa.blindvirologists.agents.genetic_code;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.virus.ParalyzeVirus;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
 public class ParalyzeCode extends GeneticCode{
@@ -21,6 +22,7 @@ public class ParalyzeCode extends GeneticCode{
         // handle cost
         ElementBank cost = pv.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(pv);
             return pv;
         }
         // if the virologist didn't have enough material
@@ -37,6 +39,7 @@ public class ParalyzeCode extends GeneticCode{
         // handle cost
         ElementBank cost = pv.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(pv);
             return pv;
         }
         // if the virologist didn't have enough material

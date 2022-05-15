@@ -15,8 +15,6 @@ public class AmnesiaVirus extends Virus {
         name = "amnesia virus";
         cost.setNucleotide(20);
         cost.setAminoAcid(20);
-
-        TurnHandler.getInstance().accept(this);
     }
 
     /**

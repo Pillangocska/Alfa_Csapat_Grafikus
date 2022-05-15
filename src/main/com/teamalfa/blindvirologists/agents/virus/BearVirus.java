@@ -12,8 +12,6 @@ public class BearVirus extends DanceVirus{
         name = "bear virus";
         cost.setNucleotide(40);
         cost.setAminoAcid(40);
-
-        TurnHandler.getInstance().accept(this);
     }
 
     /**

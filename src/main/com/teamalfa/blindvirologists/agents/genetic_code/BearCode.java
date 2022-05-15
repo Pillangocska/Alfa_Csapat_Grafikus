@@ -2,6 +2,7 @@ package main.com.teamalfa.blindvirologists.agents.genetic_code;
 
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
@@ -24,6 +25,7 @@ public class BearCode extends GeneticCode {
         // handle cost
         ElementBank cost = bv.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(bv);
             return bv;
         }
         // if the virologist didn't have enough material
@@ -42,6 +44,7 @@ public class BearCode extends GeneticCode {
         // handle cost
         ElementBank cost = bv.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(bv);
             return bv;
         }
         // if the virologist didn't have enough material
