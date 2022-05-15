@@ -23,7 +23,7 @@ public class AxeInventoryView extends AxeView {
         if (isWorn) {
             if (!axe.isWornOut()) {
                 if (GameFrame.getHighlightedVirologistView() != null) {
-                    popupMenu = new WornAxePopupMenu();
+                    popupMenu = new WornAxePopupMenu(axe);
                     popupMenu.show(this, 0, 0);
                 }
             }
@@ -32,7 +32,7 @@ public class AxeInventoryView extends AxeView {
             }
         }
         else {
-            popupMenu = new EquipmentPopupMenu();
+            popupMenu = new EquipmentPopupMenu(axe);
             popupMenu.show(this, 0, 0);
         }
 

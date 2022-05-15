@@ -13,7 +13,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class WornAxePopupMenu extends JPopupMenu {
-    public WornAxePopupMenu() {
+    private Axe axe;
+    public WornAxePopupMenu(Axe axe) {
+        this.axe = axe;
         setOpaque(false);
         setBorderPainted(false);
 
@@ -22,7 +24,6 @@ public class WornAxePopupMenu extends JPopupMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (getInvoker() instanceof AxeInventoryView && GameFrame.getHighlightedVirologistView() != null) {
-                    Axe axe = (Axe) ((EquipmentView) getInvoker()).getEquipment();
                     Virologist target = GameFrame.getHighlightedVirologistView().getVirologist();
                     TurnHandler.getActiveVirologist().use(axe, target);
                 }
@@ -36,7 +37,7 @@ public class WornAxePopupMenu extends JPopupMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (getInvoker() instanceof  EquipmentView) {
-                    TurnHandler.getActiveVirologist().toggle(((EquipmentView) getInvoker()).getEquipment());
+                    TurnHandler.getActiveVirologist().toggle(axe);
                 }
             }
         });

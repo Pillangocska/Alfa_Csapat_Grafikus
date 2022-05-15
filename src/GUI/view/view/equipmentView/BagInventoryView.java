@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class BagInventoryView extends BagView {
     private boolean isWorn;
-    private JPopupMenu popupMenu = new EquipmentPopupMenu();
+    private JPopupMenu popupMenu = new EquipmentPopupMenu(bag);
 
     public BagInventoryView(Bag bag, boolean isWorn) {
         super(bag);
