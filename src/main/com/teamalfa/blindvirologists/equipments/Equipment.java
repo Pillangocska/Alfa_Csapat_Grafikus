@@ -34,4 +34,8 @@ abstract public class Equipment {
     public String getName() { return name; }
 
     abstract public String getType();
+
+    public Virologist getVirologist() {
+        return virologist;
+    }
 }
