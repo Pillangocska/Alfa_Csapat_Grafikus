@@ -13,11 +13,11 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.pockets.GeneticCod
 import java.util.ArrayList;
 
 public class Backpack {
-    private EquipmentPocket equipmentPocket;
-    private AgentPocket agentPocket;
+    private final EquipmentPocket equipmentPocket;
+    private final AgentPocket agentPocket;
     private ElementBank elementBank;
-    private GeneticCodePocket geneticCodePocket;
-    private Virologist virologist;
+    private final GeneticCodePocket geneticCodePocket;
+    private final Virologist virologist;
 
     public Backpack(Virologist virologist) {
         equipmentPocket = new EquipmentPocket(this);
@@ -29,7 +29,7 @@ public class Backpack {
 
     /**
      * Adds the equipment to the EquipmentPocket, if there's enough space.
-     * Removes it from the safehouse.
+     * Removes it from the safe-house.
      * @param equipment The picked up equipment.
      * @return true if it was successful, false otherwise.
      */
@@ -50,7 +50,7 @@ public class Backpack {
 
     /**
      * Adds the new GeneticCode to the GeneticCode pocket.
-     * @param geneticCode
+     * @param geneticCode The genetic code to add
      */
     public void add(GeneticCode geneticCode) {
         geneticCodePocket.add(geneticCode);
@@ -58,12 +58,10 @@ public class Backpack {
 
     /**
      * Adds Elements to the backpack's elementBank.
-     * @param elements
+     * @param elements The element that is added
      */
     public void add(ElementBank elements) {
-        ElementBank added = elementBank.add(elements);
-        elements.remove(added);
-        virologist.getGame().creativeNotify("Elements added.");
+        elementBank.add(elements);
     }
 
     /**
@@ -76,7 +74,7 @@ public class Backpack {
     }
 
     /**
-     * Adds the new virus to the agentpocket.
+     * Adds the new virus to the agent-pocket.
      * @param geneticCode The virus' genetic code.
      */
     public Agent createVirus(GeneticCode geneticCode) {
@@ -123,7 +121,7 @@ public class Backpack {
     public GeneticCodePocket getGeneticCodePocket() { return geneticCodePocket;}
 
     public ElementBank getElementBank() {
-        return (ElementBank) elementBank;
+        return elementBank;
     }
 
     public ArrayList<Agent> getAgents() {

@@ -14,13 +14,22 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class EquipmentPanel extends BaseBagPanel {
+    /**
+     * Array of views of equipments
+     */
     private ArrayList<EquipmentView> views;
+    /**
+     * The slots in the inventory
+     */
     private ArrayList<InventorySlot> slots;
+    /**
+     * The pocket that the panel refers to
+     */
     private EquipmentPocket equipmentPocket;
 
     /**
-     * constructs a new equipment panel base on the parameter
-     * @param equipmentPocket
+     * Constructs a new equipment panel base on the parameter
+     * @param equipmentPocket The pocket that the panel refers to
      */
     public EquipmentPanel(EquipmentPocket equipmentPocket) {
         // initializing
@@ -41,7 +50,8 @@ public class EquipmentPanel extends BaseBagPanel {
                 GridBagConstraints.PAGE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0);
 
         // creating the title of the panel
-        JLabel title = new JLabel("Equipments"); // todo this correctly called "Pieces of equipment" but that is long and making it multiline is difficult
+        // this correctly called "Pieces of equipment" but that is long and making it multiline is difficult
+        JLabel title = new JLabel("Equipments");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Viner Hand ITC", Font.PLAIN, 12));
         title.setForeground(Color.RED);

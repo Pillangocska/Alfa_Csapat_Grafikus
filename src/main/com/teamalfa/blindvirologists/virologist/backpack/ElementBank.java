@@ -9,8 +9,8 @@ public class ElementBank {
     public ElementBank(int amino, int nucleotide){
         this.aminoAcid = amino;
         this.nucleotide = nucleotide;
-        aminoAcidMaxSize = 40;
-        nucleotideMaxSize = 40;
+        aminoAcidMaxSize = 20;
+        nucleotideMaxSize = 20;
 
     }
 
@@ -41,24 +41,27 @@ public class ElementBank {
 
     /**
      * Adds the element if they fit.
-     * @param elements The elements that needs to be added-
-     * @return The amount that were added to the element bank.
+     * @param elements The elements that is needed to be added-
      */
-    public ElementBank add(ElementBank elements) {
-       nucleotide += elements.nucleotide;
-       aminoAcid += elements.aminoAcid;
-
-       ElementBank added = new ElementBank(elements.aminoAcid, elements.nucleotide);
-       if(nucleotide > nucleotideMaxSize){
-           nucleotide = nucleotideMaxSize;
-           added.setNucleotide(nucleotide);
-       }
-       if(aminoAcid > aminoAcidMaxSize){
-           aminoAcid = aminoAcidMaxSize;
-           added.setAminoAcid(aminoAcid);
-       }
-
-       return added;
+    public void add(ElementBank elements) {
+        if(elements.getAminoAcid() > aminoAcidMaxSize-aminoAcid){
+            int tmp = aminoAcidMaxSize - aminoAcid;
+            elements.aminoAcid -= tmp;
+            aminoAcid += tmp;
+        }
+        else{
+            aminoAcid += elements.aminoAcid;
+            elements.aminoAcid -= elements.aminoAcid;
+        }
+        if(elements.getNucleotide() > nucleotideMaxSize-nucleotide){
+            int tmp = nucleotideMaxSize - nucleotide;
+            elements.nucleotide -= tmp;
+            nucleotide += tmp;
+        }
+        else{
+            nucleotide += elements.nucleotide;
+            elements.nucleotide -= elements.nucleotide;
+        }
     }
 
     /**
@@ -68,7 +71,7 @@ public class ElementBank {
      */
     public boolean remove(ElementBank added) {
 
-        Boolean ret = false;
+        boolean ret = false;
         if(added.getAminoAcid() < aminoAcid && added.getNucleotide() < nucleotide) {
             aminoAcid -= added.getAminoAcid();
             nucleotide -= added.getNucleotide();
@@ -82,6 +85,10 @@ public class ElementBank {
      */
     public void removeAll() {
         nucleotide = aminoAcid = 0;
+    }
+
+    public boolean isFull() {
+        return nucleotide == nucleotideMaxSize && aminoAcid == aminoAcidMaxSize;
     }
 
     //getters, setters
