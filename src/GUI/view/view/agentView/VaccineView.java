@@ -9,8 +9,13 @@ import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-
+/**
+ * View for the vaccine
+ */
 public class VaccineView extends AgentView {
+    /**
+     * The vaccine in the model
+     */
     private Vaccine vaccine;
 
     /**
@@ -30,7 +35,10 @@ public class VaccineView extends AgentView {
         // set the vaccine
         this.vaccine = vaccine;
     }
-
+    /**
+     * The vaccine could be used on the highlighted virologist
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         VirologistView highlightedVirologistView = GameFrame.getHighlightedVirologistView();

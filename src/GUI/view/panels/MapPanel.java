@@ -15,11 +15,26 @@ import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
+/**
+ * This is the panel where the player can see the map
+ */
 public class MapPanel extends JPanel implements View {
+    /**
+     * The array of different fields
+     */
     private final ArrayList<FieldView> fieldViews = new ArrayList<>();
+    /**
+     * The field in the middle
+     */
     FieldView mainField;
+    /**
+     * The array of neighbouring fields
+     */
     ArrayList<FieldView> neighbourFields;
+
+    /**
+     * Creates a map panel
+     */
     public MapPanel(){
         setLayout(null);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -30,6 +45,9 @@ public class MapPanel extends JPanel implements View {
         update();
     }
 
+    /**
+     * Adds a neighbour to the main field
+     */
     private void addNeighbours(){
         int max = 1;
         for(FieldView neighbour : neighbourFields) {
@@ -40,13 +58,16 @@ public class MapPanel extends JPanel implements View {
         }
     }
 
+    /**
+     * Sets the position of the fields
+     * on the screen
+     */
     private void positionFields(){
         int offSet = 10;
         int dimension = FieldView.getHexaDimension();
         int horizontalOffset = dimension/2;
         int verticalOffset = dimension - dimension / 4 + offSet;
         Point center = new Point(1000/2-dimension/2, 550/2-dimension/2);
-
         mainField.setBounds(center.x, center.y, dimension,dimension);
 
         // northeast
@@ -74,6 +95,9 @@ public class MapPanel extends JPanel implements View {
         }
     }
 
+    /**
+     * Updates the view every time something happens
+     */
     @Override
     public void update() {
         removeAll();
@@ -103,48 +127,15 @@ public class MapPanel extends JPanel implements View {
         this.repaint();
     }
 
+    /**
+     * Doesn't do anything
+     */
     @Override
-    public void onClick() {
+    public void onClick() {}
 
-    }
-
-    public void drawCircle(Graphics2D g, Point origin, int radius,
-                           boolean centered, boolean filled, int colorValue, int lineThickness) {
-        g.setColor(new Color(colorValue));
-        g.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_ROUND,
-                BasicStroke.JOIN_ROUND));
-
-        int diameter = radius * 2;
-        int x2 = centered ? origin.x - radius : origin.x;
-        int y2 = centered ? origin.y - radius : origin.y;
-
-        if (filled)
-            g.fillOval(x2, y2, diameter, diameter);
-        else
-            g.drawOval(x2, y2, diameter, diameter);
-    }
-
-    public void drawPolygon(Graphics2D g, int xcenter, int ycenter, int lineThickness, int colorValue, boolean filled) {
-        g.setColor(new Color(colorValue));
-        g.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
-
-        int[] xpoints = new int[6];
-        int[] ypoints = new int[6];
-        for (int p = 0; p < 6; p++) {
-            double fraction = (double) p / 6;
-            double angle = fraction * Math.PI * 2 + Math.toRadians((90 + 180) % 360);
-            int x = (int) (xcenter + Math.cos(angle) * 120); //1000/2 -> center
-            int y = (int) (ycenter + Math.sin(angle) * 120); //120 -> radius
-            Point point = new Point(x,y);
-            xpoints[p] = point.x;
-            ypoints[p] = point.y;
-        }
-        if (filled)
-            g.fillPolygon(xpoints, ypoints, 6);
-        else
-            g.drawPolygon(xpoints, ypoints, 6);
-    }
-
+    /**
+     * This method binds the fields together
+     */
     private void bindFields(){
         // bind fields
         for(Field field : City.getAllFields()){
@@ -175,6 +166,11 @@ public class MapPanel extends JPanel implements View {
         }
     }
 
+    /**
+     * Finds a field-view by field
+     * @param field The field that we want to find
+     * @return The view that it belongs to
+     */
     private FieldView findFieldViewByField(Field field) {
         // find fieldView by its field object
         for(FieldView fieldView : fieldViews)

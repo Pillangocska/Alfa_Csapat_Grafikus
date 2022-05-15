@@ -7,11 +7,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * View for the axe on the field
+ */
 public class AxeView extends EquipmentView{
+    /**
+     * The axe in the model
+     */
     protected final Axe axe;
+    /**
+     * The width of the button
+     */
     private final int iconWidth = 896 / 20;
+    /**
+     * The height of the button
+     */
     private final int iconHeight = 1196 / 20;
 
+    /**
+     * Creates an axe-view
+     * @param axe With this axe
+     */
     public AxeView(Axe axe){
         setLayout(null);
         this.axe = axe;
@@ -22,7 +38,9 @@ public class AxeView extends EquipmentView{
         setBorderPainted(false);
         this.addActionListener(this);
     }
-
+    /**
+     * Sets up the icon or background of the view
+     */
     @Override
     protected void handleIcon() {
         removeAll();
@@ -37,6 +55,10 @@ public class AxeView extends EquipmentView{
         add(thumb);
     }
 
+    /**
+     * You can pick up the axe by clicking the button
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         TurnHandler.getActiveVirologist().pickUpEquipment(axe);

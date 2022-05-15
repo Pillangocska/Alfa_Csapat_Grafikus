@@ -2,6 +2,7 @@ package main.com.teamalfa.blindvirologists.agents.genetic_code;
 
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.virus.AmnesiaVirus;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
 public class AmnesiaCode extends GeneticCode {
@@ -23,6 +24,7 @@ public class AmnesiaCode extends GeneticCode {
         // handle cost
         ElementBank cost = av.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(av);
             return av;
         }
         // if the virologist didn't have enough material
@@ -41,6 +43,7 @@ public class AmnesiaCode extends GeneticCode {
         // handle cost
         ElementBank cost = av.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(av);
             return av;
         }
         // if the virologist didn't have enough material

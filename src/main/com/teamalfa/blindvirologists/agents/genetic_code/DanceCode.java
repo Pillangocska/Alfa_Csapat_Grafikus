@@ -2,6 +2,7 @@ package main.com.teamalfa.blindvirologists.agents.genetic_code;
 
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
 import main.com.teamalfa.blindvirologists.agents.virus.DanceVirus;
+import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
 public class DanceCode extends GeneticCode{
@@ -22,6 +23,7 @@ public class DanceCode extends GeneticCode{
         // handle cost
         ElementBank cost = dv.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(dv);
             return dv;
         }
         // if the virologist didn't have enough material
@@ -39,6 +41,7 @@ public class DanceCode extends GeneticCode{
         // handle cost
         ElementBank cost = dv.getCost();
         if(elementBank.remove(cost)) {
+            TurnHandler.getInstance().accept(dv);
             return dv;
         }
         // if the virologist didn't have enough material

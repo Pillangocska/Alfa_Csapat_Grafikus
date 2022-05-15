@@ -107,12 +107,23 @@ public class Virologist {
         }
     }
 
+    /**
+     * Uses an active equipment on a Virologist.
+     * @param a active equipment that is used
+     * @param v targeted virologist
+     * @return true if it can be done and were successful, false if the virologist is paralízed or doesnt have action points, or the use were unsuccessful.
+     */
     public boolean use(ActiveEquipment a, Virologist v) {
         if(!(checkUsageAffect()) && actions > 0) {
             actions--;
-            boolean result = a.use(v);
-            game.creativeNotify(a.getName() + " used on " + v.getName() + ".");
-            return result;
+            if(a.getCooldown() == 0) {
+                boolean result = a.use(v);
+                game.creativeNotify(a.getName() + " used on " + v.getName() + ".");
+                return result;
+            }
+            else{
+                game.creativeNotify(a.getName() + "is on cooldown.");
+            }
         }
         return false;
     }

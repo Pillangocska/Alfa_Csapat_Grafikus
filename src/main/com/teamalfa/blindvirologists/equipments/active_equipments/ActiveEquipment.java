@@ -9,6 +9,9 @@ abstract public class ActiveEquipment extends Equipment implements Steppable {
     protected int cooldown;
     protected int usetime;
 
+    //getter
+    public int getCooldown() { return cooldown; }
+
     /**
      * abstract method that tells what happens when the item is used.
      * @param v

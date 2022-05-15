@@ -1,13 +1,14 @@
 package main.com.teamalfa.blindvirologists.agents;
 
 import main.com.teamalfa.blindvirologists.agents.genetic_code.GeneticCode;
+import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 public class Vaccine extends Agent {
 
     public Vaccine(GeneticCode geneticcode) {
-        expiry = duration = 5;
+        expiry = duration = 2 * Game.getNumberOfPlayers();
         this.geneticCode = geneticcode;
         name = "vaccine";
 
