@@ -19,11 +19,7 @@ public class Cloak extends Equipment{
      * @return true if it did, false if it did not.
      */
     public boolean protect(){
-        if(MyRandom.getInstance().isYesOrNoDeterministic()) {
-            return MyRandom.getInstance().getYesOrNo();
-        }else {
-            return new Random().nextInt(1001) < protectionRate;
-        }
+        return new Random().nextInt(1001) < protectionRate;
     }
 
     @Override
