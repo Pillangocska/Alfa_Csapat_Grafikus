@@ -39,7 +39,7 @@ public class HelpFrame extends JFrame implements ActionListener {
         //Textarea for how to play the game
         TextArea textArea = new TextArea();
         textArea.setForeground(Color.RED);
-        textArea.setBackground(Color.CYAN);
+        textArea.setBackground(Color.BLACK);
         textArea.setFont(new Font("Viner Hand ITC",Font.PLAIN,10));
         textArea.setBounds(0,50,285,610);
 
