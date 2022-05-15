@@ -50,7 +50,8 @@ public class MapPanel extends JPanel implements View {
         mainField.setBounds(center.x, center.y, dimension,dimension);
 
         // northeast
-        neighbourFields.get(0).setBounds(center.x + horizontalOffset, center.y - verticalOffset, dimension, dimension);
+        if(!neighbourFields.isEmpty())
+            neighbourFields.get(0).setBounds(center.x + horizontalOffset, center.y - verticalOffset, dimension, dimension);
         // east
         if(neighbourFields.size() >= 2) {
             neighbourFields.get(1).setBounds(center.x + dimension, center.y, dimension, dimension);
