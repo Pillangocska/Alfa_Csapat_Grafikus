@@ -4,7 +4,7 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
 public class Bag extends Equipment{
-    private int extraSize;
+    private final int extraSize;
 
     public Bag(int size){
         extraSize = size;
@@ -32,12 +32,18 @@ public class Bag extends Equipment{
     }
 
     /**
-     * Decreases the size of the virologist's elementbank with extrasize.
+     * Decreases the size of the virologist's elementbank with extra-size.
      */
-    public void unEquip(){
-        Backpack b = virologist.getBackpack();
-        ElementBank e = b.getElementBank();
-        e.decreaseMaxSize(extraSize);
-        virologist.removeWorn(this);
+    public void unEquip() {
+        if (canBeUnequipped()) {
+            Backpack b = virologist.getBackpack();
+            ElementBank e = b.getElementBank();
+            e.decreaseMaxSize(extraSize);
+            virologist.removeWorn(this);
+        }
+    }
+    private boolean canBeUnequipped(){
+        return this.virologist.getBackpack().getElementBank().getAminoAcidMaxSize() - extraSize > this.virologist.getBackpack().getElementBank().getAminoAcid()
+                && this.virologist.getBackpack().getElementBank().getNucleotideMaxSize() - extraSize > this.virologist.getBackpack().getElementBank().getNucleotide();
     }
 }

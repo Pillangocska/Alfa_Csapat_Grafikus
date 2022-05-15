@@ -31,8 +31,9 @@ public class TurnHandler {
         for(int i = 0; i < steppables.size(); i++) {
             steppables.get(i).step();
         }
-        changeActiveVirologist();
-
+        if(!TurnHandler.GetOrder().isEmpty()) {
+            changeActiveVirologist();
+        }
     }
 
     /**

@@ -11,8 +11,8 @@ public class AmnesiaVirus extends Virus {
         expiry = duration = 5;
         geneticCode = new AmnesiaCode();
         name = "amnesia virus";
-        cost.setNucleotide(20);
-        cost.setAminoAcid(20);
+        cost.setNucleotide(19);
+        cost.setAminoAcid(19);
 
         TurnHandler.getInstance().accept(this);
     }

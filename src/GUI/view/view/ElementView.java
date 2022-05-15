@@ -1,5 +1,6 @@
 package GUI.view.view;
 
+import main.com.teamalfa.blindvirologists.city.fields.StoreHouse;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.backpack.ElementBank;
 
@@ -24,18 +25,25 @@ public class ElementView extends JButton implements View, ActionListener {
         this.addActionListener(this);
     }
     protected void handleIcon() {
-        ImageIcon icon = new ImageIcon("resources/elementbank.png");
-        Image img = icon.getImage().getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-        icon = new ImageIcon(img);
-        JLabel thumb = new JLabel();
-        thumb.setIcon(icon);
-        thumb.setBounds(0,0, iconWidth, iconHeight);
-        add(thumb);
+        if(eb.getAminoAcid() > 0 || eb.getNucleotide() > 0) {
+            ImageIcon icon = new ImageIcon("resources/elementbank.png");
+            Image img = icon.getImage().getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
+            JLabel thumb = new JLabel();
+            thumb.setIcon(icon);
+            thumb.setBounds(0, 0, iconWidth, iconHeight);
+            add(thumb);
+        }
+        else {
+            this.setEnabled(false);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        TurnHandler.getActiveVirologist().pickUpMaterial(this.eb);
+        if(eb.getAminoAcid() > 0 || eb.getNucleotide() > 0) {
+            TurnHandler.getActiveVirologist().pickUpMaterial(eb);
+        }
     }
 
     @Override
