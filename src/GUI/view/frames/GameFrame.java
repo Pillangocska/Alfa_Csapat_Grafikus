@@ -3,7 +3,6 @@ package GUI.view.frames;
 import GUI.view.panels.*;
 import GUI.view.view.VirologistView;
 import main.com.teamalfa.blindvirologists.city.City;
-import main.com.teamalfa.blindvirologists.equipments.active_equipments.Axe;
 import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;

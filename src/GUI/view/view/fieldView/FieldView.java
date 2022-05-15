@@ -1,5 +1,6 @@
 package GUI.view.view.fieldView;
 
+import GUI.view.frames.GameFrame;
 import GUI.view.view.View;
 import GUI.view.view.VirologistView;
 import GUI.view.view.equipmentView.AxeView;
@@ -58,6 +59,7 @@ public class FieldView extends JPanel implements View, MouseListener {
         Virologist current = TurnHandler.getActiveVirologist();
         if(field != current.getField() && current != null) {
             current.move(field);
+            GameFrame.setHighlightedVirologistView(null);
         }
         else if(field.equals(current.getField())) {
             if(!TurnHandler.getActiveVirologist().getDiscoveredFields().contains(field))

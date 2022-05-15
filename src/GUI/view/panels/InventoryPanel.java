@@ -1,6 +1,9 @@
 package GUI.view.panels;
 
+import GUI.view.buttons.RoundedOutlinedButton;
+import GUI.view.frames.GameFrame;
 import GUI.view.view.View;
+import GUI.view.view.VirologistView;
 import GUI.view.view.agentView.AgentView;
 import GUI.view.view.agentView.VaccineView;
 import main.com.teamalfa.blindvirologists.agents.Vaccine;
@@ -11,6 +14,9 @@ import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class InventoryPanel extends JPanel implements View {
     AgentPanel agentPanel;
@@ -83,6 +89,26 @@ public class InventoryPanel extends JPanel implements View {
         constraints.anchor = GridBagConstraints.PAGE_END;
         constraints.weighty = 0.0;
         add(elementPanel, constraints);
+
+        // create a new button to rob
+        JButton rob = new RoundedOutlinedButton("Rob highlighted virologist");
+        rob.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VirologistView targetView = GameFrame.getHighlightedVirologistView();
+                if (targetView != null) {
+                    Virologist target = targetView.getVirologist();
+                    System.out.println("itt vagyok");
+                    JOptionPane dialog = new RobOptionPane(TurnHandler.getActiveVirologist().rob(target));
+                    dialog.setVisible(true);
+                }
+            }
+        });
+
+        // adding it to the panel
+        constraints.gridy = 3;
+        add(rob, constraints);
+
     }
 
     /**

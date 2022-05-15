@@ -205,6 +205,7 @@ public class Virologist {
             game.creativeNotify(name + " robbed " + v.getName() + ".");
             return v.robbed();
         }
+        game.creativeNotify("You can't rob" + v.getName() + ". He is not paralyzed!");
         return null;
     }
 
@@ -406,6 +407,30 @@ public class Virologist {
             }
         }
         return false;
+    }
+
+    /**
+     * Robs a pieces of equipment from it's original owner.
+     * @param e
+     */
+    public void robEquipment(Equipment e) {
+        if (actions > 0 && e.getVirologist().isParalyzed()) {
+            Virologist target = e.getVirologist();
+            boolean wasWorn = target.getWornEquipment().remove(e);
+            target.getBackpack().getEquipmentPocket().getEquipmentHolder().remove(e);
+            if (!isParalyzed()) {
+                if (backpack.add(e)) {
+                    e.setVirologist(this);
+                    game.creativeNotify(name + " robbed " + e.getName() + " from " + e.getVirologist().getName() + ".");
+                    actions--;
+                }
+                else {
+                    target.backpack.add(e);
+                    if (wasWorn)
+                        target.getWornEquipment().add(e);
+                }
+            }
+        }
     }
 
     /**
