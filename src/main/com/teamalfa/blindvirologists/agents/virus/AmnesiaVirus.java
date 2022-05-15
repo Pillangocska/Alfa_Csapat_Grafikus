@@ -1,6 +1,8 @@
 package main.com.teamalfa.blindvirologists.agents.virus;
 
 import main.com.teamalfa.blindvirologists.agents.genetic_code.AmnesiaCode;
+import main.com.teamalfa.blindvirologists.city.City;
+import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
@@ -8,7 +10,7 @@ public class AmnesiaVirus extends Virus {
 
     public AmnesiaVirus() {
         priority = 4;
-        expiry = duration = 5;
+        expiry = duration = 2 * Game.getNumberOfPlayers();
         geneticCode = new AmnesiaCode();
         name = "amnesia virus";
         cost.setNucleotide(20);

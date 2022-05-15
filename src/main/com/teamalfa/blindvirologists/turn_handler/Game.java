@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Game implements Steppable{
     private static Game instance;
     private City city;
+    private static int numberOfPlayers;
     private ArrayList<Virologist> bears;
 
     static {
@@ -86,5 +87,11 @@ public class Game implements Steppable{
     public ArrayList<Virologist> getBears() {
         return bears;
     }
+
+    //setter
+    public static void setNumberOfPlayers(int players) { numberOfPlayers = players; }
+
+    //getter
+    public static int getNumberOfPlayers() { return numberOfPlayers; }
 
 }

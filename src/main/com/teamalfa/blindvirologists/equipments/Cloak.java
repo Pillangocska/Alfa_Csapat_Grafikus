@@ -19,7 +19,14 @@ public class Cloak extends Equipment{
      * @return true if it did, false if it did not.
      */
     public boolean protect(){
-        return new Random().nextInt(1001) < protectionRate;
+        boolean tmp = new Random().nextInt(1001) < protectionRate;
+        if(tmp){
+            virologist.getGame().creativeNotify("Infection blocked by cape");
+        }
+        else {
+            virologist.getGame().creativeNotify("Cape didn't block the infection.");
+        }
+        return tmp;
     }
 
     @Override

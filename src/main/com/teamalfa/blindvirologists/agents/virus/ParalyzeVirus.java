@@ -2,13 +2,14 @@ package main.com.teamalfa.blindvirologists.agents.virus;
 
 import main.com.teamalfa.blindvirologists.agents.genetic_code.ParalyzeCode;
 import main.com.teamalfa.blindvirologists.city.fields.Field;
+import main.com.teamalfa.blindvirologists.turn_handler.Game;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
 public class ParalyzeVirus extends Virus {
 
     public ParalyzeVirus() {
         priority = 2;
-        expiry = duration = 5;
+        expiry = duration = 2 * Game.getNumberOfPlayers();
         geneticCode = new ParalyzeCode();
         name = "paralyze virus";
 
