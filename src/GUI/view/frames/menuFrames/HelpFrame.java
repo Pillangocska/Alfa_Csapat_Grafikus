@@ -5,7 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * On this frame the player can learn how to play
+ * the game and learn the rules
+ */
 public class HelpFrame extends JFrame implements ActionListener {
+    /**
+     * Closes this window and goes back
+     * to the main menu
+     */
     JButton backButton;
 
     HelpFrame(){
@@ -28,11 +36,25 @@ public class HelpFrame extends JFrame implements ActionListener {
         backButton.setFocusPainted(false);
         backButton.setBounds(0,0,100,50);
 
+        //Textarea for how to play the game
+        TextArea textArea = new TextArea();
+        textArea.setForeground(Color.RED);
+        textArea.setBackground(Color.BLACK);
+        textArea.setFont(new Font("Viner Hand ITC",Font.PLAIN,10));
+        textArea.setBounds(0,50,285,610);
+
         this.setLayout(null);
         this.setVisible(true);
         this.add(backButton);
+        this.add(textArea);
         this.repaint();
     }
+
+    /**
+     * Upon clicking the "back" button the player
+     * goes back to the main menu
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == backButton){

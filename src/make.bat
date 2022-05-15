@@ -1,0 +1,25 @@
+javac^
+ main\com\teamalfa\blindvirologists\agents\genetic_code\*.java^
+ main\com\teamalfa\blindvirologists\agents\virus\*.java^
+ main\com\teamalfa\blindvirologists\agents\*.java^
+ main\com\teamalfa\blindvirologists\city\fields\*.java^
+ main\com\teamalfa\blindvirologists\city\*.java^
+ main\com\teamalfa\blindvirologists\consoleController\*.java^
+ main\com\teamalfa\blindvirologists\equipments\active_equipments\*.java^
+ main\com\teamalfa\blindvirologists\equipments\*.java^
+ main\com\teamalfa\blindvirologists\random\*.java^
+ main\com\teamalfa\blindvirologists\tun_handler\*.java^
+ main\com\teamalfa\blindvirologists\virologist\backpack\pockets\*.java^
+ main\com\teamalfa\blindvirologists\virologist\backpack\*.java^
+ main\com\teamalfa\blindvirologists\*.java
+ GUI\view\buttons\*.java^
+ GUI\view\buttons\frames\menuFrames*.java^
+ GUI\view\buttons\frames\*.java^
+ GUI\view\buttons\labels\*.java^
+ GUI\view\buttons\menus\*.java^
+ GUI\view\buttons\panels\*.java^
+ GUI\view\buttons\view\agentView\*.java^
+ GUI\view\buttons\view\equipmentView\*.java^
+ GUI\view\buttons\view\fieldView\*.java^
+ GUI\view\buttons\view\geneticCodeView\*.java^
+ GUI\view\buttons\view\*.java
