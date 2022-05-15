@@ -1,6 +1,7 @@
 package GUI.view.view.equipmentView;
 
 import GUI.view.menus.EquipmentPopupMenu;
+import GUI.view.menus.WornGlovePopupMenu;
 import main.com.teamalfa.blindvirologists.equipments.active_equipments.Gloves;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 
@@ -9,7 +10,7 @@ import java.awt.event.ActionEvent;
 
 public class GlovesInventoryView extends GlovesView {
     private boolean isWorn;
-    private JPopupMenu popupMenu = new EquipmentPopupMenu();
+    private JPopupMenu popupMenu = new EquipmentPopupMenu(gloves);
 
     public GlovesInventoryView(Gloves gloves, boolean isWorn) {
         super(gloves);
@@ -20,7 +21,9 @@ public class GlovesInventoryView extends GlovesView {
     public void actionPerformed(ActionEvent e) {
         if(!isWorn)
             popupMenu.show(this, 0, 0);
-        else
-            TurnHandler.getActiveVirologist().toggle(gloves);
+        else {
+            popupMenu = new WornGlovePopupMenu(gloves);
+            popupMenu.show(this, 0, 0);
+        }
     }
 }

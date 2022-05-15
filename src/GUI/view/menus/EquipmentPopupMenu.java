@@ -9,7 +9,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class EquipmentPopupMenu extends JPopupMenu {
-    public EquipmentPopupMenu() {
+    private Equipment equipment;
+
+    public EquipmentPopupMenu(Equipment equipment) {
+        this.equipment = equipment;
         setOpaque(false);
         setBorderPainted(false);
 
@@ -18,7 +21,7 @@ public class EquipmentPopupMenu extends JPopupMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (getInvoker() instanceof  EquipmentView) {
-                    TurnHandler.getActiveVirologist().toss(((EquipmentView) getInvoker()).getEquipment());
+                    TurnHandler.getActiveVirologist().toss(equipment);
                 }
             }
         });
@@ -30,7 +33,7 @@ public class EquipmentPopupMenu extends JPopupMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (getInvoker() instanceof  EquipmentView) {
-                    TurnHandler.getActiveVirologist().toggle(((EquipmentView) getInvoker()).getEquipment());
+                    TurnHandler.getActiveVirologist().toggle(equipment);
                 }
             }
         });

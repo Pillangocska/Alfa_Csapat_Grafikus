@@ -105,8 +105,9 @@ public class Virologist {
     public boolean use(ActiveEquipment a, Virologist v) {
         if(!(checkUsageAffect()) && actions > 0) {
             actions--;
+            boolean result = a.use(v);
             game.creativeNotify(a.getName() + " used on " + v.getName() + ".");
-            return a.use(v);
+            return result;
         }
         return false;
     }
@@ -469,4 +470,5 @@ public class Virologist {
         //TurnHandler.changeActiveVirologist();
         game.creativeNotify(name + "'s turn ended");
     }
+
 }

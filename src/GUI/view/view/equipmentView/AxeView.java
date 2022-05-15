@@ -13,7 +13,6 @@ public class AxeView extends EquipmentView{
     private final int iconHeight = 1196 / 20;
 
     public AxeView(Axe axe){
-        super(axe);
         setLayout(null);
         this.axe = axe;
         setPreferredSize(new Dimension(iconWidth, iconHeight));

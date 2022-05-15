@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 
 public class CloakInventoryView extends CloakView {
     private boolean isWorn;
-    private JPopupMenu popupMenu = new EquipmentPopupMenu();
+    private JPopupMenu popupMenu = new EquipmentPopupMenu(cloak);
 
     public CloakInventoryView(Cloak cloak, boolean isWorn) {
         super(cloak);
