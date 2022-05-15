@@ -1,6 +1,5 @@
 package GUI.view.panels;
 
-
 import GUI.view.view.View;
 
 import javax.swing.*;
