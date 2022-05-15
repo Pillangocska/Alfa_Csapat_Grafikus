@@ -6,12 +6,27 @@ import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-
+/**
+ * View for the bag on the field
+ */
 public class BagView extends EquipmentView{
+    /**
+     * The bag in the model
+     */
     protected Bag bag;
+    /**
+     * The width of the button
+     */
     private final int iconWidth = 896 / 20;
+    /**
+     * The height of the button
+     */
     private final int iconHeight = 1196 / 20;
 
+    /**
+     * Creates a bag-view
+     * @param bag With this bag
+     */
     public BagView(Bag bag){
         setLayout(null);
         this.bag = bag;
@@ -22,7 +37,9 @@ public class BagView extends EquipmentView{
         setBorderPainted(false);
         this.addActionListener(this);
     }
-
+    /**
+     * Sets up the icon or background of the view
+     */
     @Override
     protected void handleIcon() {
         ImageIcon icon = new ImageIcon("resources/bag.png");
@@ -33,7 +50,10 @@ public class BagView extends EquipmentView{
         thumb.setBounds(0,0, iconWidth, iconHeight);
         add(thumb);
     }
-
+    /**
+     * You can pick up the bag by clicking the button
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         TurnHandler.getActiveVirologist().pickUpEquipment(bag);

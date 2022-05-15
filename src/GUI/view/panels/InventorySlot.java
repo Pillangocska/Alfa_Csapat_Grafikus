@@ -1,14 +1,22 @@
 package GUI.view.panels;
 
-import GUI.view.view.agentView.AgentView;
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This panel represents one slot in the inventory panel
+ */
 public class InventorySlot extends JPanel {
     private JButton view;
+    /**
+     * The length of the panel
+     */
     protected static int sideLength = 60;
 
+    /**
+     * Creates an inventory slot with the specified view
+     * @param view The view that needs to be created
+     */
     public InventorySlot(JButton view) {
         setOpaque(false);
         int a = sideLength/2;
@@ -18,6 +26,10 @@ public class InventorySlot extends JPanel {
         setView(view);
     }
 
+    /**
+     * Sets the view of the button
+     * @param view The view that needs to be created
+     */
     public void setView(JButton view) {
         removeAll();
         this.view = view;
@@ -32,12 +44,11 @@ public class InventorySlot extends JPanel {
             setBorder(BorderFactory.createEmptyBorder(a, a, a, a));
         }
     }
-
-    @Override
     /**
      * Print a black rectangle with rounded corners. This method can be called from the paint methods of classes, who inherit from this class,
      * when putting an image on top of it.
      */
+    @Override
     public void paint(Graphics g) {
         setOpaque(false);
         Graphics2D g2 = (Graphics2D) g.create();

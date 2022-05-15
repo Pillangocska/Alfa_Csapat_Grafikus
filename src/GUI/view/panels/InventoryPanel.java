@@ -5,28 +5,37 @@ import GUI.view.frames.GameFrame;
 import GUI.view.menus.RobPopupMenu;
 import GUI.view.view.View;
 import GUI.view.view.VirologistView;
-import GUI.view.view.agentView.AgentView;
-import GUI.view.view.agentView.VaccineView;
-import main.com.teamalfa.blindvirologists.agents.Vaccine;
-import main.com.teamalfa.blindvirologists.agents.genetic_code.BearCode;
 import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
 import main.com.teamalfa.blindvirologists.virologist.Virologist;
 import main.com.teamalfa.blindvirologists.virologist.backpack.Backpack;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
+/**
+ * The whole inventory of the player can be seen on
+ * this panel
+ */
 public class InventoryPanel extends JPanel implements View {
+    /**
+     * Separate panel for the agents
+     */
     AgentPanel agentPanel;
+    /**
+     * Separate panel for the equipments
+     */
     EquipmentPanel equipmentPanel;
+    /**
+     * Separate panel for the genetic codes
+     */
     GeneticCodePanel geneticCodePanel;
+    /**
+     * Separate panel for the elements
+     */
     ElementPanel elementPanel;
 
     /**
-     * constructs a new inventory panel
+     * Constructs a new inventory panel
      */
     public InventoryPanel() {
         // creating the layout of the panel. creating constraints that will later be manipulated at each element
@@ -79,7 +88,6 @@ public class InventoryPanel extends JPanel implements View {
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.weighty = 1.0;
         add(scrollPane, constraints);
-
 
         // create the panel displaying the elements
         elementPanel = new ElementPanel(TurnHandler.getActiveVirologist().getBackpack().getElementBank());
@@ -143,6 +151,9 @@ public class InventoryPanel extends JPanel implements View {
         geneticCodePanel.update();
     }
 
+    /**
+     * Doesn't do anything
+     */
     public void onClick() {
         //TODO
     }

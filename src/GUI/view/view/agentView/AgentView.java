@@ -1,25 +1,25 @@
 package GUI.view.view.agentView;
 
-import GUI.view.frames.GameFrame;
 import GUI.view.panels.AgentPanel;
 import GUI.view.view.View;
-import GUI.view.view.VirologistView;
-import main.com.teamalfa.blindvirologists.agents.virus.BearVirus;
-import main.com.teamalfa.blindvirologists.turn_handler.TurnHandler;
-import main.com.teamalfa.blindvirologists.virologist.Virologist;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A view for the agent (Abstract class)
+ */
 public abstract class AgentView extends JButton implements View, ActionListener {
+    /**
+     * The panel that is binded with view
+     */
     private AgentPanel panel;
-    // todo ezt még át kell gondolni...
-    private Dimension mysize = new Dimension(20, 20);
+    Dimension mysize = new Dimension(20, 20);
 
     /**
-     * initializes the button part of the view
+     * Initializes the button part of the view
      */
     public AgentView() {
         setOpaque(false);
@@ -29,7 +29,6 @@ public abstract class AgentView extends JButton implements View, ActionListener 
         setVerticalAlignment(CENTER);
         setHorizontalAlignment(CENTER);
         this.addActionListener(this);
-
         setSize(mysize);
     }
 
@@ -42,14 +41,24 @@ public abstract class AgentView extends JButton implements View, ActionListener 
         setIcon(imageIcon);
     }
 
+    /**
+     * Doesn't do anything
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {   }
 
+    /**
+     * Updates the panel
+     */
     @Override
     public void update() {
         panel.update();
     }
 
+    /**
+     * Doesn't do anything
+     */
     @Override
     public void onClick() {
 

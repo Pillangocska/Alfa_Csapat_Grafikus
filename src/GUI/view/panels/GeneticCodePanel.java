@@ -8,9 +8,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This panel contains the genetic codes
+ * in the inventory
+ */
 public class GeneticCodePanel extends BaseBagPanel {
+    /**
+     * View for every genetic code
+     */
     private ArrayList<GeneticCodeView> views;
+    /**
+     * Slots for the genetic codes
+     */
     private ArrayList<InventorySlot> slots;
+    /**
+     * The genetic code pocket bound with the view
+     */
     GeneticCodePocket geneticCodePocket;
 
     public GeneticCodePanel(GeneticCodePocket geneticCodePocket) {
@@ -46,6 +59,10 @@ public class GeneticCodePanel extends BaseBagPanel {
         }
     }
 
+    /**
+     * Updates the graphic view every time
+     * something happens
+     */
     public void update() {
         views = new ArrayList<>();
         ArrayList<GeneticCode> geneticCodes = geneticCodePocket.getGeneticCodes();
@@ -81,6 +98,10 @@ public class GeneticCodePanel extends BaseBagPanel {
             slots.get(i).setView(null);
     }
 
+    /**
+     * Sets the genetic code pocket of this panel
+     * @param gcp Genetic code pocket
+     */
     public void setGeneticCodePocket(GeneticCodePocket gcp) {
         this.geneticCodePocket = gcp;
     }
