@@ -47,8 +47,8 @@ public class StatusPanel extends JPanel implements ActionListener/*, View*/ {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == endTurnButton) {
-            //TurnHandler.getActiveVirologist().endTurn();
-            TurnHandler.tick();
+            TurnHandler.getActiveVirologist().endTurn();
+            //TurnHandler.tick();
             notifiable.creativeNotify("New turn");
         }
     }

@@ -30,7 +30,6 @@ public class TurnHandler {
     public static void tick() {
         for(Steppable steppable : steppables) {
             steppable.step();
-            System.out.println("uwu");
         }
         changeActiveVirologist();
 
